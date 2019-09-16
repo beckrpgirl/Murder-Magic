@@ -88,6 +88,22 @@ void AMurderMagicCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 }
 
 
+void AMurderMagicCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	APlayerController* PC = Cast<APlayerController>(GetController());
+
+	if (PC)
+	{
+		PC->bShowMouseCursor = true;
+		PC->bEnableClickEvents = true;
+		PC->bEnableMouseOverEvents = true;
+	}
+
+
+}
+
 void AMurderMagicCharacter::OnResetVR()
 {
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
