@@ -3,6 +3,7 @@
 #include "MurderMagicGameMode.h"
 #include "MurderMagicCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "GameHUD.h"
 
 AMurderMagicGameMode::AMurderMagicGameMode()
 {
@@ -12,4 +13,6 @@ AMurderMagicGameMode::AMurderMagicGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+
+	HUDClass = AGameHUD::StaticClass();
 }
