@@ -58,6 +58,22 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	//lets the player quit game
+	void ExitGame();
+
+	void FireLeftAbility();
+
+	void FireRightAbility();
+
+	//Interact with objects
+	void ObjectInteract();
+
+	//Cycle through the abilities available for left hand
+	void CycleLeftAbility();
+
+	//Cycle through the abilities available for right hand
+	void CycleRightAbility();
+
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
