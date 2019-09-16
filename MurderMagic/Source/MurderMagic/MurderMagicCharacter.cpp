@@ -7,6 +7,7 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
+#include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 
 //////////////////////////////////////////////////////////////////////////
@@ -74,6 +75,16 @@ void AMurderMagicCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AMurderMagicCharacter::OnResetVR);
+
+	//Binding the new player actions to their specific key presses set in UE4
+	PlayerInputComponent->BindAction("QuitGame", IE_Pressed, this, &AMurderMagicCharacter::ExitGame);
+	PlayerInputComponent->BindAction("LeftAbility", IE_Pressed, this, &AMurderMagicCharacter::FireLeftAbility);
+	PlayerInputComponent->BindAction("RightAbility", IE_Pressed, this, &AMurderMagicCharacter::FireRightAbility);
+	PlayerInputComponent->BindAction("ObjectInteract", IE_Pressed, this, &AMurderMagicCharacter::ObjectInteract);
+	PlayerInputComponent->BindAction("SwitchLeftAbility", IE_Pressed, this, &AMurderMagicCharacter::CycleLeftAbility);
+	PlayerInputComponent->BindAction("SwitchRightAbility", IE_Pressed, this, &AMurderMagicCharacter::CycleRightAbility);
+
+
 }
 
 
@@ -90,6 +101,37 @@ void AMurderMagicCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector 
 void AMurderMagicCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 {
 		StopJumping();
+}
+
+void AMurderMagicCharacter::ExitGame()
+{
+
+	if (GetController()) {
+
+		Cast<APlayerController>(GetController())->ConsoleCommand("quit");
+
+	}
+
+}
+
+void AMurderMagicCharacter::FireLeftAbility()
+{
+}
+
+void AMurderMagicCharacter::FireRightAbility()
+{
+}
+
+void AMurderMagicCharacter::ObjectInteract()
+{
+}
+
+void AMurderMagicCharacter::CycleLeftAbility()
+{
+}
+
+void AMurderMagicCharacter::CycleRightAbility()
+{
 }
 
 void AMurderMagicCharacter::TurnAtRate(float Rate)
