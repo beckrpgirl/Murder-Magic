@@ -2,6 +2,7 @@
 
 
 #include "GameHUD.h"
+#include "UserWidget.h"
 
 
 AGameHUD::AGameHUD() {
@@ -17,8 +18,8 @@ void AGameHUD::BeginPlay()
 
 	if (hudWidgetClass)
 	{
-		////hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetClass);
-		////hudWidget->AddToViewport();
+		hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetClass);
+		hudWidget->AddToViewport();
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Widget has been loaded");
 	}
