@@ -83,6 +83,29 @@ public:
 
 	virtual void BeginPlay() override;
 
+	float Health;
+	float MaxHealth;
+
+	float Mana;
+	float MaxMana;
+	float ManaRegen;
+
+	FTimerHandle AddMana_Handler;
+
+	bool AddHealth(float Points);
+
+	void AddMana();
+	bool UseMana(float Points);
+
+	float GetManaPercent();
+	float GetHealthPercent();
+
+	UFUNCTION()
+	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
+
+	UFUNCTION()
+	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }

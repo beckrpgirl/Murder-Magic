@@ -46,6 +46,13 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
+	MaxHealth = 100;
+	Health = MaxHealth;
+
+	MaxMana = 100;
+	ManaRegen = 3;
+	Mana = MaxMana;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -92,6 +99,8 @@ void AMurderMagicCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::AddMana, 1, true);
+
 	APlayerController* PC = Cast<APlayerController>(GetController());
 
 	if (PC)
@@ -100,6 +109,78 @@ void AMurderMagicCharacter::BeginPlay()
 		PC->bEnableClickEvents = true;
 		PC->bEnableMouseOverEvents = true;
 	}
+
+
+}
+
+bool AMurderMagicCharacter::AddHealth(float Points)
+{
+	
+	Health += Points;
+
+	if (Health > MaxHealth) {
+
+		Health = MaxHealth;
+
+	}
+
+	return true;
+
+}
+
+void AMurderMagicCharacter::AddMana()
+{
+
+	if (Mana != MaxMana) {
+
+		Mana += ManaRegen;
+
+	}
+
+
+	if (Mana > MaxMana) {
+
+		Mana = MaxMana;
+
+	}
+
+}
+
+bool AMurderMagicCharacter::UseMana(float Points)
+{
+	
+	Mana -= Points;
+
+	if (Mana <= 0) {
+
+		Mana = 0;
+
+	}
+
+	return true;
+
+}
+
+float AMurderMagicCharacter::GetManaPercent()
+{
+	return Mana / MaxMana;
+}
+
+float AMurderMagicCharacter::GetHealthPercent()
+{
+	return Health / MaxHealth;
+}
+
+void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
+{
+
+
+
+}
+
+void AMurderMagicCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+
 
 
 }
