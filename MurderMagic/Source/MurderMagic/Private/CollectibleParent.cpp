@@ -2,12 +2,30 @@
 
 
 #include "CollectibleParent.h"
+#include "MurderMagicCharacter.h"
 
-// Sets default values
-ACollectibleParent::ACollectibleParent()
+
+ACollectibleParent::ACollectibleParent(const FObjectInitializer& OI)
+	: Super(OI)
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+
 	PrimaryActorTick.bCanEverTick = true;
+
+	CollisionSphere = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("SphereComponent"));
+	CollisionSphere->InitSphereRadius(40.0f);
+	CollisionSphere->GetCollisionResponseToChannel(ECC_WorldStatic);
+	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	CollisionSphere->SetGenerateOverlapEvents(true);
+	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ACollectibleParent::OnOverlapBegin);
+	SetRootComponent(CollisionSphere);
+
+	Mesh = OI.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("MeshComponent"));
+	Mesh->SetupAttachment(CollisionSphere);
+	Mesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	Particle = OI.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("ParticleComponent"));
+	Particle->SetupAttachment(Mesh);
+	Particle->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 }
 
@@ -22,6 +40,23 @@ void ACollectibleParent::BeginPlay()
 void ACollectibleParent::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+}
+
+void ACollectibleParent::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
+{
+
+	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(OtherActor);
+
+	if (MMC) {
+
+		if (GEngine) {
+
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, "Collided with Collectible");
+
+		}
+
+	}
 
 }
 
