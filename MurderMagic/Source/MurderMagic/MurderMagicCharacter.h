@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "LevelManager.h"
 #include "MurderMagicCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -82,6 +83,8 @@ protected:
 public:
 
 	virtual void BeginPlay() override;
+
+	ALevelManager* CurrentLevelManager;
 
 	float Health;
 	float MaxHealth;
