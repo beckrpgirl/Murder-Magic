@@ -99,7 +99,7 @@ void AMurderMagicCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::AddMana, 1, true);
+	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::RegenMana, 1, true);
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
 
@@ -128,7 +128,7 @@ bool AMurderMagicCharacter::AddHealth(float Points)
 
 }
 
-void AMurderMagicCharacter::AddMana()
+void AMurderMagicCharacter::RegenMana()
 {
 
 	if (Mana != MaxMana) {
@@ -161,6 +161,19 @@ bool AMurderMagicCharacter::UseMana(float Points)
 
 }
 
+bool AMurderMagicCharacter::AddMana(float Points)
+{
+	Mana += Points;
+
+	if (Mana > MaxMana) {
+
+		Mana = MaxMana;
+
+	}
+
+	return true;
+}
+
 float AMurderMagicCharacter::GetManaPercent()
 {
 	return Mana / MaxMana;
@@ -169,6 +182,11 @@ float AMurderMagicCharacter::GetManaPercent()
 float AMurderMagicCharacter::GetHealthPercent()
 {
 	return Health / MaxHealth;
+}
+
+float AMurderMagicCharacter::GetExperiencePercent()
+{
+	return Experience / ExperienceToNextLevel;
 }
 
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
