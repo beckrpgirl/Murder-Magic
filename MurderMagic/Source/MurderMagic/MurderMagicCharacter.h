@@ -101,6 +101,8 @@ public:
 	bool UseMana(float Points);
 	bool AddMana(float Points);
 
+	bool AddExperience(float Points);
+
 	float GetManaPercent();
 	float GetHealthPercent();
 	float GetExperiencePercent();

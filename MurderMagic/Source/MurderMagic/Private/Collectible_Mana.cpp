@@ -21,7 +21,7 @@ bool ACollectible_Mana::OnInteract(AMurderMagicCharacter* pCharacter)
 
 		if (GEngine) {
 
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, "Collected Health collectible");
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, "Collected Mana collectible");
 
 		}
 
