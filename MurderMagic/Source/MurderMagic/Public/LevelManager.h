@@ -24,9 +24,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	AMurderMagicCharacter* PC;
+	//AMurderMagicCharacter* PC;
 
-	void GetLevelInfo();
+	//void GetLevelInfo();
 
 	//get level #
 	//get enemy manager

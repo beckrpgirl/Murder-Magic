@@ -26,11 +26,11 @@ void ALevelManager::Tick(float DeltaTime)
 
 }
 
-void ALevelManager::GetLevelInfo()
-{
-	PC->CurrentLevelManager = this;
-
-
-
-}
+//void ALevelManager::GetLevelInfo()
+//{
+//	//PC->CurrentLevelManager = this;
+//
+//
+//
+//}
 

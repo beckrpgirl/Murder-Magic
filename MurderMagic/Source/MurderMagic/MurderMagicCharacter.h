@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "LevelManager.h"
 #include "MurderMagicCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -21,6 +20,8 @@ class AMurderMagicCharacter : public ACharacter
 	class UCameraComponent* FollowCamera;
 public:
 	AMurderMagicCharacter();
+
+	//ALevelManager* CurrentLevelManager;
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -84,7 +85,7 @@ public:
 
 	virtual void BeginPlay() override;
 
-	ALevelManager* CurrentLevelManager;
+
 
 	float Health;
 	float MaxHealth;
