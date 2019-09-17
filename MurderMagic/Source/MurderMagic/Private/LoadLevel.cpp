@@ -45,7 +45,7 @@ void ALoadLevel::Tick(float DeltaTime)
 void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 
-	UGameplayStatics::OpenLevel(this, LevelName, false);
+	UGameplayStatics::OpenLevel(this, NextLevelName, false);
 
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Player Overlapped on load Level");

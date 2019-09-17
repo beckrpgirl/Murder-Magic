@@ -50,6 +50,8 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	MaxHealth = 100;
 	Health = MaxHealth;
 
+	ExperienceToNextLevel = 100;
+
 	MaxMana = 100;
 	ManaRegen = 3;
 	Mana = MaxMana;
@@ -170,6 +172,13 @@ bool AMurderMagicCharacter::AddMana(float Points)
 		Mana = MaxMana;
 
 	}
+
+	return true;
+}
+
+bool AMurderMagicCharacter::AddExperience(float Points)
+{
+	Experience += Points;
 
 	return true;
 }
