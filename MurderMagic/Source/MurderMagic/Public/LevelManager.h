@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "MurderMagicCharacter.h"
+#include "LoadLevel.h"
 #include "LevelManager.generated.h"
+
+
 
 UCLASS()
 class MURDERMAGIC_API ALevelManager : public AActor
@@ -16,6 +18,13 @@ public:
 	// Sets default values for this actor's properties
 	ALevelManager();
 
+	UPROPERTY(EditAnywhere, Category = LevelContents)
+		TArray<ALoadLevel*> LevelMapInformation;
+
+	ALoadLevel* CurrentLvlMapInfo;
+
+	void SetLevelManager();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -24,9 +33,8 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	//AMurderMagicCharacter* PC;
+	void GetLevelInfo();
 
-	//void GetLevelInfo();
 
 	//get level #
 	//get enemy manager

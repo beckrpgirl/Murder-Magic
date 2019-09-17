@@ -12,11 +12,33 @@ ALevelManager::ALevelManager()
 
 }
 
+void ALevelManager::SetLevelManager()
+{
+	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(this);
+
+	if (PC)
+	{
+		PC->CurrentLevelManager = this;
+		if (GEngine)
+			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Current Level Manager level info Loaded");
+
+	}
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Fail to load Level Manager level info");
+
+
+
+}
+
 // Called when the game starts or when spawned
 void ALevelManager::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	CurrentLvlMapInfo = LevelMapInformation[0];
+
+	SetLevelManager();
+
 }
 
 // Called every frame
@@ -26,11 +48,10 @@ void ALevelManager::Tick(float DeltaTime)
 
 }
 
-//void ALevelManager::GetLevelInfo()
-//{
-//	//PC->CurrentLevelManager = this;
-//
-//
-//
-//}
+void ALevelManager::GetLevelInfo()
+{
+
+
+
+}
 
