@@ -93,15 +93,20 @@ public:
 	float MaxMana;
 	float ManaRegen;
 
+	float Experience;
+	float ExperienceToNextLevel;
+
 	FTimerHandle AddMana_Handler;
 
 	bool AddHealth(float Points);
 
-	void AddMana();
+	void RegenMana();
 	bool UseMana(float Points);
+	bool AddMana(float Points);
 
 	float GetManaPercent();
 	float GetHealthPercent();
+	float GetExperiencePercent();
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
