@@ -14,7 +14,8 @@ private:
 
 	GENERATED_BODY()
 
-	USpell *equippedSpell;
+	USpell *equippedSpellL;
+	USpell *equippedSpellR;
 	
 
 protected:
@@ -29,5 +30,11 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void NextSpellL();
+	void NextSpellR();
+
+	void CastSpellL();
+	void CastSpellR();
 
 };
