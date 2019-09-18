@@ -10,7 +10,7 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 
-#include "Collectible_EXP.h"
+#include "CollectibleParent.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMurderMagicCharacter
@@ -211,7 +211,7 @@ float AMurderMagicCharacter::GetExperiencePercent()
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 
-	EXPCollectibles = Cast<ACollectible_EXP>(OtherActor);
+	Collectibles = Cast<ACollectibleParent>(OtherActor);
 
 	if (OtherActor && (OtherActor != this) && OtherComp) {
 
@@ -222,9 +222,9 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 
 	}
 
-	if (OtherActor == EXPCollectibles) {
+	if (OtherActor == Collectibles) {
 
-		EXPCollectibles->OnInteract(this);
+		Collectibles->OnInteract(this);
 
 	}
 
