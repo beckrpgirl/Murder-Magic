@@ -11,6 +11,7 @@
 #include "GameFramework/SpringArmComponent.h"
 
 #include "CollectibleParent.h"
+#include "Trigger.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMurderMagicCharacter
@@ -212,6 +213,7 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 {
 
 	Collectibles = Cast<ACollectibleParent>(OtherActor);
+	Triggers = Cast<ATrigger>(OtherActor);
 
 	if (OtherActor && (OtherActor != this) && OtherComp) {
 
@@ -233,7 +235,11 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 void AMurderMagicCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 
+	if (OtherActor == Triggers) {
 
+		Triggers = nullptr;
+
+	}
 
 }
 
@@ -273,6 +279,13 @@ void AMurderMagicCharacter::FireRightAbility()
 
 void AMurderMagicCharacter::ObjectInteract()
 {
+
+	if (Triggers) {
+
+		Triggers->OnInteract();
+
+	}
+
 }
 
 void AMurderMagicCharacter::CycleLeftAbility()
