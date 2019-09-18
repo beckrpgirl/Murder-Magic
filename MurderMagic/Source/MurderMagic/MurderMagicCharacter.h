@@ -7,6 +7,8 @@
 #include "LevelManager.h"
 #include "MurderMagicCharacter.generated.h"
 
+class ACollectible_EXP;
+
 UCLASS(config=Game)
 class AMurderMagicCharacter : public ACharacter
 {
@@ -19,6 +21,10 @@ class AMurderMagicCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, Category = "Trigger")
+	class UCapsuleComponent* TriggerCapsule;
+
 public:
 	AMurderMagicCharacter();
 
@@ -111,6 +117,8 @@ public:
 	float GetManaPercent();
 	float GetHealthPercent();
 	float GetExperiencePercent();
+
+	ACollectible_EXP* EXPCollectibles;
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
