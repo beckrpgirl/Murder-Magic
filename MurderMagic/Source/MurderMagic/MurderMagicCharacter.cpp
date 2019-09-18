@@ -11,6 +11,7 @@
 #include "GameFramework/SpringArmComponent.h"
 
 #include "CollectibleParent.h"
+#include "MMGameInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMurderMagicCharacter
@@ -122,6 +123,10 @@ void AMurderMagicCharacter::BeginPlay()
 		PC->bEnableMouseOverEvents = true;
 	}
 
+	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
+	Experience = GI->PlayerXP;
+	Health = GI->PlayerHealth;
+	Mana = GI->PlayerMana;
 
 }
 
