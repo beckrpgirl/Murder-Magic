@@ -7,7 +7,7 @@
 #include "LevelManager.h"
 #include "MurderMagicCharacter.generated.h"
 
-class ACollectible_EXP;
+class ACollectibleParent;
 
 UCLASS(config=Game)
 class AMurderMagicCharacter : public ACharacter
@@ -118,7 +118,7 @@ public:
 	float GetHealthPercent();
 	float GetExperiencePercent();
 
-	ACollectible_EXP* EXPCollectibles;
+	ACollectibleParent* Collectibles;
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
