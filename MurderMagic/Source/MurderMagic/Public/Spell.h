@@ -12,6 +12,22 @@
 UCLASS()
 class MURDERMAGIC_API USpell : public UObject
 {
+private:
+
 	GENERATED_BODY()
-	
+
+	float spellCD;
+	float sinceCast;
+	float range;
+	float baseDMG;
+
+public:
+
+	USpell *prev;
+	USpell *next;
+
+	USpell();
+
+	void Cast();
+
 };

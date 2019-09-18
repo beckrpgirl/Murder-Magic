@@ -4,6 +4,7 @@
 #include "LevelManager.h"
 #include "MurderMagicCharacter.h"
 
+
 // Sets default values
 ALevelManager::ALevelManager()
 {
@@ -14,7 +15,7 @@ ALevelManager::ALevelManager()
 
 void ALevelManager::SetLevelManager()
 {
-	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(this);
+	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(GetOwner());
 
 	if (PC)
 	{
