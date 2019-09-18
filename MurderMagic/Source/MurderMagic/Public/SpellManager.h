@@ -10,17 +10,23 @@
 UCLASS()
 class MURDERMAGIC_API ASpellManager : public AActor
 {
+private:
+
 	GENERATED_BODY()
+
+	USpell *equippedSpell;
 	
-public:	
-	// Sets default values for this actor's properties
-	ASpellManager();
 
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
+
+	// Sets default values for this actor's properties
+	ASpellManager();
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
