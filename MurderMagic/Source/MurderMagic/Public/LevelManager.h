@@ -5,8 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "LoadLevel.h"
-#include "Components/BoxComponent.h"
-#include "Components/StaticMeshComponent.h"
 #include "LevelManager.generated.h"
 
 
@@ -18,14 +16,7 @@ class MURDERMAGIC_API ALevelManager : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-	ALevelManager(const FObjectInitializer& OI);
-
-	UPROPERTY(VisibleDefaultsOnly)
-		UBoxComponent* CollisionBox;
-
-	UPROPERTY(VisibleDefaultsOnly)
-		UStaticMeshComponent* Mesh;
-
+	ALevelManager();
 
 	UPROPERTY(EditAnywhere, Category = LevelContents)
 		TArray<ALoadLevel*> LevelMapInformation;
@@ -41,9 +32,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UFUNCTION()
-		void OnOverlapBegin(class UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	void GetLevelInfo();
 

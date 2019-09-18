@@ -15,6 +15,7 @@ class MURDERMAGIC_API AGameHUD : public AHUD
 	GENERATED_BODY()
 
 public:
+
 	AGameHUD();
 
 	UPROPERTY(EditDefaultsOnly)

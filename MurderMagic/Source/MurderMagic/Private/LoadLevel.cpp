@@ -4,7 +4,6 @@
 #include "LoadLevel.h"
 #include "MurderMagicCharacter.h"
 #include "Kismet/GameplayStatics.h"
-#include "MMGameInstance.h"
 
 
 // Sets default values
@@ -45,21 +44,6 @@ void ALoadLevel::Tick(float DeltaTime)
 
 void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
-
-	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(OtherActor);
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	if (GI && PC)
-	{
-		GI->PlayerXP = PC->Experience;
-		//GI->PlayerHealth = PC->MaxHealth;
-		//GI->PlayerMana = PC->MaxMana;
-
-		if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Game Instance set");
-	}
-	
-
-	
 
 	UGameplayStatics::OpenLevel(this, NextLevelName, false);
 

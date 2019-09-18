@@ -10,11 +10,6 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 
-#include "CollectibleParent.h"
-#include "MMGameInstance.h"
-#include "Trigger.h"
-
-
 //////////////////////////////////////////////////////////////////////////
 // AMurderMagicCharacter
 
@@ -49,14 +44,6 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
-
-	TriggerCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("TriggerCapsule"));
-	TriggerCapsule->InitCapsuleSize(42.f, 96.0f);
-	TriggerCapsule->SetCollisionProfileName(TEXT("Trigger"));
-	TriggerCapsule->SetupAttachment(RootComponent);
-	TriggerCapsule->OnComponentBeginOverlap.AddDynamic(this, &AMurderMagicCharacter::OnOverlapBegin);
-	TriggerCapsule->OnComponentEndOverlap.AddDynamic(this, &AMurderMagicCharacter::OnOverlapEnd);
-
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
@@ -68,45 +55,6 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	MaxMana = 100;
 	ManaRegen = 3;
 	Mana = MaxMana;
-}
-
-//////////////////////////////////////////////////////////////////////////
-// Input
-
-void AMurderMagicCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
-{
-	// Set up gameplay key bindings
-	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-
-	PlayerInputComponent->BindAxis("MoveForward", this, &AMurderMagicCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &AMurderMagicCharacter::MoveRight);
-
-	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
-	// "turn" handles devices that provide an absolute delta, such as a mouse.
-	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
-	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("TurnRate", this, &AMurderMagicCharacter::TurnAtRate);
-	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis("LookUpRate", this, &AMurderMagicCharacter::LookUpAtRate);
-
-	// handle touch devices
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &AMurderMagicCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &AMurderMagicCharacter::TouchStopped);
-
-	// VR headset functionality
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AMurderMagicCharacter::OnResetVR);
-
-	//Binding the new player actions to their specific key presses set in UE4
-	PlayerInputComponent->BindAction("QuitGame", IE_Pressed, this, &AMurderMagicCharacter::ExitGame);
-	PlayerInputComponent->BindAction("LeftAbility", IE_Pressed, this, &AMurderMagicCharacter::FireLeftAbility);
-	PlayerInputComponent->BindAction("RightAbility", IE_Pressed, this, &AMurderMagicCharacter::FireRightAbility);
-	PlayerInputComponent->BindAction("ObjectInteract", IE_Pressed, this, &AMurderMagicCharacter::ObjectInteract);
-	PlayerInputComponent->BindAction("SwitchLeftAbility", IE_Pressed, this, &AMurderMagicCharacter::CycleLeftAbility);
-	PlayerInputComponent->BindAction("SwitchRightAbility", IE_Pressed, this, &AMurderMagicCharacter::CycleRightAbility);
-
-
 }
 
 
@@ -125,10 +73,6 @@ void AMurderMagicCharacter::BeginPlay()
 		PC->bEnableMouseOverEvents = true;
 	}
 
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	Experience = GI->PlayerXP;
-	//Health = GI->PlayerHealth;
-	//Mana = GI->PlayerMana;
 
 }
 
@@ -218,127 +162,13 @@ float AMurderMagicCharacter::GetExperiencePercent()
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 
-	Collectibles = Cast<ACollectibleParent>(OtherActor);
-	Triggers = Cast<ATrigger>(OtherActor);
 
-	if (OtherActor && (OtherActor != this) && OtherComp) {
-
-		if (GEngine) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "did overlap");
-		}
-
-	}
-
-	if (OtherActor == Collectibles) {
-
-		Collectibles->OnInteract(this);
-
-	}
 
 }
 
 void AMurderMagicCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 
-	if (OtherActor == Triggers) {
 
-		Triggers = nullptr;
 
-	}
-
-}
-
-void AMurderMagicCharacter::OnResetVR()
-{
-	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
-}
-
-void AMurderMagicCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		Jump();
-}
-
-void AMurderMagicCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
-{
-		StopJumping();
-}
-
-void AMurderMagicCharacter::ExitGame()
-{
-
-	if (GetController()) {
-
-		Cast<APlayerController>(GetController())->ConsoleCommand("quit");
-
-	}
-
-}
-
-void AMurderMagicCharacter::FireLeftAbility()
-{
-}
-
-void AMurderMagicCharacter::FireRightAbility()
-{
-}
-
-void AMurderMagicCharacter::ObjectInteract()
-{
-
-	if (Triggers) {
-
-		Triggers->OnInteract();
-
-	}
-
-}
-
-void AMurderMagicCharacter::CycleLeftAbility()
-{
-}
-
-void AMurderMagicCharacter::CycleRightAbility()
-{
-}
-
-void AMurderMagicCharacter::TurnAtRate(float Rate)
-{
-	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
-}
-
-void AMurderMagicCharacter::LookUpAtRate(float Rate)
-{
-	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
-}
-
-void AMurderMagicCharacter::MoveForward(float Value)
-{
-	if ((Controller != NULL) && (Value != 0.0f))
-	{
-		// find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		// get forward vector
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, Value);
-	}
-}
-
-void AMurderMagicCharacter::MoveRight(float Value)
-{
-	if ( (Controller != NULL) && (Value != 0.0f) )
-	{
-		// find out which way is right
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-	
-		// get right vector 
-		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		// add movement in that direction
-		AddMovementInput(Direction, Value);
-	}
 }
