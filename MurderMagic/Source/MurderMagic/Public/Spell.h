@@ -16,6 +16,8 @@ private:
 
 	GENERATED_BODY()
 
+protected:
+
 	float spellCD;
 	float sinceCast;
 	float range;
@@ -23,7 +25,6 @@ private:
 
 public:
 
-	USpell *prev;
 	USpell *next;
 
 	USpell();
