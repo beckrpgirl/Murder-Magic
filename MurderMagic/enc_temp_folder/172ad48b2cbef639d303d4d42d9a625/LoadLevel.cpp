@@ -51,8 +51,8 @@ void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* 
 	if (GI && PC)
 	{
 		GI->PlayerXP = PC->Experience;
-		//GI->PlayerHealth = PC->MaxHealth;
-		//GI->PlayerMana = PC->MaxMana;
+		GI->PlayerHealth = PC->Health;
+		GI->PlayerMana = PC->Mana;
 
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Game Instance set");

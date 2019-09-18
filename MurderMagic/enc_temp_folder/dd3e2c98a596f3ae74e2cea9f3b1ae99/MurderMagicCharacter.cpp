@@ -127,8 +127,8 @@ void AMurderMagicCharacter::BeginPlay()
 
 	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
 	Experience = GI->PlayerXP;
-	//Health = GI->PlayerHealth;
-	//Mana = GI->PlayerMana;
+	Health = GI->PlayerHealth;
+	Mana = GI->PlayerMana;
 
 }
 
