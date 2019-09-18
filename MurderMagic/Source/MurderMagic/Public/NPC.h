@@ -2,8 +2,10 @@
 
 #pragma once
 
+#include "NPCAIController.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Components/SphereComponent.h"
 #include "NPC.generated.h"
 
 UCLASS()
@@ -13,7 +15,12 @@ class MURDERMAGIC_API ANPC : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	ANPC();
+	ANPC(const FObjectInitializer& OI);
+
+	UPROPERTY(VisibleDefaultsOnly)
+	USphereComponent* CollisionSphere;
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	class UBehaviorTree* BehaviorTree;
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,7 +30,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 };
