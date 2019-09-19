@@ -10,6 +10,10 @@
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
 
+#include "CollectibleParent.h"
+#include "MMGameInstance.h"
+#include "Trigger.h"
+
 //////////////////////////////////////////////////////////////////////////
 // AMurderMagicCharacter
 
@@ -44,6 +48,13 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
 
+	TriggerCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("TriggerCapsule"));
+	TriggerCapsule->InitCapsuleSize(42.f, 96.0f);
+	TriggerCapsule->SetCollisionProfileName(TEXT("Trigger"));
+	TriggerCapsule->SetupAttachment(RootComponent);
+	TriggerCapsule->OnComponentBeginOverlap.AddDynamic(this, &AMurderMagicCharacter::OnOverlapBegin);
+	TriggerCapsule->OnComponentEndOverlap.AddDynamic(this, &AMurderMagicCharacter::OnOverlapEnd);
+
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
@@ -73,6 +84,10 @@ void AMurderMagicCharacter::BeginPlay()
 		PC->bEnableMouseOverEvents = true;
 	}
 
+	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
+	Experience = GI->PlayerXP;
+	//Health = GI->PlayerHealth;
+	//Mana = GI->PlayerMana;
 
 }
 
@@ -161,14 +176,45 @@ float AMurderMagicCharacter::GetExperiencePercent()
 
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
+	Collectibles = Cast<ACollectibleParent>(OtherActor);
+	Triggers = Cast<ATrigger>(OtherActor);
 
+	if (OtherActor && (OtherActor != this) && OtherComp) {
+
+		if (GEngine) {
+
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "did overlap");
+		}
+
+	}
+
+	if (OtherActor == Collectibles) {
+
+		Collectibles->OnInteract(this);
+
+	}
 
 
 }
 
 void AMurderMagicCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+	if (OtherActor == Triggers) {
+
+		Triggers = nullptr;
+
+	}
 
 
+}
+
+void AMurderMagicCharacter::ObjectInteract()
+{
+
+	if (Triggers) {
+
+		Triggers->OnInteract();
+
+	}
 
 }

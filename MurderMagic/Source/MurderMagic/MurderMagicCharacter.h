@@ -7,6 +7,9 @@
 #include "LevelManager.h"
 #include "MurderMagicCharacter.generated.h"
 
+class ACollectibleParent;
+class ATrigger;
+
 UCLASS(config=Game)
 class AMurderMagicCharacter : public ACharacter
 {
@@ -21,6 +24,9 @@ private:
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, Category = "Trigger")
+		class UCapsuleComponent* TriggerCapsule;
 
 public:
 
@@ -37,8 +43,6 @@ public:
 	float BaseLookUpRate;
 
 	virtual void BeginPlay() override;
-
-
 
 	float Health;
 	float MaxHealth;
@@ -64,11 +68,16 @@ public:
 	float GetHealthPercent();
 	float GetExperiencePercent();
 
+	ACollectibleParent* Collectibles;
+	ATrigger* Triggers;
+
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 
 	UFUNCTION()
 	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	void ObjectInteract();
 
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
