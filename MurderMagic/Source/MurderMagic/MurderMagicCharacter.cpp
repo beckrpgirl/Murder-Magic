@@ -68,22 +68,12 @@ void AMurderMagicCharacter::BeginPlay()
 	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::RegenMana, 1, true);
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
+	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
 
+	Experience = GI->PlayerXP;
+	CurrentPlayerLevel = GI->PlayerLvl;
 
-	if (DataTable) {
-
-		FDataTableStruct* Row = DataTable->FindRow<FDataTableStruct>(FName(*FString::FromInt(1)), TEXT(""));
-
-		MaxHealth = Row->MaxHealth;
-		Health = MaxHealth;
-
-		ExperienceToNextLevel = Row->ExperienceToNextLevel;
-
-		MaxMana = Row->MaxMana;
-		ManaRegen = 3;
-		Mana = MaxMana;
-
-	}
+	PlayerStats();
 
 	if (PC)
 	{
@@ -91,11 +81,6 @@ void AMurderMagicCharacter::BeginPlay()
 		PC->bEnableClickEvents = true;
 		PC->bEnableMouseOverEvents = true;
 	}
-
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	Experience = GI->PlayerXP;
-	//Health = GI->PlayerHealth;
-	//Mana = GI->PlayerMana;
 
 }
 
@@ -182,6 +167,46 @@ float AMurderMagicCharacter::GetExperiencePercent()
 	return Experience / ExperienceToNextLevel;
 }
 
+void AMurderMagicCharacter::PlayerLevelup()
+{
+
+	if (Experience >= ExperienceToNextLevel) {
+
+		CurrentPlayerLevel++;
+		PlayerStats();
+		Experience = 0;
+
+		if (GEngine) {
+
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Health: " + FString::FromInt(Row->MaxHealth));
+		}
+
+	}
+
+}
+
+void AMurderMagicCharacter::PlayerStats()
+{
+
+	if (DataTable) {
+
+		Row = DataTable->FindRow<FDataTableStruct>(FName(*FString::FromInt(CurrentPlayerLevel)), TEXT(""));
+
+		if (Row)
+		{
+			MaxHealth = Row->MaxHealth;
+			Health = MaxHealth;
+
+			ExperienceToNextLevel = Row->ExperienceToNextLevel;
+
+			MaxMana = Row->MaxMana;
+			ManaRegen = 3;
+			Mana = MaxMana;
+		}
+	}
+
+}
+
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 	Collectibles = Cast<ACollectibleParent>(OtherActor);
@@ -199,6 +224,7 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	if (OtherActor == Collectibles) {
 
 		Collectibles->OnInteract(this);
+		PlayerLevelup();
 
 	}
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "SpellManager.h"
 #include "MMPlayerController.generated.h"
 
 /**
@@ -16,7 +17,11 @@ private:
 
 	GENERATED_BODY()
 
+	ASpellManager *spellManager;
+
 protected:
+
+	virtual void BeginPlay() override;
 
 	// Begin PlayerController interface
 	virtual void PlayerTick(float deltaTime) override;

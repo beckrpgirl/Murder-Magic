@@ -9,15 +9,15 @@ ASpellManager::ASpellManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	equippedSpellL = NewObject<UMagiBolt>();
-	equippedSpellR = equippedSpellL;
 }
 
 // Called when the game starts or when spawned
 void ASpellManager::BeginPlay()
 {
 	Super::BeginPlay();
+
+	equippedSpellL = (ASpell *)GetWorld()->SpawnActor(AMagiBolt::StaticClass());
+	equippedSpellR = equippedSpellL;
 	
 }
 
@@ -38,12 +38,12 @@ void ASpellManager::NextSpellR()
 	equippedSpellR = equippedSpellR->next;
 }
 
-void ASpellManager::CastSpellL()
+void ASpellManager::CastSpellL(FVector start, float angle)
 {
-	equippedSpellL->Cast();
+	equippedSpellL->Cast(start, angle);
 }
 
-void ASpellManager::CastSpellR()
+void ASpellManager::CastSpellR(FVector start, float angle)
 {
-	equippedSpellR->Cast();
+	equippedSpellR->Cast(start, angle);
 }

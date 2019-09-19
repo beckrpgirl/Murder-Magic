@@ -62,6 +62,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	UDataTable* DataTable;
 
+	FDataTableStruct* Row;
+
 	virtual void BeginPlay() override;
 
 	float Health;
@@ -73,6 +75,8 @@ public:
 
 	float Experience;
 	float ExperienceToNextLevel;
+
+	int CurrentPlayerLevel;
 
 	FTimerHandle AddMana_Handler;
 
@@ -87,6 +91,9 @@ public:
 	float GetManaPercent();
 	float GetHealthPercent();
 	float GetExperiencePercent();
+
+	void PlayerLevelup();
+	void PlayerStats();
 
 	ACollectibleParent* Collectibles;
 	ATrigger* Triggers;

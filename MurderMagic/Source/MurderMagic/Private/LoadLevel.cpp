@@ -51,11 +51,11 @@ void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* 
 	if (GI && PC)
 	{
 		GI->PlayerXP = PC->Experience;
-		//GI->PlayerHealth = PC->MaxHealth;
-		//GI->PlayerMana = PC->MaxMana;
+		GI->PlayerLvl = PC->CurrentPlayerLevel;
+		GI->PlayerMaxXP = PC->ExperienceToNextLevel;
 
 		if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Game Instance set");
+			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "Current Level " + FString::FromInt(PC->ExperienceToNextLevel));
 	}
 	
 

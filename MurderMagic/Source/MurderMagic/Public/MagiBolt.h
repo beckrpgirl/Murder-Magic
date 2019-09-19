@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class MURDERMAGIC_API UMagiBolt : public USpell
+class MURDERMAGIC_API AMagiBolt : public ASpell
 {
 private:
 
@@ -18,5 +18,5 @@ private:
 	
 public:
 
-	UMagiBolt();
+	AMagiBolt();
 };
