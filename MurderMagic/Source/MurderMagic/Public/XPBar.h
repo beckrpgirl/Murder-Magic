@@ -22,5 +22,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 	AMurderMagicCharacter* Character;
+
+	UFUNCTION(BlueprintPure, Category = "XP")
+		FString UpdateXP();
 	
+	FString XProgress;
+
 };

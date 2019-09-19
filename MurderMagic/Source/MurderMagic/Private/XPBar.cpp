@@ -12,3 +12,16 @@ float UXPBar::UpdateXPPercent() {
 
 }
 
+FString UXPBar::UpdateXP()
+{
+	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
+	if (MMC)
+	{
+		XProgress = FString::FromInt(MMC->Experience) + " / " + FString::FromInt(MMC->ExperienceToNextLevel);
+
+	}
+
+	return XProgress;
+
+}
+
