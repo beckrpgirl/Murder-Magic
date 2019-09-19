@@ -21,7 +21,8 @@ public:
 	float PlayerHealth;
 	float PlayerMana;
 	float PlayerXP;
-
+	float PlayerMaxXP;
+	int PlayerLvl;
 
 
 

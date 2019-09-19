@@ -68,8 +68,12 @@ void AMurderMagicCharacter::BeginPlay()
 	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::RegenMana, 1, true);
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
+	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
+	//CurrentPlayerLevel = 1;
 
-	CurrentPlayerLevel = 1;
+
+	Experience = GI->PlayerXP;
+	CurrentPlayerLevel = GI->PlayerLvl;
 
 	PlayerStats();
 
@@ -80,8 +84,9 @@ void AMurderMagicCharacter::BeginPlay()
 		PC->bEnableMouseOverEvents = true;
 	}
 
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	Experience = GI->PlayerXP;
+	
+
+	//ExperienceToNextLevel = GI->PlayerMaxXP;
 	//Health = GI->PlayerHealth;
 	//Mana = GI->PlayerMana;
 
@@ -195,15 +200,17 @@ void AMurderMagicCharacter::PlayerStats()
 
 		Row = DataTable->FindRow<FDataTableStruct>(FName(*FString::FromInt(CurrentPlayerLevel)), TEXT(""));
 
-		MaxHealth = Row->MaxHealth;
-		Health = MaxHealth;
+		if (Row)
+		{
+			MaxHealth = Row->MaxHealth;
+			Health = MaxHealth;
 
-		ExperienceToNextLevel = Row->ExperienceToNextLevel;
+			ExperienceToNextLevel = Row->ExperienceToNextLevel;
 
-		MaxMana = Row->MaxMana;
-		ManaRegen = 3;
-		Mana = MaxMana;
-
+			MaxMana = Row->MaxMana;
+			ManaRegen = 3;
+			Mana = MaxMana;
+		}
 	}
 
 }
