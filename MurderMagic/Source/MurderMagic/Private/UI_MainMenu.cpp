@@ -31,7 +31,7 @@ bool UUI_MainMenu::Initialize()
 
 void UUI_MainMenu::OnClickEvent()
 {
-	UGameplayStatics::OpenLevel(this, "Level1", false);
+	UGameplayStatics::OpenLevel(this, "Floor1", false);
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "I've Been clicked!");
 
