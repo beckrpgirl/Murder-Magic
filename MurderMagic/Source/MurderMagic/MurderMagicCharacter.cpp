@@ -58,14 +58,6 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
-	MaxHealth = 100;
-	Health = MaxHealth;
-
-	ExperienceToNextLevel = 100;
-
-	MaxMana = 100;
-	ManaRegen = 3;
-	Mana = MaxMana;
 }
 
 
@@ -76,6 +68,22 @@ void AMurderMagicCharacter::BeginPlay()
 	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::RegenMana, 1, true);
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
+
+
+	if (DataTable) {
+
+		FDataTableStruct* Row = DataTable->FindRow<FDataTableStruct>(FName(*FString::FromInt(1)), TEXT(""));
+
+		MaxHealth = Row->MaxHealth;
+		Health = MaxHealth;
+
+		ExperienceToNextLevel = Row->ExperienceToNextLevel;
+
+		MaxMana = Row->MaxMana;
+		ManaRegen = 3;
+		Mana = MaxMana;
+
+	}
 
 	if (PC)
 	{

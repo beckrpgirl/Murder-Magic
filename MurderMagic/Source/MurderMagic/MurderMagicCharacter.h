@@ -5,10 +5,27 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "LevelManager.h"
+#include "Engine/DataTable.h"
 #include "MurderMagicCharacter.generated.h"
 
 class ACollectibleParent;
 class ATrigger;
+
+USTRUCT(Blueprintable)
+struct FDataTableStruct : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levelup")
+	float MaxHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levelup")
+	float MaxMana;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levelup")
+	float ExperienceToNextLevel;
+
+};
 
 UCLASS(config=Game)
 class AMurderMagicCharacter : public ACharacter
@@ -41,6 +58,9 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+
+	UPROPERTY(EditAnywhere)
+	UDataTable* DataTable;
 
 	virtual void BeginPlay() override;
 
