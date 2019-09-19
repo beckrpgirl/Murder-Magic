@@ -5,10 +5,27 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "LevelManager.h"
+#include "Engine/DataTable.h"
 #include "MurderMagicCharacter.generated.h"
 
 class ACollectibleParent;
 class ATrigger;
+
+USTRUCT(Blueprintable)
+struct FDataTableStruct : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levelup")
+	float MaxHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levelup")
+	float MaxMana;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levelup")
+	float ExperienceToNextLevel;
+
+};
 
 UCLASS(config=Game)
 class AMurderMagicCharacter : public ACharacter
@@ -42,6 +59,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+	UPROPERTY(EditAnywhere)
+	UDataTable* DataTable;
+
+	FDataTableStruct* Row;
+
 	virtual void BeginPlay() override;
 
 	float Health;
@@ -53,6 +75,8 @@ public:
 
 	float Experience;
 	float ExperienceToNextLevel;
+
+	int CurrentPlayerLevel;
 
 	FTimerHandle AddMana_Handler;
 
@@ -67,6 +91,9 @@ public:
 	float GetManaPercent();
 	float GetHealthPercent();
 	float GetExperiencePercent();
+
+	void PlayerLevelup();
+	void PlayerStats();
 
 	ACollectibleParent* Collectibles;
 	ATrigger* Triggers;
