@@ -19,8 +19,15 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	class UClass* hudWidgetClass;
+	UPROPERTY(EditDefaultsOnly)
+	class UClass* hudWidgetMMClass;
+
 	class UUserWidget* hudWidget;
 
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable, Category = "TestFunctions")
+		FString GetCurrentMapName();
+
 	
 };
