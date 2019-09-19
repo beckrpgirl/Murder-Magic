@@ -13,7 +13,7 @@ bool UUI_MainMenu::Initialize()
 		{
 		    //if (GEngine)
 		    //    GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Found play button");
-		    PlayButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickEvent);
+		  //  PlayButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickEvent);
 		}
 		else
 		{
