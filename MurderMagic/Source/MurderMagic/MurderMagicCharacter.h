@@ -25,6 +25,9 @@ struct FDataTableStruct : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levelup")
 	float ExperienceToNextLevel;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levelup")
+	int AbilityPoint;
+
 };
 
 UCLASS(config=Game)
