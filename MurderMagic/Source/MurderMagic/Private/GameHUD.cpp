@@ -16,12 +16,33 @@ void AGameHUD::BeginPlay()
 
 	Super::BeginPlay();
 
+	UWorld* MyWorld = GetWorld();
+	FString CurrentMapName = MyWorld->GetMapName();
+
+
+
 	if (hudWidgetClass)
 	{
-		hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetClass);
-		hudWidget->AddToViewport();
+		if (CurrentMapName == "UEDPIE_0_MainMenu")
+		{
+			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetMMClass);
+			hudWidget->AddToViewport();
+		}
+		else
+		{
+			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetClass);
+			hudWidget->AddToViewport();
+		}
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Widget has been loaded");
 	}
 
+}
+
+FString AGameHUD::GetCurrentMapName()
+{
+	UWorld* MyWorld = GetWorld();
+	FString CurrentMapName = MyWorld->GetMapName();
+
+	return CurrentMapName;
 }
