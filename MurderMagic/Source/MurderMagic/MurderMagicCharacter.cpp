@@ -69,8 +69,6 @@ void AMurderMagicCharacter::BeginPlay()
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
 	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	//CurrentPlayerLevel = 1;
-
 
 	Experience = GI->PlayerXP;
 	CurrentPlayerLevel = GI->PlayerLvl;
@@ -83,12 +81,6 @@ void AMurderMagicCharacter::BeginPlay()
 		PC->bEnableClickEvents = true;
 		PC->bEnableMouseOverEvents = true;
 	}
-
-	
-
-	//ExperienceToNextLevel = GI->PlayerMaxXP;
-	//Health = GI->PlayerHealth;
-	//Mana = GI->PlayerMana;
 
 }
 

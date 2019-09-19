@@ -7,6 +7,6 @@ UMMGameInstance::UMMGameInstance(const FObjectInitializer& ObjectInitializer)
 {
 
 	PlayerLvl = 1;
-	PlayerMaxXP = 1000;
+
 
 }
