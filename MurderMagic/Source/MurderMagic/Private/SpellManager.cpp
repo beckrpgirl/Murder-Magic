@@ -40,7 +40,8 @@ void ASpellManager::NextSpellR()
 
 void ASpellManager::CastSpellL(FVector start, float angle)
 {
-	equippedSpellL->Cast(start, angle);
+	//When you click into the game to start moving it tries to pull this infor and crashes. 
+//	equippedSpellL->Cast(start, angle);
 }
 
 void ASpellManager::CastSpellR(FVector start, float angle)

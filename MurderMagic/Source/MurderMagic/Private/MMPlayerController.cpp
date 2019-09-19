@@ -11,9 +11,10 @@ AMMPlayerController::AMMPlayerController()
 
 void AMMPlayerController::BeginPlay()
 {
+	//If statement needed for when null
 	TArray<ASpellManager *> sManager;
 	FindAllActors(GetWorld(), sManager);
-	spellManager = sManager[0];
+	//spellManager = sManager[0];
 }
 
 void AMMPlayerController::PlayerTick(float deltaTime)
