@@ -3,7 +3,7 @@
 
 #include "MagiBolt.h"
 
-UMagiBolt::UMagiBolt()
+AMagiBolt::AMagiBolt()
 {
 	spellCD = 3;
 	range = 25;

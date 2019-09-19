@@ -3,14 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UObject/NoExportTypes.h"
+#include "GameFramework/Actor.h"
+#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
+#include "Types.h"
 #include "Spell.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MURDERMAGIC_API USpell : public UObject
+class MURDERMAGIC_API ASpell : public AActor
 {
 private:
 
@@ -25,10 +27,12 @@ protected:
 
 public:
 
-	USpell *next;
+	ASpell *next;
 
-	USpell();
+	ASpell();
 
-	void Cast();
+	void Cast(FVector start, float angle);
+
+	//virtual void CreateEffect() PURE_VIRTUAL(ASpell::CreateEffect);
 
 };

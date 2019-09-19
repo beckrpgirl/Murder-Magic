@@ -2,11 +2,18 @@
 
 
 #include "MMPlayerController.h"
+#include "Templates.h"
 #include "GameFramework/Character.h"
 
 AMMPlayerController::AMMPlayerController()
 {
+}
 
+void AMMPlayerController::BeginPlay()
+{
+	TArray<ASpellManager *> sManager;
+	FindAllActors(GetWorld(), sManager);
+	spellManager = sManager[0];
 }
 
 void AMMPlayerController::PlayerTick(float deltaTime)
@@ -51,20 +58,24 @@ void AMMPlayerController::ExitGame()
 
 void AMMPlayerController::FireLSpell()
 {
-
+	FRotator direction = GetPawn()->GetActorRotation();
+	float rAngle = direction.Yaw;
+	spellManager->CastSpellL(GetPawn()->GetActorLocation(), rAngle);
 }
 
 void AMMPlayerController::FireRSpell()
 {
-
+	FRotator direction = GetPawn()->GetActorRotation();
+	float rAngle = direction.Yaw;
+	spellManager->CastSpellR(GetPawn()->GetActorLocation(), rAngle);
 }
 
 void AMMPlayerController::LNextSpell()
 {
-
+	spellManager->NextSpellL();
 }
 
 void AMMPlayerController::RNextSpell()
 {
-
+	spellManager->NextSpellR();
 }

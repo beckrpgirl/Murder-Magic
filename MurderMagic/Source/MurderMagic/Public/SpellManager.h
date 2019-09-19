@@ -14,8 +14,8 @@ private:
 
 	GENERATED_BODY()
 
-	USpell *equippedSpellL;
-	USpell *equippedSpellR;
+	ASpell *equippedSpellL;
+	ASpell *equippedSpellR;
 	
 
 protected:
@@ -34,7 +34,7 @@ public:
 	void NextSpellL();
 	void NextSpellR();
 
-	void CastSpellL();
-	void CastSpellR();
+	void CastSpellL(FVector start, float angle);
+	void CastSpellR(FVector start, float angle);
 
 };
