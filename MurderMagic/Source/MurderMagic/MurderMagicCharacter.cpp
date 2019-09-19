@@ -58,6 +58,14 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
+	MaxHealth = 100;
+	Health = MaxHealth;
+
+	ExperienceToNextLevel = 100;
+
+	MaxMana = 100;
+	ManaRegen = 3;
+	Mana = MaxMana;
 }
 
 
@@ -68,10 +76,6 @@ void AMurderMagicCharacter::BeginPlay()
 	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::RegenMana, 1, true);
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
-
-	CurrentPlayerLevel = 1;
-
-	PlayerStats();
 
 	if (PC)
 	{
@@ -170,44 +174,6 @@ float AMurderMagicCharacter::GetExperiencePercent()
 	return Experience / ExperienceToNextLevel;
 }
 
-void AMurderMagicCharacter::PlayerLevelup()
-{
-
-	if (Experience >= ExperienceToNextLevel) {
-
-		CurrentPlayerLevel++;
-		PlayerStats();
-		Experience = 0;
-
-		if (GEngine) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Health: " + FString::FromInt(Row->MaxHealth));
-		}
-
-	}
-
-}
-
-void AMurderMagicCharacter::PlayerStats()
-{
-
-	if (DataTable) {
-
-		Row = DataTable->FindRow<FDataTableStruct>(FName(*FString::FromInt(CurrentPlayerLevel)), TEXT(""));
-
-		MaxHealth = Row->MaxHealth;
-		Health = MaxHealth;
-
-		ExperienceToNextLevel = Row->ExperienceToNextLevel;
-
-		MaxMana = Row->MaxMana;
-		ManaRegen = 3;
-		Mana = MaxMana;
-
-	}
-
-}
-
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 	Collectibles = Cast<ACollectibleParent>(OtherActor);
@@ -225,7 +191,6 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	if (OtherActor == Collectibles) {
 
 		Collectibles->OnInteract(this);
-		PlayerLevelup();
 
 	}
 

@@ -2,8 +2,6 @@
 
 
 #include "UI_MainMenu.h"
-#include "Components/Button.h"
-#include "Kismet/GameplayStatics.h"
 
 bool UUI_MainMenu::Initialize()
 {
@@ -13,14 +11,14 @@ bool UUI_MainMenu::Initialize()
 	//If statements for adding in a button. 
 		if (PlayButton)
 		{
-		    if (GEngine)
-		        GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Found play button");
-		    PlayButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickEvent);
+		    //if (GEngine)
+		    //    GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Found play button");
+		  //  PlayButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickEvent);
 		}
 		else
 		{
-		    if (GEngine)
-		        GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "could not find play button");
+		    //if (GEngine)
+		    //    GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "could not find play button");
 		}
 
 	if (GEngine)
@@ -31,7 +29,7 @@ bool UUI_MainMenu::Initialize()
 
 void UUI_MainMenu::OnClickEvent()
 {
-	UGameplayStatics::OpenLevel(this, "Level1", false);
+
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "I've Been clicked!");
 
