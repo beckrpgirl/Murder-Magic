@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
-#include "Types.h"
 #include "Spell.generated.h"
 
 /**

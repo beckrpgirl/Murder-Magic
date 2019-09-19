@@ -11,9 +11,7 @@ AMMPlayerController::AMMPlayerController()
 
 void AMMPlayerController::BeginPlay()
 {
-	TArray<ASpellManager *> sManager;
-	FindAllActors(GetWorld(), sManager);
-	spellManager = sManager[0];
+	spellManager = (ASpellManager *)GetWorld()->SpawnActor(ASpellManager::StaticClass());
 }
 
 void AMMPlayerController::PlayerTick(float deltaTime)
