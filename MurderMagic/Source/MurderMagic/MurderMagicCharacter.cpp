@@ -69,21 +69,9 @@ void AMurderMagicCharacter::BeginPlay()
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
 
+	CurrentPlayerLevel = 1;
 
-	if (DataTable) {
-
-		FDataTableStruct* Row = DataTable->FindRow<FDataTableStruct>(FName(*FString::FromInt(1)), TEXT(""));
-
-		MaxHealth = Row->MaxHealth;
-		Health = MaxHealth;
-
-		ExperienceToNextLevel = Row->ExperienceToNextLevel;
-
-		MaxMana = Row->MaxMana;
-		ManaRegen = 3;
-		Mana = MaxMana;
-
-	}
+	PlayerStats();
 
 	if (PC)
 	{
@@ -182,6 +170,44 @@ float AMurderMagicCharacter::GetExperiencePercent()
 	return Experience / ExperienceToNextLevel;
 }
 
+void AMurderMagicCharacter::PlayerLevelup()
+{
+
+	if (Experience >= ExperienceToNextLevel) {
+
+		CurrentPlayerLevel++;
+		PlayerStats();
+		Experience = 0;
+
+		if (GEngine) {
+
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Health: " + FString::FromInt(Row->MaxHealth));
+		}
+
+	}
+
+}
+
+void AMurderMagicCharacter::PlayerStats()
+{
+
+	if (DataTable) {
+
+		Row = DataTable->FindRow<FDataTableStruct>(FName(*FString::FromInt(CurrentPlayerLevel)), TEXT(""));
+
+		MaxHealth = Row->MaxHealth;
+		Health = MaxHealth;
+
+		ExperienceToNextLevel = Row->ExperienceToNextLevel;
+
+		MaxMana = Row->MaxMana;
+		ManaRegen = 3;
+		Mana = MaxMana;
+
+	}
+
+}
+
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 	Collectibles = Cast<ACollectibleParent>(OtherActor);
@@ -199,6 +225,7 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	if (OtherActor == Collectibles) {
 
 		Collectibles->OnInteract(this);
+		PlayerLevelup();
 
 	}
 
