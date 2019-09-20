@@ -23,6 +23,7 @@ public:
 	float PlayerXP;
 	float PlayerMaxXP;
 	int PlayerLvl;
+	FTransform PlayerLocation;
 
 
 

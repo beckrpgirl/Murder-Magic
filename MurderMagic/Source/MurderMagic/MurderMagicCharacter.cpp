@@ -13,6 +13,7 @@
 #include "CollectibleParent.h"
 #include "MMGameInstance.h"
 #include "Trigger.h"
+#include "MMPlayerController.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMurderMagicCharacter
@@ -221,10 +222,10 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	Triggers = Cast<ATrigger>(OtherActor);
 
 	if (OtherActor && (OtherActor != this) && OtherComp) {
-		if (GEngine) {
+		//if (GEngine) {
 
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "did overlap");
-		}
+		//	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "did overlap");
+		//}
 	}
 
 	if (OtherActor == Collectibles) {
@@ -261,12 +262,37 @@ void AMurderMagicCharacter::ObjectInteract()
 
 void AMurderMagicCharacter::CheckPointRespond()
 {
-	FTransform transform;
+	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
 
-	transform = AMurderMagicCharacter::GetTransform();
-/*	transform.GetLocation().ToString();
-	transform.DebugPrint()*/;
-
+	PlayerTransform = AMurderMagicCharacter::GetTransform();
+	GI->PlayerLocation = PlayerTransform;
 	if (GEngine) 
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "CheckPoint triggered!" + transform.GetLocation().ToString());
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "CheckPoint triggered!" + PlayerTransform.GetLocation().ToString());
+}
+
+void AMurderMagicCharacter::SpawnPoint()
+{
+	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
+	AMMPlayerController* controller = Cast<AMMPlayerController>(GetController());
+	
+	//CurrentLevelManager->GetTransform;
+	//PlayerTransform = CurrentLevelManager->GetTransform;
+
+	FVector Location = CurrentLevelManager->GetActorLocation();
+	FRotator Rotation = CurrentLevelManager->GetActorRotation();
+	FActorSpawnParameters SpawnInfo;
+	GetWorld()->SpawnActor<AMurderMagicCharacter>(Location, Rotation, SpawnInfo);
+	controller->Possess(this);
+	
+	
+}
+
+void AMurderMagicCharacter::KillPlayer()
+{
+	AMMPlayerController* controller = Cast<AMMPlayerController>(GetController());
+	//controller->UnPossess();
+	//Destroy();
+
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "Death!");
 }

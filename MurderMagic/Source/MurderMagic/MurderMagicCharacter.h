@@ -99,6 +99,8 @@ public:
 	void PlayerLevelup();
 	void PlayerStats();
 
+	FTransform PlayerTransform;
+
 	ACollectibleParent* Collectibles;
 	ATrigger* Triggers;
 
@@ -111,6 +113,10 @@ public:
 	void ObjectInteract();
 
 	void CheckPointRespond();
+	void SpawnPoint();
+
+	UFUNCTION()
+	void KillPlayer();
 
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
