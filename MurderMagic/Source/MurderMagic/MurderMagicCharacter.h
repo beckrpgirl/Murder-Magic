@@ -80,6 +80,7 @@ public:
 	float ExperienceToNextLevel;
 
 	int CurrentPlayerLevel;
+	int CurrentFloor;
 
 	FTimerHandle AddMana_Handler;
 

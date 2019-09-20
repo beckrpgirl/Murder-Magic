@@ -61,7 +61,7 @@ void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* 
 
 	
 
-	UGameplayStatics::OpenLevel(this, NextLevelName, false);
+	UGameplayStatics::OpenLevel(this, NextFloorName, false);
 
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Player Overlapped on load Level");

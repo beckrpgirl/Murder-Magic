@@ -57,6 +57,8 @@ void ALevelManager::OnOverlapBegin(class UPrimitiveComponent* OverlapComp, class
 	if (PC)
 	{
 		PC->CurrentLevelManager = this;
+		PC->CurrentFloor = CurrentLvlMapInfo->CurrentFloorNum;
+
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Current Level Manager level info Loaded");
 	}

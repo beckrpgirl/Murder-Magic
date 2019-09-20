@@ -12,7 +12,8 @@ UCLASS()
 class MURDERMAGIC_API ALoadLevel : public AActor
 {
 	GENERATED_BODY()
-	
+
+public:
 	UPROPERTY(VisibleDefaultsOnly)
 		UBoxComponent* CollisionBox;
 
@@ -20,9 +21,9 @@ class MURDERMAGIC_API ALoadLevel : public AActor
 		UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere, Category = Level)
-		FName NextLevelName;
+		FName NextFloorName;
 	UPROPERTY(EditAnywhere, Category = Level)
-		float CurrentLevelNum;
+		float CurrentFloorNum;
 
 
 public:	

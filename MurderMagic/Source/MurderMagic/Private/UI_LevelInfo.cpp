@@ -24,7 +24,7 @@ FString UUI_LevelInfo::CurrentFloor()
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 	if (MMC)
 	{
-		CFloor = "Floor: " + FString::FromInt(MMC->CurrentPlayerLevel);
+		CFloor = "Floor: " + FString::FromInt(MMC->CurrentFloor);
 
 	}
 
