@@ -185,12 +185,6 @@ void AMurderMagicCharacter::PlayerLevelup()
 
 	}
 
-	if (CurrentPlayerLevel == 10) {
-
-		Experience = 0;
-
-	}
-
 }
 
 void AMurderMagicCharacter::PlayerStats()
@@ -221,20 +215,21 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	Triggers = Cast<ATrigger>(OtherActor);
 
 	if (OtherActor && (OtherActor != this) && OtherComp) {
+
 		if (GEngine) {
 
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "did overlap");
 		}
+
 	}
 
 	if (OtherActor == Collectibles) {
+
 		Collectibles->OnInteract(this);
 		PlayerLevelup();
+
 	}
-	if (OtherActor == CurrentLevelManager)
-	{
-		CheckPointRespond();
-	}
+
 
 }
 
@@ -245,6 +240,7 @@ void AMurderMagicCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AA
 		Triggers = nullptr;
 
 	}
+
 
 }
 
@@ -261,12 +257,10 @@ void AMurderMagicCharacter::ObjectInteract()
 
 void AMurderMagicCharacter::CheckPointRespond()
 {
-	FTransform transform;
 
-	transform = AMurderMagicCharacter::GetTransform();
-/*	transform.GetLocation().ToString();
-	transform.DebugPrint()*/;
+	//GetWorld()->SpawnActor;
 
-	if (GEngine) 
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "CheckPoint triggered!" + transform.GetLocation().ToString());
+
+
+
 }

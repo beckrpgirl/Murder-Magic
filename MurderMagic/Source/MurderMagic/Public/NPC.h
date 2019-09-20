@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "MMPlayerController.h"
 #include "NPCAIController.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
