@@ -185,12 +185,6 @@ void AMurderMagicCharacter::PlayerLevelup()
 
 	}
 
-	if (CurrentPlayerLevel == 10) {
-
-		Experience = 0;
-
-	}
-
 }
 
 void AMurderMagicCharacter::PlayerStats()
