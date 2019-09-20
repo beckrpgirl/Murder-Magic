@@ -255,12 +255,7 @@ void AMurderMagicCharacter::ObjectInteract()
 
 void AMurderMagicCharacter::CheckPointRespond()
 {
-	FTransform transform;
-
-	transform = AMurderMagicCharacter::GetTransform();
-/*	transform.GetLocation().ToString();
-	transform.DebugPrint()*/;
 
 	if (GEngine) 
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "CheckPoint triggered!" + transform.GetLocation().ToString());
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "CheckPoint triggered!");
 }
