@@ -4,7 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
+#include "SpellEffect.h"
+#include <vector>
 #include "Spell.generated.h"
 
 /**
@@ -23,6 +24,8 @@ protected:
 	float sinceCast;
 	float range;
 	float baseDMG;
+
+	std::vector <USpellEffect *> effects;
 
 public:
 
