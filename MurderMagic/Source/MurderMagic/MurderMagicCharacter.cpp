@@ -82,6 +82,8 @@ void AMurderMagicCharacter::BeginPlay()
 		PC->bEnableMouseOverEvents = true;
 	}
 
+
+
 }
 
 bool AMurderMagicCharacter::AddHealth(float Points)
@@ -250,5 +252,15 @@ void AMurderMagicCharacter::ObjectInteract()
 		Triggers->OnInteract();
 
 	}
+
+}
+
+void AMurderMagicCharacter::CheckPointRespond()
+{
+
+	//GetWorld()->SpawnActor;
+
+
+
 
 }

@@ -110,6 +110,8 @@ public:
 
 	void ObjectInteract();
 
+	void CheckPointRespond();
+
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
