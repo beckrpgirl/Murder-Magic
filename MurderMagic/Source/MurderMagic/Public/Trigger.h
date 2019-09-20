@@ -32,6 +32,10 @@ public:
 	UPROPERTY(VisibleDefaultsOnly)
 	UParticleSystemComponent* Particle;
 
+	bool DidActivate;
+
+	bool ToggleInteracted();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

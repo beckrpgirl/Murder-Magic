@@ -2,6 +2,8 @@
 
 
 #include "TriggerManager.h"
+#include "Trigger.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ATriggerManager::ATriggerManager()
@@ -11,10 +13,24 @@ ATriggerManager::ATriggerManager()
 
 }
 
+void ATriggerManager::GetAllTriggers()
+{
+
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATrigger::StaticClass(), HasNotInteracted);
+
+	for (int i = 0; i < HasNotInteracted.Num(); i++) {
+
+		TotalUnusedTriggers = i;
+
+	}
+
+}
+
 // Called when the game starts or when spawned
 void ATriggerManager::BeginPlay()
 {
 	Super::BeginPlay();
+	GetAllTriggers();
 	
 }
 
@@ -22,6 +38,23 @@ void ATriggerManager::BeginPlay()
 void ATriggerManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (Trigger && (HasNotInteracted.Num() != 0)) {
+
+		if ((Trigger->DidActivate) == true) {
+
+			HasNotInteracted.Remove(Trigger);
+			HasInteracted.Add(Trigger);
+
+		}
+		else if ((Trigger->DidActivate) == false) {
+
+			HasInteracted.Remove(Trigger);
+			HasNotInteracted.Add(Trigger);
+
+		}
+
+	}
 
 }
 

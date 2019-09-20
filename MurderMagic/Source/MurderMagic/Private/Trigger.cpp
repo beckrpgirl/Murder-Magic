@@ -28,6 +28,24 @@ ATrigger::ATrigger(const FObjectInitializer& OI)
 
 }
 
+bool ATrigger::ToggleInteracted()
+{
+
+	if (DidActivate == false) {
+
+		DidActivate = true;
+
+	}
+	else {
+
+		DidActivate = false;
+
+	}
+
+
+	return DidActivate;
+}
+
 // Called when the game starts or when spawned
 void ATrigger::BeginPlay()
 {
@@ -58,6 +76,8 @@ void ATrigger::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 
 bool ATrigger::OnInteract()
 {
+
+	ToggleInteracted();
 
 	if (GEngine) {
 
