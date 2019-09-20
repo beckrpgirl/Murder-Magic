@@ -217,8 +217,20 @@ void AMurderMagicCharacter::PlayerStats()
 
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
-	Collectibles = Cast<ACollectibleParent>(OtherActor);
-	Triggers = Cast<ATrigger>(OtherActor);
+	TempCollectibles = Cast<ACollectibleParent>(OtherActor);
+	TempTrig = Cast<ATrigger>(OtherActor);
+
+	if (TempTrig) {
+
+		Triggers = TempTrig;
+	}
+
+	if (TempCollectibles) {
+
+		Collectibles = TempCollectibles;
+
+	}
+
 
 	if (OtherActor && (OtherActor != this) && OtherComp) {
 		if (GEngine) {
@@ -254,6 +266,10 @@ void AMurderMagicCharacter::ObjectInteract()
 	if (Triggers) {
 
 		Triggers->OnInteract();
+		if (GEngine) {
+
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Interacted with buttons");
+		}
 
 	}
 
@@ -264,8 +280,6 @@ void AMurderMagicCharacter::CheckPointRespond()
 	FTransform transform;
 
 	transform = AMurderMagicCharacter::GetTransform();
-/*	transform.GetLocation().ToString();
-	transform.DebugPrint()*/;
 
 	if (GEngine) 
 		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "CheckPoint triggered!" + transform.GetLocation().ToString());

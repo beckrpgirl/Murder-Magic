@@ -79,12 +79,6 @@ bool ATrigger::OnInteract()
 
 	ToggleInteracted();
 
-	if (GEngine) {
-
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, "Player Interacted with a door trigger");
-
-	}
-
 	return false;
 }
 
