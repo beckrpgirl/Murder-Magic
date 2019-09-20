@@ -20,6 +20,11 @@ FString UXPBar::UpdateXP()
 		XProgress = FString::FromInt(MMC->Experience) + " / " + FString::FromInt(MMC->ExperienceToNextLevel);
 
 	}
+	else if (MMC->CurrentPlayerLevel == 10) {
+
+		XProgress = "Max lvl reached";
+
+	}
 
 	return XProgress;
 
