@@ -16,6 +16,16 @@ public:
 	// Sets default values for this actor's properties
 	ATriggerManager();
 
+	TArray<AActor*> HasInteracted;
+	TArray<AActor*> HasNotInteracted;
+
+	ATrigger* Trigger;
+
+	int TotalUnusedTriggers;
+	int TotalUsedTriggers;
+
+	void GetAllTriggers();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
