@@ -99,9 +99,11 @@ public:
 	void PlayerLevelup();
 	void PlayerStats();
 
+
 	FTransform PlayerTransform;
 
 	ACollectibleParent* Collectibles;
+	ATrigger* TempTrig;
 	ATrigger* Triggers;
 
 	UFUNCTION()

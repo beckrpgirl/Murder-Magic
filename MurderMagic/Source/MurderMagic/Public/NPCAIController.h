@@ -35,12 +35,7 @@ public:
 
 	void SetTargetEnemy(APawn* NewTarget);
 
-	FVector GetWaypointLocation();
-
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		FName TargetEnemyKeyName;
-
-	UPROPERTY(EditDefaultsOnly, Category = "AI")
-		FName CurrentWaypointKeyName;
 
 };

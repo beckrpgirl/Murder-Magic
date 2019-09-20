@@ -19,7 +19,6 @@ ANPCAIController::ANPCAIController(const class FObjectInitializer& OI)
 	BlackboardComp = OI.CreateDefaultSubobject<UBlackboardComponent>(this, TEXT("BlackboardComp"));
 
 	TargetEnemyKeyName = "TargetEnemy";
-	CurrentWaypointKeyName = "CurrentWaypoint";
 }
 
 void ANPCAIController::OnPossess(class APawn* InPawn)
@@ -49,13 +48,4 @@ void ANPCAIController::SetTargetEnemy(APawn* NewTarget)
 	{
 		BlackboardComp->SetValueAsObject(TargetEnemyKeyName, NewTarget);
 	}
-}
-
-FVector ANPCAIController::GetWaypointLocation()
-{
-	if (BlackboardComp)
-		return Cast<AActor>(BlackboardComp->GetValueAsObject(CurrentWaypointKeyName))->GetActorLocation();
-
-
-	return FVector::ZeroVector;
 }

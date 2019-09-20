@@ -15,13 +15,21 @@ ANPCManager::ANPCManager()
 void ANPCManager::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	UWorld* world = GetWorld();
+	FindAllActors(world, spawnerArray);
 }
 
 // Called every frame
 void ANPCManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	for (int i = 0; i < spawnerArray.Num(); i++)
+	{
+		currentSpawner = Cast<AAITargetPoint>(spawnerArray[i]);
+		if (currentSpawner->SpawnNow)
+		{
+			currentSpawner->SpawnEnemies(5, 1, GoblinRef, OgreRef, BossRef);
+		}
+	}
 }
 

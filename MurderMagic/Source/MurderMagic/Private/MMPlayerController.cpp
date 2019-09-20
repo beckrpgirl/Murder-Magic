@@ -4,6 +4,9 @@
 #include "MMPlayerController.h"
 #include "Templates.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/Controller.h"
+#include "Trigger.h"
+#include "MurderMagicCharacter.h"
 
 AMMPlayerController::AMMPlayerController()
 {
@@ -12,6 +15,7 @@ AMMPlayerController::AMMPlayerController()
 void AMMPlayerController::BeginPlay()
 {
 	spellManager = (ASpellManager *)GetWorld()->SpawnActor(ASpellManager::StaticClass());
+	pawnRef = Cast<AMurderMagicCharacter>(GetPawn());
 }
 
 void AMMPlayerController::PlayerTick(float deltaTime)
@@ -46,6 +50,18 @@ void AMMPlayerController::MoveRight(float axisValue)
 
 void AMMPlayerController::ObjectInteract()
 {
+
+	if (pawnRef && pawnRef->Triggers) {
+
+		pawnRef->Triggers->OnInteract();
+
+		if (GEngine) {
+
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "Interacted with button");
+		}
+
+	}
+
 
 }
 

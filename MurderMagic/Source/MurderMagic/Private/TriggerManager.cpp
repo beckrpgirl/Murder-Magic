@@ -22,6 +22,7 @@ void ATriggerManager::GetAllTriggers()
 
 		TotalUnusedTriggers = i;
 
+
 	}
 
 }
