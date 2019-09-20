@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-
 //Includes for AI
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
@@ -31,11 +30,6 @@ class MURDERMAGIC_API ANPCAIController : public AAIController
 	UBehaviorTreeComponent* BehaviorComp;
 	UBlackboardComponent* BlackboardComp;
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI")
-		FName TargetEnemyKeyName;
-
-	UPROPERTY(EditDefaultsOnly, Category = "AI")
-		FName CurrentWaypointKeyName;
 
 public:
 
@@ -43,5 +37,10 @@ public:
 
 	FVector GetWaypointLocation();
 
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+		FName TargetEnemyKeyName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+		FName CurrentWaypointKeyName;
 
 };

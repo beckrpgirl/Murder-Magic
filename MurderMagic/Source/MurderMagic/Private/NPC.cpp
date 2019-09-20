@@ -23,7 +23,11 @@ ANPC::ANPC(const FObjectInitializer& OI)
 void ANPC::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	ANPCAIController* AIController = Cast<ANPCAIController>(GetController());
+	if (AIController)
+	{
+		AIController->SetTargetEnemy(GetWorld()->GetFirstPlayerController()->GetPawn());
+	}
 }
 
 // Called every frame

@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "MurderMagicCharacter.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "SpellManager.h"
@@ -46,4 +46,5 @@ public:
 	void LNextSpell();
 	void RNextSpell();
 
+	AMurderMagicCharacter* pawnRef;
 };
