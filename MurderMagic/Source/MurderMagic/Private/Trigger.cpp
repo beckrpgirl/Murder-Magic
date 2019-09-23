@@ -4,6 +4,8 @@
 #include "Trigger.h"
 #include "MurderMagicCharacter.h"
 
+
+
 // Sets default values
 ATrigger::ATrigger(const FObjectInitializer& OI)
 	: Super(OI)
@@ -78,6 +80,7 @@ bool ATrigger::OnInteract()
 {
 
 	ToggleInteracted();
+	
 
 	return false;
 }
