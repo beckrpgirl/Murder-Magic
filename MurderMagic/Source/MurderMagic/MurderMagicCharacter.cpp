@@ -74,7 +74,7 @@ void AMurderMagicCharacter::BeginPlay()
 	Experience = GI->PlayerXP;
 	CurrentPlayerLevel = GI->PlayerLvl;
 
-	PlayerStats();
+	SetPlayerStats();
 
 	if (PC)
 	{
@@ -176,7 +176,7 @@ void AMurderMagicCharacter::PlayerLevelup()
 	if (Experience >= ExperienceToNextLevel) {
 
 		CurrentPlayerLevel++;
-		PlayerStats();
+		SetPlayerStats();
 		Experience = 0;
 
 		if (GEngine) {
@@ -194,7 +194,7 @@ void AMurderMagicCharacter::PlayerLevelup()
 
 }
 
-void AMurderMagicCharacter::PlayerStats()
+void AMurderMagicCharacter::SetPlayerStats()
 {
 
 	if (DataTable) {
@@ -244,10 +244,6 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 		Collectibles->OnInteract(this);
 		PlayerLevelup();
 	}
-	if (OtherActor == CurrentLevelManager)
-	{
-		CheckPointRespond();
-	}
 
 }
 
@@ -288,19 +284,7 @@ void AMurderMagicCharacter::CheckPointRespond()
 }
 
 void AMurderMagicCharacter::SpawnPoint()
-{
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	AMMPlayerController* controller = Cast<AMMPlayerController>(GetController());
-	
-	//CurrentLevelManager->GetTransform;
-	//PlayerTransform = CurrentLevelManager->GetTransform;
-
-	FVector Location = CurrentLevelManager->GetActorLocation();
-	FRotator Rotation = CurrentLevelManager->GetActorRotation();
-	FActorSpawnParameters SpawnInfo;
-	GetWorld()->SpawnActor<AMurderMagicCharacter>(Location, Rotation, SpawnInfo);
-	controller->Possess(this);
-	
+{	
 	
 }
 

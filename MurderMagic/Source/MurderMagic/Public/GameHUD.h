@@ -29,5 +29,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "TestFunctions")
 		FString GetCurrentMapName();
 
+	FString CurrentMapName;
+	UWorld* MyWorld;
 	
 };
