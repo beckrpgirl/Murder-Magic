@@ -52,6 +52,8 @@ public:
 
 	AMurderMagicCharacter();
 
+	ALevelManager *CurrentLevelManager;
+
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -66,6 +68,8 @@ public:
 	FDataTableStruct* Row;
 
 	virtual void BeginPlay() override;
+
+	int currentAP;
 
 	float Health;
 	float MaxHealth;

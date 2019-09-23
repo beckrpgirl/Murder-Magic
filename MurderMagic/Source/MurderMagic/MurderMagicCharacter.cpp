@@ -58,7 +58,7 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-
+	currentAP = 0;
 }
 
 
@@ -205,7 +205,7 @@ void AMurderMagicCharacter::SetPlayerStats()
 		{
 			MaxHealth = Row->MaxHealth;
 			Health = MaxHealth;
-
+			currentAP = currentAP + Row->AbilityPoint;
 			ExperienceToNextLevel = Row->ExperienceToNextLevel;
 
 			MaxMana = Row->MaxMana;
@@ -243,6 +243,10 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	if (OtherActor == Collectibles) {
 		Collectibles->OnInteract(this);
 		PlayerLevelup();
+	}
+	if (OtherActor == CurrentLevelManager)
+	{
+		CheckPointRespond();
 	}
 
 }
@@ -284,7 +288,19 @@ void AMurderMagicCharacter::CheckPointRespond()
 }
 
 void AMurderMagicCharacter::SpawnPoint()
-{	
+{
+	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
+	AMMPlayerController* controller = Cast<AMMPlayerController>(GetController());
+	
+	//CurrentLevelManager->GetTransform;
+	//PlayerTransform = CurrentLevelManager->GetTransform;
+
+	FVector Location = CurrentLevelManager->GetActorLocation();
+	FRotator Rotation = CurrentLevelManager->GetActorRotation();
+	FActorSpawnParameters SpawnInfo;
+	GetWorld()->SpawnActor<AMurderMagicCharacter>(Location, Rotation, SpawnInfo);
+	controller->Possess(this);
+	
 	
 }
 
