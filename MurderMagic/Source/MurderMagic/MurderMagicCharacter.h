@@ -103,6 +103,7 @@ public:
 	FTransform PlayerTransform;
 
 	ACollectibleParent* Collectibles;
+	ACollectibleParent* TempCollectibles;
 	ATrigger* TempTrig;
 	ATrigger* Triggers;
 
