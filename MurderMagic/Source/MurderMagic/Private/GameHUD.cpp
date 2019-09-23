@@ -5,7 +5,8 @@
 #include "UserWidget.h"
 
 
-AGameHUD::AGameHUD() {
+AGameHUD::AGameHUD()
+{
 
 
 
@@ -15,9 +16,8 @@ void AGameHUD::BeginPlay()
 {
 
 	Super::BeginPlay();
-
-	UWorld* MyWorld = GetWorld();
-	FString CurrentMapName = MyWorld->GetMapName();
+	MyWorld = GetWorld();
+	CurrentMapName = MyWorld->GetMapName();
 
 
 
@@ -41,8 +41,5 @@ void AGameHUD::BeginPlay()
 
 FString AGameHUD::GetCurrentMapName()
 {
-	UWorld* MyWorld = GetWorld();
-	FString CurrentMapName = MyWorld->GetMapName();
-
 	return CurrentMapName;
 }
