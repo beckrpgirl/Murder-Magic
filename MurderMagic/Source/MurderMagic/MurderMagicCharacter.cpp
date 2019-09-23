@@ -74,7 +74,7 @@ void AMurderMagicCharacter::BeginPlay()
 	Experience = GI->PlayerXP;
 	CurrentPlayerLevel = GI->PlayerLvl;
 
-	PlayerStats();
+	SetPlayerStats();
 
 	if (PC)
 	{
@@ -176,7 +176,7 @@ void AMurderMagicCharacter::PlayerLevelup()
 	if (Experience >= ExperienceToNextLevel) {
 
 		CurrentPlayerLevel++;
-		PlayerStats();
+		SetPlayerStats();
 		Experience = 0;
 
 		if (GEngine) {
@@ -194,7 +194,7 @@ void AMurderMagicCharacter::PlayerLevelup()
 
 }
 
-void AMurderMagicCharacter::PlayerStats()
+void AMurderMagicCharacter::SetPlayerStats()
 {
 
 	if (DataTable) {

@@ -97,7 +97,7 @@ public:
 	float GetExperiencePercent();
 
 	void PlayerLevelup();
-	void PlayerStats();
+	void SetPlayerStats();
 
 
 	FTransform PlayerTransform;
