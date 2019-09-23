@@ -11,6 +11,7 @@
 #include "Particles/ParticleSystem.h"
 #include "Particles/ParticleSystemComponent.h"
 
+
 #include "Trigger.generated.h"
 
 class AMurderMagicCharacter;

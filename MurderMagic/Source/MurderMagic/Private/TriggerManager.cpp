@@ -3,6 +3,8 @@
 
 #include "TriggerManager.h"
 #include "Trigger.h"
+#include "Templates.h"
+#include "TriggerDoor.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -24,6 +26,13 @@ void ATriggerManager::GetAllTriggers()
 
 
 	}
+
+}
+
+void ATriggerManager::GetTriggerDoors()
+{
+	TArray<ATriggerDoor*> door;
+	FindAllActors(GetWorld(), door);
 
 }
 
