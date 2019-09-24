@@ -25,10 +25,10 @@ void ANPCManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	for (int i = 0; i < spawnerArray.Num(); i++)
 	{
-		currentSpawner = Cast<AAITargetPoint>(spawnerArray[i]);
+		currentSpawner = Cast<AAITargetPoint>(spawnerArray[i]); //No need to cast AAITargetPoint to AAITargetPoint - they are derived from the same class.
 		if (currentSpawner->SpawnNow)
 		{
-			currentSpawner->SpawnEnemies(5, 1, GoblinRef, OgreRef, BossRef);
+			currentSpawner->SpawnEnemies(5, 1, GoblinRef, OgreRef, BossRef); // We need to pass 1 Reference at a time, and have the spawnEnemies() function return the enemy spawned so we can keep track of each enemy.
 		}
 	}
 }
