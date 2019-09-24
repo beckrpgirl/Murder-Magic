@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "SpellEffect.h"
+#include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
+#include "Components/SphereComponent.h"
 #include <vector>
 #include "Spell.generated.h"
 
@@ -33,7 +35,16 @@ public:
 
 	ASpell();
 
+	UPROPERTY(EditDefaultsOnly)
+	USphereComponent* CollisionSphere;
+
+	UPROPERTY(VisibleAnywhere, Category = "Spell Effect")
+	class UParticleSystemComponent* PSC;
+
 	void Cast(FVector start, float angle);
+
+	UFUNCTION()
+	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 
 	//virtual void CreateEffect() PURE_VIRTUAL(ASpell::CreateEffect);
 

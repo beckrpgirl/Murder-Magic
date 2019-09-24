@@ -16,7 +16,7 @@ void ASpellManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	equippedSpellL = (ASpell *)GetWorld()->SpawnActor(AMagiBolt::StaticClass());
+	equippedSpellL = Cast<ASpell>(GetWorld()->SpawnActor(AMagiBolt::StaticClass()));
 	equippedSpellR = equippedSpellL;
 	
 }
