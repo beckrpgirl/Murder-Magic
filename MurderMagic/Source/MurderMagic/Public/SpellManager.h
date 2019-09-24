@@ -14,8 +14,6 @@ private:
 
 	GENERATED_BODY()
 
-	ASpell *equippedSpellL;
-	ASpell *equippedSpellR;
 	
 
 protected:
@@ -27,6 +25,9 @@ public:
 
 	// Sets default values for this actor's properties
 	ASpellManager();
+
+	ASpell* equippedSpellL;
+	ASpell* equippedSpellR;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

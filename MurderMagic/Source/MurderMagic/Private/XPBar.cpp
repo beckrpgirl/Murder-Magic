@@ -4,6 +4,7 @@
 #include "XPBar.h"
 #include "MurderMagicCharacter.h"
 
+//binding for the exp progress bar
 float UXPBar::UpdateXPPercent() {
 
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
@@ -12,6 +13,7 @@ float UXPBar::UpdateXPPercent() {
 
 }
 
+//Binding for the text on the exp bar
 FString UXPBar::UpdateXP()
 {
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());

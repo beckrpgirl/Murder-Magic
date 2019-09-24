@@ -14,7 +14,7 @@ AMMPlayerController::AMMPlayerController()
 
 void AMMPlayerController::BeginPlay()
 {
-	spellManager = (ASpellManager *)GetWorld()->SpawnActor(ASpellManager::StaticClass());
+	spellManager = Cast<ASpellManager>(GetWorld()->SpawnActor(ASpellManager::StaticClass()));
 	pawnRef = Cast<AMurderMagicCharacter>(GetPawn());
 }
 
@@ -51,6 +51,7 @@ void AMMPlayerController::MoveRight(float axisValue)
 void AMMPlayerController::ObjectInteract()
 {
 
+	//allows interraction with the triggers
 	if (pawnRef && pawnRef->Triggers) {
 
 		pawnRef->Triggers->OnInteract();
@@ -74,7 +75,8 @@ void AMMPlayerController::FireLSpell()
 {
 	FRotator direction = GetPawn()->GetActorRotation();
 	float rAngle = direction.Yaw;
-	spellManager->CastSpellL(GetPawn()->GetActorLocation(), rAngle);
+	spellManager->CastSpellL((GetPawn()->GetActorLocation()), rAngle);
+
 }
 
 void AMMPlayerController::FireRSpell()

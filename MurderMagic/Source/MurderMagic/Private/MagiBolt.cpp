@@ -2,10 +2,15 @@
 
 
 #include "MagiBolt.h"
+#include "ConstructorHelpers.h"
 
 AMagiBolt::AMagiBolt()
 {
 	spellCD = 3;
-	range = 25;
+	range = 20;
 	baseDMG = 10;
+
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> PS(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
+
+	PSC->SetTemplate(PS.Object);
 }
