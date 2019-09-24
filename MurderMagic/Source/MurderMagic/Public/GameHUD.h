@@ -27,7 +27,7 @@ public:
 	virtual void BeginPlay() override;
 
 	UFUNCTION(BlueprintCallable, Category = "TestFunctions")
-		FString GetCurrentMapName();
+	FString GetCurrentMapName();
 
 	FString CurrentMapName;
 	UWorld* MyWorld;

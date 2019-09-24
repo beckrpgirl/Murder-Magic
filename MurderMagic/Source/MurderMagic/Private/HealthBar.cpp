@@ -7,8 +7,8 @@
 
 float UHealthBar::UpdateHealthPercent() {
 
-	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
+	Character = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 
-	return MMC->GetHealthPercent();
+	return Character->GetHealthPercent();
 
 }

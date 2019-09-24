@@ -2,6 +2,7 @@
 
 
 #include "MagiBolt.h"
+#include "Runtime/Engine/Classes/Engine/objectLibrary.h"
 #include "ConstructorHelpers.h"
 
 AMagiBolt::AMagiBolt()

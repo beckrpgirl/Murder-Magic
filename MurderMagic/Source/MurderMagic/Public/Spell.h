@@ -31,9 +31,11 @@ protected:
 
 public:
 
+	ASpell();
 	ASpell *next;
 
-	ASpell();
+	UPROPERTY(EditDefaultsOnly)
+	UTexture2D* SpellTexture;
 
 	UPROPERTY(EditDefaultsOnly)
 	USphereComponent* CollisionSphere;

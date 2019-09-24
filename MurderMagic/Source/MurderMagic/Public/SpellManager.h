@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "SpellSlots.h"
+#include "MagiBolt.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Spell.h"
@@ -14,6 +15,7 @@ private:
 
 	GENERATED_BODY()
 
+	AGameHUD* hudRef;
 	ASpell *equippedSpellL;
 	ASpell *equippedSpellR;
 	
@@ -28,6 +30,8 @@ public:
 	// Sets default values for this actor's properties
 	ASpellManager();
 
+	ASpell* GetLeftSpell();
+	ASpell* GetRightSpell();
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
