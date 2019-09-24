@@ -18,14 +18,6 @@ ASpell::ASpell()
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
 	SetRootComponent(CollisionSphere);
 
-	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
-	ProjectileMovementComponent->SetUpdatedComponent(CollisionSphere);
-	ProjectileMovementComponent->InitialSpeed = 3000.0f;
-	ProjectileMovementComponent->MaxSpeed = 3000.0f;
-	ProjectileMovementComponent->bRotationFollowsVelocity = true;
-	ProjectileMovementComponent->bShouldBounce = false;
-
-
 	PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleComponent"));
 	PSC->SetupAttachment(CollisionSphere);
 	PSC->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -41,7 +33,6 @@ void ASpell::Cast(FVector start, float angle)
 
 }
 
-//function meant for later use when the enemies can take damage
 void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 

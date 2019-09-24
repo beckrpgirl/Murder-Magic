@@ -8,7 +8,7 @@
 AMagiBolt::AMagiBolt()
 {
 	spellCD = 3;
-	range = 10;
+	range = 20;
 	baseDMG = 10;
 
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> PS(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));

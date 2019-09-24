@@ -15,7 +15,6 @@ private:
 
 	GENERATED_BODY()
 
-	AGameHUD* hudRef;
 	ASpell *equippedSpellL;
 	ASpell *equippedSpellR;
 	
@@ -32,6 +31,10 @@ public:
 
 	ASpell* GetLeftSpell();
 	ASpell* GetRightSpell();
+
+	ASpell* equippedSpellL;
+	ASpell* equippedSpellR;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

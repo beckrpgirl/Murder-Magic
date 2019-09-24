@@ -17,8 +17,8 @@ void AAITargetPoint::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, class A
 
 void AAITargetPoint::SpawnEnemies(int amount, int tier, TSubclassOf<ANPC> GoblinRef, TSubclassOf<ANPC> OgreRef, TSubclassOf<ANPC> BossRef)
 {
-	const FVector Location = this->GetActorLocation();
-	const FRotator Rotation = this->GetActorRotation();
+	const FVector Location = GetActorLocation();
+	const FRotator Rotation = GetActorRotation();
 	const FActorSpawnParameters Params;
 	UWorld* world = GetWorld();
 	for (int i = 0; i < amount; i++)

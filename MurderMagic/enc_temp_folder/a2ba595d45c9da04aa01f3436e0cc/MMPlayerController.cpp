@@ -51,7 +51,6 @@ void AMMPlayerController::MoveRight(float axisValue)
 void AMMPlayerController::ObjectInteract()
 {
 
-	//allows interraction with the triggers
 	if (pawnRef && pawnRef->Triggers) {
 
 		pawnRef->Triggers->OnInteract();

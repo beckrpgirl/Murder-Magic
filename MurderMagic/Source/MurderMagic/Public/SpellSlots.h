@@ -25,6 +25,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* SlotRight;
 
+	
+	/*UFUNCTION(BlueprintPure, Category = "Spells")
+	void UpdateSpellIcons();
+
+	UPROPERTY(BlueprintReadWrite)
+	AMurderMagicCharacter* Character;*/
 
 
 };
