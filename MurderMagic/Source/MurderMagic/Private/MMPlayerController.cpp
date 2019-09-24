@@ -74,7 +74,7 @@ void AMMPlayerController::FireLSpell()
 {
 	FRotator direction = GetPawn()->GetActorRotation();
 	float rAngle = direction.Yaw;
-	spellManager->CastSpellL(GetPawn()->GetActorLocation(), rAngle);
+	spellManager->CastSpellL((GetPawn()->GetActorLocation()), rAngle);
 
 }
 
