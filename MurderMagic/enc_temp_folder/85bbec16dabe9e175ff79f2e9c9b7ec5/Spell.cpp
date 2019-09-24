@@ -33,7 +33,6 @@ void ASpell::Cast(FVector start, float angle)
 
 }
 
-//function meant for later use when the enemies can take damage
 void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 

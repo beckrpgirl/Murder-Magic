@@ -15,11 +15,11 @@ class MURDERMAGIC_API USpellSlots : public UUserWidget
 {
 	GENERATED_BODY()
 	
-	UFUNCTION(BlueprintPure, Category = "Spells")
+	/*UFUNCTION(BlueprintPure, Category = "Spells")
 	void UpdateSpellIcons();
 
 	UPROPERTY(BlueprintReadWrite)
-	AMurderMagicCharacter* Character;
+	AMurderMagicCharacter* Character;*/
 
 
 };
