@@ -18,6 +18,14 @@ ASpell::ASpell()
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
 	SetRootComponent(CollisionSphere);
 
+	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
+	ProjectileMovementComponent->SetUpdatedComponent(CollisionSphere);
+	ProjectileMovementComponent->InitialSpeed = 3000.0f;
+	ProjectileMovementComponent->MaxSpeed = 3000.0f;
+	ProjectileMovementComponent->bRotationFollowsVelocity = true;
+	ProjectileMovementComponent->bShouldBounce = false;
+
+
 	PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleComponent"));
 	PSC->SetupAttachment(CollisionSphere);
 	PSC->SetCollisionEnabled(ECollisionEnabled::NoCollision);

@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "SpellEffect.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 #include <vector>
 #include "Spell.generated.h"
@@ -37,6 +38,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 	USphereComponent* CollisionSphere;
+
+	UPROPERTY(VisibleAnywhere, Category = "MovementComponent")
+	UProjectileMovementComponent* ProjectileMovementComponent;
 
 	UPROPERTY(VisibleAnywhere, Category = "Spell Effect")
 	class UParticleSystemComponent* PSC;
