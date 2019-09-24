@@ -13,5 +13,5 @@ UCLASS()
 class MURDERMAGIC_API ATriggerDoor : public ADoor
 {
 	GENERATED_BODY()
-public:
+	
 };
