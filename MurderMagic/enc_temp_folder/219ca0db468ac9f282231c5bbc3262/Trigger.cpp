@@ -28,8 +28,6 @@ ATrigger::ATrigger(const FObjectInitializer& OI)
 	Particle->SetupAttachment(Mesh);
 	Particle->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-	DidActivate = false;
-
 }
 
 bool ATrigger::ToggleInteracted()
@@ -68,10 +66,6 @@ void ATrigger::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherAct
 {
 
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(OtherActor);
-	if (MMC)
-	{
-		OnInteract();
-	}
 
 }
 

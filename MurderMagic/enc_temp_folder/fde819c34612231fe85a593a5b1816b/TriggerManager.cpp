@@ -14,24 +14,33 @@ ATriggerManager::ATriggerManager()
 	PrimaryActorTick.bCanEverTick = true;
 
 }
-//Boolean checking if there are no active triggers then returns true
-bool ATriggerManager::CheckIsActive()
-{//Looping through triggers
-	for (int i = 0; i < Triggers.Num(); i++)
-	{
-		//returns false if any trigger is not active
-		if (!Triggers[i]->DidActivate)
-			return false;
+
+void ATriggerManager::GetAllTriggers()
+{
+
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATrigger::StaticClass(), HasNotInteracted);
+
+	for (int i = 0; i < HasNotInteracted.Num(); i++) {
+
+		TotalUnusedTriggers = i;
+
+
 	}
 
-	return true;
 }
 
+void ATriggerManager::GetTriggerDoors()
+{
+	TArray<ATriggerDoor*> door;
+	FindAllActors(GetWorld(), door);
+
+}
 
 // Called when the game starts or when spawned
 void ATriggerManager::BeginPlay()
 {
 	Super::BeginPlay();
+	GetAllTriggers();
 	
 }
 
@@ -39,15 +48,23 @@ void ATriggerManager::BeginPlay()
 void ATriggerManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//Opens door  if all the triggers are active
-	if (CheckIsActive())
-	{
-		//calls function opens door 
-		door->Open();
+
+	if (Trigger && (HasNotInteracted.Num() != 0)) {
+
+		if ((Trigger->DidActivate) == true) {
+
+			HasNotInteracted.Remove(Trigger);
+			HasInteracted.Add(Trigger);
+
+		}
+		else if ((Trigger->DidActivate) == false) {
+
+			HasInteracted.Remove(Trigger);
+			HasNotInteracted.Add(Trigger);
+
+		}
+
 	}
 
-
 }
-
-
 
