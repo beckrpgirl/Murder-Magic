@@ -2,11 +2,13 @@
 //Runtime\UMG\Public\Components\Image.h
 #pragma once
 #include "Runtime/UMG/Public/Components/Image.h"
+#include "MagiBolt.h"
 #include "Styling/SlateBrush.h"
 #include "GameHUD.h"
 #include "MurderMagicCharacter.h"
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include <string>
 #include "SpellSlots.generated.h"
 
 /**
@@ -19,18 +21,20 @@ class MURDERMAGIC_API USpellSlots : public UUserWidget
 
 public:
 
+	virtual void NativeTick(const FGeometry& MyGeometry, float DeltaTime) override;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* SlotLeft;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	UImage* SlotRight;
 
+	UFUNCTION()
+	void UpdateLeftSlotImage(UTexture2D* texture);
+
+	UFUNCTION()
+	void UpdateRightSlotImage(UTexture2D* texture);
+
 	
-	/*UFUNCTION(BlueprintPure, Category = "Spells")
-	void UpdateSpellIcons();
-
-	UPROPERTY(BlueprintReadWrite)
-	AMurderMagicCharacter* Character;*/
-
 
 };
