@@ -95,3 +95,8 @@ void AMMPlayerController::RNextSpell()
 {
 	spellManager->NextSpellR();
 }
+
+ASpellManager* AMMPlayerController::GetSpellManager()
+{
+	return spellManager;
+}

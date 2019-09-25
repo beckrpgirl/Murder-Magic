@@ -23,26 +23,38 @@ ASpell* ASpellManager::GetRightSpell()
 void ASpellManager::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	equippedSpellL = Cast<ASpell>(GetWorld()->SpawnActor(AMagiBolt::StaticClass()));
 	equippedSpellR = equippedSpellL;
+	hasLeftUpdated = true;
 }
 
 // Called every frame
 void ASpellManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (hasLeftUpdated)
+	{
+		spellSlotRef->UpdateLeftSlotImage(equippedSpellL->SpellTexture);
+		hasLeftUpdated = false;
+	}
+	if (hasRightUpdated)
+	{
+		spellSlotRef->UpdateRightSlotImage(equippedSpellR->SpellTexture);
+		hasRightUpdated = false;
+	}
 }
 
 void ASpellManager::NextSpellL()
 {
 	equippedSpellL = equippedSpellL->next;
+	hasLeftUpdated = true;
 }
 
 void ASpellManager::NextSpellR()
 {
 	equippedSpellR = equippedSpellR->next;
+	hasRightUpdated = true;
 }
 
 void ASpellManager::CastSpellL(FVector start, float angle)

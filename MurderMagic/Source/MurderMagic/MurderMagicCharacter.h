@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameHUD.h"
 #include "GameFramework/Character.h"
 #include "LevelManager.h"
 #include "Engine/DataTable.h"
