@@ -39,11 +39,6 @@ void ALevelManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (firstTick)
 	{
-		FActorSpawnParameters spawnParams;
-		spawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-		AActor *pActor = GetWorld()->SpawnActor<AMurderMagicCharacter>(AMurderMagicCharacter::StaticClass(), spawnParams);
-		AMurderMagicCharacter *player = (AMurderMagicCharacter *)pActor;
-		player->SetActorLocation(spawnPoint);
 	
 
 		firstTick = false;
