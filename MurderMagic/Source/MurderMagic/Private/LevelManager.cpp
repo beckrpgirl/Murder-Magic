@@ -4,6 +4,7 @@
 #include "LevelManager.h"
 #include "Templates.h"
 #include "MurderMagicCharacter.h"
+#include "NPCManager.h"
 
 
 // Sets default values
@@ -39,7 +40,12 @@ void ALevelManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (firstTick)
 	{
-	
+		TArray<AMurderMagicCharacter*> player;
+		FindAllActors(GetWorld(), player);
+		player[0]->CurrentFloor = CurrentLvlMapInfo->CurrentFloorNum;
+		TArray<ANPCManager *> npcManager;
+		FindAllActors(GetWorld(), npcManager);
+		npcManager[0]->SetLevel(CurrentLvlMapInfo->CurrentFloorNum);
 
 		firstTick = false;
 	}

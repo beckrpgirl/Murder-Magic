@@ -33,3 +33,12 @@ void ANPCManager::Tick(float DeltaTime)
 	}
 }
 
+void ANPCManager::SetLevel(int level)
+{
+	currentLevel = level;
+}
+
+int* ANPCManager::GetLevel()
+{
+	return &currentLevel;
+}

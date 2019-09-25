@@ -13,7 +13,15 @@
 UCLASS()
 class MURDERMAGIC_API ANPCManager : public AActor
 {
+private:
+
 	GENERATED_BODY()
+
+	int currentLevel;
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 	
 public:	
 	// Sets default values for this actor's properties
@@ -32,12 +40,10 @@ public:
 	TArray<AAITargetPoint*> spawnerArray;
 	AAITargetPoint* currentSpawner;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	void SetLevel(int level);
+	int *GetLevel();
 
 };
