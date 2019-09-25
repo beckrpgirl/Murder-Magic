@@ -59,10 +59,10 @@ void ASpellManager::NextSpellR()
 
 void ASpellManager::CastSpellL(FVector start, float angle)
 {
-	equippedSpellL->Cast(start, angle);
+	equippedSpellL->CastSpell(start, angle);
 }
 
 void ASpellManager::CastSpellR(FVector start, float angle)
 {
-	equippedSpellR->Cast(start, angle);
+	equippedSpellR->CastSpell(start, angle);
 }

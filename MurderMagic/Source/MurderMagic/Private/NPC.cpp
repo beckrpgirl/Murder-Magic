@@ -37,6 +37,36 @@ void ANPC::Tick(float DeltaTime)
 
 }
 
+float ANPC::GetHealthPercent()
+{
+	return Health / MaxHealth;
+}
+
+bool ANPC::TakeDamage(int DamageAmount)
+{
+	Health -= DamageAmount;
+
+	if (Health <= 0) {
+
+		SpawnEXP(EXPWorth);
+		Destroy();
+
+	}
+
+	return true;
+}
+
+void ANPC::SpawnEXP(int SpawnAmount)
+{
+
+	for (int i = 0; i <= SpawnAmount; i++) {
+
+		GetWorld()->SpawnActor(ACollectible_EXP::StaticClass());
+
+	}
+
+}
+
 
 void ANPC::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {

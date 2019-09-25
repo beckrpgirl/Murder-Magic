@@ -11,6 +11,8 @@
 #include <vector>
 #include "Spell.generated.h"
 
+class ANPC;
+
 /**
  * 
  */
@@ -35,6 +37,8 @@ public:
 	ASpell();
 	ASpell *next;
 
+	ANPC* Enemy;
+
 	UPROPERTY(EditDefaultsOnly)
 	UTexture2D* SpellTexture;
 
@@ -47,7 +51,7 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Spell Effect")
 	class UParticleSystemComponent* PSC;
 
-	void Cast(FVector start, float angle);
+	void CastSpell(FVector start, float angle);
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);

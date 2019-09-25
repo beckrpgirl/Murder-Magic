@@ -2,6 +2,7 @@
 
 
 #include "Spell.h"
+#include "NPC.h"
 
 ASpell::ASpell()
 {
@@ -32,7 +33,7 @@ ASpell::ASpell()
 
 }
 
-void ASpell::Cast(FVector start, float angle)
+void ASpell::CastSpell(FVector start, float angle)
 {
 	FVector destination;
 	destination.X = start.X + (FMath::Cos(angle) * range);
@@ -45,6 +46,12 @@ void ASpell::Cast(FVector start, float angle)
 void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 
+	Enemy = Cast<ANPC>(OtherActor);
 
+	if (Enemy) {
+
+		Enemy->TakeDamage(baseDMG);
+
+	}
 
 }
