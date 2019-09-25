@@ -15,10 +15,6 @@ private:
 
 	GENERATED_BODY()
 
-	ASpell *equippedSpellL;
-	ASpell *equippedSpellR;
-	
-
 protected:
 
 	// Called when the game starts or when spawned
