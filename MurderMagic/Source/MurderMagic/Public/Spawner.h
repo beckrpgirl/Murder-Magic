@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "NPC.h"
+#include "Engine/EngineTypes.h"
 #include "Spawner.generated.h"
 
 UCLASS()
@@ -33,10 +34,17 @@ public:
 
 	UFUNCTION()
 		virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
+	UFUNCTION()
+		virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	void SpawnDelay();
+	void EndTimer();
 
 	bool SpawnNow;
 	bool Used;
 
 	FVector Location;
 	FRotator Rotation;
+
+	FTimerHandle _TimerHandle;
 };

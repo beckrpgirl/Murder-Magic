@@ -9,7 +9,6 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/SpringArmComponent.h"
-
 #include "CollectibleParent.h"
 #include "MMGameInstance.h"
 #include "Trigger.h"
@@ -59,6 +58,7 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 	currentAP = 0;
+
 }
 
 

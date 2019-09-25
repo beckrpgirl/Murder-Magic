@@ -64,24 +64,6 @@ void ATrigger::Tick(float DeltaTime)
 
 }
 
-void ATrigger::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
-{
-
-	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(OtherActor);
-	if (MMC)
-	{
-		OnInteract();
-	}
-
-}
-
-void ATrigger::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-
-
-
-}
-
 bool ATrigger::OnInteract()
 {
 

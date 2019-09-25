@@ -15,6 +15,11 @@ private:
 
 	GENERATED_BODY()
 
+	ASpell* equippedSpellL;
+	ASpell* equippedSpellR;
+	bool hasLeftUpdated;
+	bool hasRightUpdated;
+
 protected:
 
 	// Called when the game starts or when spawned
@@ -25,11 +30,9 @@ public:
 	// Sets default values for this actor's properties
 	ASpellManager();
 
+	USpellSlots* spellSlotRef;
 	ASpell* GetLeftSpell();
 	ASpell* GetRightSpell();
-
-	ASpell* equippedSpellL;
-	ASpell* equippedSpellR;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

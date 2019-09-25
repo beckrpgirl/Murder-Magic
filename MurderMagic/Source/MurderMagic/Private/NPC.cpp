@@ -2,6 +2,9 @@
 
 
 #include "NPC.h"
+#include "Collectible_EXP.h"
+#include "Math/Vector.h"
+#include "Components/PrimitiveComponent.h"
 
 // Sets default values
 ANPC::ANPC(const FObjectInitializer& OI)
@@ -59,9 +62,20 @@ bool ANPC::TakeDamage(int DamageAmount)
 void ANPC::SpawnEXP(int SpawnAmount)
 {
 
+	FVector XPSpawnPoint;
+	Location = GetActorLocation();
+
+	FActorSpawnParameters SpawnInfo;
+	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
 	for (int i = 0; i <= SpawnAmount; i++) {
 
-		GetWorld()->SpawnActor(ACollectible_EXP::StaticClass());
+		XPSpawnPoint.X = Location.X + (FMath::RandRange(0, 10));
+		XPSpawnPoint.Y = Location.Y + (FMath::RandRange(0, 10));
+		XPSpawnPoint.Z = Location.Z;
+
+		ACollectible_EXP* XPCollectible = GetWorld()->SpawnActor<ACollectible_EXP>(ACollectible_EXP::StaticClass(), SpawnInfo);
+		XPCollectible->GetActorLocation() = XPSpawnPoint;
 
 	}
 

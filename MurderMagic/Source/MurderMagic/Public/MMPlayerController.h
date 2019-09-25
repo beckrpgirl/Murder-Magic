@@ -47,4 +47,6 @@ public:
 	void RNextSpell();
 
 	AMurderMagicCharacter* pawnRef;
+
+	ASpellManager* GetSpellManager();
 };

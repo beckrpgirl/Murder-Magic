@@ -35,6 +35,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
 	int EXPWorth;
 
+	FVector Location;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
