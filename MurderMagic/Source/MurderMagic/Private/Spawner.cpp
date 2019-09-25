@@ -4,6 +4,7 @@
 #include "Spawner.h"
 #include "MurderMagicCharacter.h"
 #include "NPC.h"
+#include "Engine/EngineTypes.h"
 
 // Sets default values
 ASpawner::ASpawner(const FObjectInitializer& OI)
@@ -17,6 +18,7 @@ ASpawner::ASpawner(const FObjectInitializer& OI)
 	CollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionBox->SetGenerateOverlapEvents(true);
 	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ASpawner::OnOverlapBegin);
+	//CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ASpawner::OnOverlapEnd);
 	SetRootComponent(CollisionBox);
 
 }
@@ -39,14 +41,15 @@ void ASpawner::Tick(float DeltaTime)
 }
 
 void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
-{
-	if (Used == false)
+{	
+	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(OtherActor);
+	if (Used == false && OtherActor == PC)
 	{
-		AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(OtherActor);
+		
 		if (PC && ToSpawn)
 		{
-			if (GEngine)
-				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "PC and ToSpawn ok");
+			//if (GEngine)
+			//	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "PC and ToSpawn ok");
 
 			SpawnNow = true;
 			UWorld* world = GetWorld();
@@ -54,17 +57,41 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 			{
 				FActorSpawnParameters SpawnInfo;
 				SpawnInfo.Owner = this;
+				for (float i = 1; i < 5; i++)
+				{
+				
+					FVector Location2 = FVector(0.0f, i, 0.0f) + Location;
+					world->SpawnActor<ANPC>(ToSpawn, Location, Rotation, SpawnInfo);
+					//SpawnDelay();
 
-				world->SpawnActor<ANPC>(ToSpawn,Location, Rotation, SpawnInfo);
+					//world->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::EndTimer, 1.f, false);
 
 
-				if (GEngine)
-					GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned");
+
+					if (GEngine)
+						GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(i));
+				}
 			}
 
 		}
 	}
 
 
+}
+
+void ASpawner::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+
+}
+
+void ASpawner::SpawnDelay()
+{
+	GetWorld()->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::EndTimer, 1.f, false);
+}
+
+void ASpawner::EndTimer()
+{
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Orange, "Timer");
 }
 
