@@ -3,6 +3,7 @@
 #pragma once
 #include "MMPlayerController.h"
 #include "NPCAIController.h"
+#include "Collectible_EXP.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Components/SphereComponent.h"
@@ -21,6 +22,18 @@ public:
 	USphereComponent* CollisionSphere;
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 	class UBehaviorTree* BehaviorTree;
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
+	float MovementSpeed;
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
+	float MaxHealth;
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
+	float Health;
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
+	float Damage;
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
+	float AttackSpeed;
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
+	int EXPWorth;
 
 protected:
 	// Called when the game starts or when spawned
@@ -29,6 +42,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	float GetHealthPercent();
+	bool TakeDamage(int DamageAmount);
+	void SpawnEXP(int SpawnAmount);
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
