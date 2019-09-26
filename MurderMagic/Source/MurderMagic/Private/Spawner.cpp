@@ -53,6 +53,8 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 			{
 				FActorSpawnParameters SpawnInfo;
 				SpawnInfo.Owner = this;
+				if (GEngine)
+					GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(XNPC));
 				for (i = 1; i <= XNPC; i++)
 				{
 					float j = i * 10;
@@ -64,8 +66,7 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 
 
 
-					if (GEngine)
-						GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(i));
+					
 				}
 				SpawnNow = false;
 			}

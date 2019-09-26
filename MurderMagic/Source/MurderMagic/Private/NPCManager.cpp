@@ -3,6 +3,7 @@
 
 #include "NPCManager.h"
 #include "Spawner.h"
+#include "NPC.h"
 #include "UnrealMathUtility.h"
 
 // Sets default values
@@ -18,8 +19,9 @@ ANPCManager::ANPCManager()
 void ANPCManager::BeginPlay()
 {
 	Super::BeginPlay();
+	ANPC* NPC = Cast<ANPC>(this);
 	UWorld* world = GetWorld();
-	FindAllActors(world, spawnerArray);
+	//FindAllActors(world, spawnerArray);
 }
 
 // Called every frame
@@ -31,14 +33,6 @@ void ANPCManager::Tick(float DeltaTime)
 		SetSpawner();
 	}
 
-	//for (int i = 0; i < spawnerArray.Num(); i++)
-	//{
-	//	currentSpawner = Cast<AAITargetPoint>(spawnerArray[i]); //No need to cast AAITargetPoint to AAITargetPoint - they are derived from the same class.
-	//	if (currentSpawner->SpawnNow)
-	//	{
-	//		currentSpawner->SpawnEnemies(5, 1, GoblinRef, OgreRef, BossRef); // We need to pass 1 Reference at a time, and have the spawnEnemies() function return the enemy spawned so we can keep track of each enemy.
-	//	}
-	//}
 }
 
 void ANPCManager::SetSpawner()
