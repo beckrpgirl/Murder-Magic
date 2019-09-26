@@ -4,7 +4,7 @@
 #include "TriggerManager.h"
 #include "Trigger.h"
 #include "Templates.h"
-#include "TriggerDoor.h"
+#include "Door.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values

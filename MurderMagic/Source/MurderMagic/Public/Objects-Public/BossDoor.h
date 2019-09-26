@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "NPC.h"
-#include "T1_Goblin.generated.h"
+#include "Objects-Public/Door.h"
+#include "BossDoor.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MURDERMAGIC_API AT1_Goblin : public ANPC
+class MURDERMAGIC_API ABossDoor : public ADoor
 {
 	GENERATED_BODY()
 	

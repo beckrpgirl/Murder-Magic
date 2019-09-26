@@ -3,7 +3,6 @@
 
 #include "LevelManager.h"
 #include "Templates.h"
-#include "MurderMagicCharacter.h"
 #include "NPCManager.h"
 
 
@@ -43,11 +42,18 @@ void ALevelManager::Tick(float DeltaTime)
 		TArray<AMurderMagicCharacter*> player;
 		FindAllActors(GetWorld(), player);
 		player[0]->CurrentFloor = CurrentLvlMapInfo->CurrentFloorNum;
+		this->player = player[0];
 		TArray<ANPCManager *> npcManager;
 		FindAllActors(GetWorld(), npcManager);
 		npcManager[0]->SetLevel(CurrentLvlMapInfo->CurrentFloorNum);
 
 		firstTick = false;
+	}
+
+	if (player->GetHealthPercent() <= 0)
+	{
+		
+		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetMapName()), false);
 	}
 
 }
