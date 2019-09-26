@@ -63,9 +63,6 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 					//SpawnDelay();
 
 					//world->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::EndTimer, 1.f, false);
-
-
-
 					
 				}
 				SpawnNow = false;
