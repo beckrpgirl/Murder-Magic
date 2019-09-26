@@ -5,6 +5,7 @@
 #include "MurderMagicCharacter.h"
 #include "NPC.h"
 #include "Engine/EngineTypes.h"
+#include "NPCManager.h"
 
 // Sets default values
 ASpawner::ASpawner(const FObjectInitializer& OI)
@@ -31,6 +32,8 @@ void ASpawner::BeginPlay()
 	SpawnNow = true;
 	Location = GetActorLocation();
 	Rotation = GetActorRotation();
+	//ANPCManager* NPCM = Cast<ANPCManager>()
+
 
 }
 
@@ -48,25 +51,27 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 	{
 		if (PC && ToSpawn)
 		{
-			UWorld* world = GetWorld();
-			if (world)
-			{
-				FActorSpawnParameters SpawnInfo;
-				SpawnInfo.Owner = this;
-				if (GEngine)
-					GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(XNPC));
-				for (i = 1; i <= XNPC; i++)
-				{
-					float j = i * 10;
-					FVector Location2 = FVector(i, j, 0.0f) + Location;
-					world->SpawnActor<ANPC>(ToSpawn, Location2, Rotation, SpawnInfo);
-					//SpawnDelay();
+			SpawnDelay();
 
-					//world->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::EndTimer, 1.f, false);
-					
-				}
-				SpawnNow = false;
-			}
+			//UWorld* world = GetWorld();
+			//if (world)
+			//{
+			//	FActorSpawnParameters SpawnInfo;
+			//	SpawnInfo.Owner = this;
+			//	if (GEngine)
+			//		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(XNPC));
+			//	for (i = 1; i <= XNPC; i++)
+			//	{
+			//		float j = i * 10;
+			//		FVector Location2 = FVector(i, j, 0.0f) + Location;
+			//		world->SpawnActor<ANPC>(ToSpawn, Location2, Rotation, SpawnInfo);
+			//		//SpawnDelay();
+
+			//		//world->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::EndTimer, 1.f, false);
+			//		
+			//	}
+			//	SpawnNow = false;
+			//}
 
 		}
 	}
@@ -81,7 +86,22 @@ void ASpawner::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 
 void ASpawner::SpawnDelay()
 {
-	GetWorld()->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::EndTimer, 1.f, false);
+if (GEngine)
+	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(XNPC));
+	if (i <= XNPC)
+	{
+		FActorSpawnParameters SpawnInfo;
+		SpawnInfo.Owner = this;
+		float j = i * 10;
+		FVector Location2 = FVector(i, j, 0.0f) + Location;
+		GetWorld()->SpawnActor<ANPC>(ToSpawn, Location2, Rotation, SpawnInfo);
+		i++;
+		GetWorld()->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::SpawnDelay, 1.f, false);
+	}
+	else
+	{
+		SpawnNow = false;
+	}
 }
 
 void ASpawner::EndTimer()
