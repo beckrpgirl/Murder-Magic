@@ -28,33 +28,33 @@ void ANPCManager::BeginPlay()
 void ANPCManager::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (Spawnersleft == true)
-	{
-		SetSpawner();
-	}
+	//if (Spawnersleft == true)
+	//{
+	//	SetSpawner();
+	//}
 
 }
 
 void ANPCManager::SetSpawner()
 {
-	RanNumMaker();
-	float Y = float(RNum);
-	CurrentSpawner = TotalSpawners[SY];
-	if (CurrentSpawner && CurrentSpawner->Used == false)
-	{
-		if (CurrentSpawner->SpawnNow == true) 
-		{
-			CurrentSpawner->ToSpawn = NPCType;
-			CurrentSpawner->XNPC = Y;
-		}
-		else
-		{
-			CurrentSpawner->Used = true;
-			SY++;
-			if (SY == TotalSpawners.Num()){Spawnersleft = false;}
-			
-		}
-	}
+	//RanNumMaker();
+	//float Y = float(RNum);
+	//CurrentSpawner = TotalSpawners[SY];
+	//if (CurrentSpawner && CurrentSpawner->Used == false)
+	//{
+	//	if (CurrentSpawner->SpawnNow == true) 
+	//	{
+	//		CurrentSpawner->ToSpawn = NPCType;
+	//		CurrentSpawner->XNPC = Y;
+	//	}
+	//	else
+	//	{
+	//		CurrentSpawner->Used = true;
+	//		SY++;
+	//		if (SY == TotalSpawners.Num()){Spawnersleft = false;}
+	//		
+	//	}
+	//}
 }
 
 void ANPCManager::SetLevel(int level)

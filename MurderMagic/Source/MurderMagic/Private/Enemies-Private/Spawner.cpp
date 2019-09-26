@@ -6,6 +6,7 @@
 #include "NPC.h"
 #include "Engine/EngineTypes.h"
 #include "NPCManager.h"
+#include "UnrealMathUtility.h"
 
 // Sets default values
 ASpawner::ASpawner(const FObjectInitializer& OI)
@@ -32,8 +33,6 @@ void ASpawner::BeginPlay()
 	SpawnNow = true;
 	Location = GetActorLocation();
 	Rotation = GetActorRotation();
-	//ANPCManager* NPCM = Cast<ANPCManager>()
-
 
 }
 
@@ -51,28 +50,10 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 	{
 		if (PC && ToSpawn)
 		{
+			RandomNumber();
+			XNPC = float(RNum);
+			i = 1;
 			SpawnDelay();
-
-			//UWorld* world = GetWorld();
-			//if (world)
-			//{
-			//	FActorSpawnParameters SpawnInfo;
-			//	SpawnInfo.Owner = this;
-			//	if (GEngine)
-			//		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(XNPC));
-			//	for (i = 1; i <= XNPC; i++)
-			//	{
-			//		float j = i * 10;
-			//		FVector Location2 = FVector(i, j, 0.0f) + Location;
-			//		world->SpawnActor<ANPC>(ToSpawn, Location2, Rotation, SpawnInfo);
-			//		//SpawnDelay();
-
-			//		//world->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::EndTimer, 1.f, false);
-			//		
-			//	}
-			//	SpawnNow = false;
-			//}
-
 		}
 	}
 
@@ -86,8 +67,9 @@ void ASpawner::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 
 void ASpawner::SpawnDelay()
 {
-if (GEngine)
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(XNPC));
+	if (GEngine)
+	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Orange, "NPC Spawned" + FString::FromInt(XNPC));
+	
 	if (i <= XNPC)
 	{
 		FActorSpawnParameters SpawnInfo;
@@ -101,6 +83,7 @@ if (GEngine)
 	else
 	{
 		SpawnNow = false;
+		//Used = true;
 	}
 }
 
@@ -108,5 +91,11 @@ void ASpawner::EndTimer()
 {
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Orange, "Timer");
+}
+
+int ASpawner::RandomNumber()
+{
+	RNum = FMath::RandRange(1, 5);
+	return RNum;
 }
 

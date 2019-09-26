@@ -32,8 +32,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ANPC> ToSpawn;
 	
-	UPROPERTY(EditAnywhere)
-	float XNPC = 5;
+	//UPROPERTY(EditAnywhere)
+	float XNPC;
 
 
 	UFUNCTION()
@@ -49,6 +49,9 @@ public:
 
 	bool SpawnNow;
 	bool Used;
+
+	int RandomNumber();
+	int RNum;
 
 	FVector Location;
 	FRotator Rotation;
