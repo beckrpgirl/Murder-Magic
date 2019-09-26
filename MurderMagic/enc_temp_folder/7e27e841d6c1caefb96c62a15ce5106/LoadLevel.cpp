@@ -56,8 +56,16 @@ void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* 
 
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "Current Level " + FString::FromInt(PC->ExperienceToNextLevel));
+	}
+	
+
+	
 
 	UGameplayStatics::OpenLevel(this, NextFloorName, false);
-	}
+
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Player Overlapped on load Level");
+
+
 }
 
