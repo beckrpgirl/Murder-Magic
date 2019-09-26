@@ -14,4 +14,11 @@ class MURDERMAGIC_API AT1_Goblin : public ANPC
 {
 	GENERATED_BODY()
 	
+	float MovementSpeed;
+	float MaxHealth = 10;
+	float Damage = 5;
+	float AttackSpeed;
+	int EXPWorth = 10;
+
+
 };

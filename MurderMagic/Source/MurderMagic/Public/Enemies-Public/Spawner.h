@@ -31,15 +31,17 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ANPC> ToSpawn;
+	
+	UPROPERTY(EditAnywhere)
+	float XNPC = 5;
+
 
 	UFUNCTION()
 		virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 	UFUNCTION()
 		virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	
-	UPROPERTY(EditAnywhere)
-	float XNPC = 5;
+
 
 	float i;
 	void SpawnDelay();
