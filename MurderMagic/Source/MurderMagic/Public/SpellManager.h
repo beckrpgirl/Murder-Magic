@@ -1,11 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
+#include "UObject/ConstructorHelpers.h"
 #include "SpellSlots.h"
+#include "Spell.h"
 #include "MagiBolt.h"
+#include "WindSurge.h"
+#include "MageBlast.h"
+#include "BurningHands.h"
+#include "LightningStrikes.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Spell.h"
 #include "SpellManager.generated.h"
 
 UCLASS()
@@ -14,6 +19,12 @@ class MURDERMAGIC_API ASpellManager : public AActor
 private:
 
 	GENERATED_BODY()
+
+	ASpell* MagiBoltSpell;
+	ASpell* WindSurgeSpell;
+	ASpell* MageBlastSpell;
+	ASpell* BurningHandsSpell;
+	ASpell* LightningStrikesSpell;
 
 	ASpell* equippedSpellL;
 	ASpell* equippedSpellR;
@@ -30,7 +41,17 @@ public:
 	// Sets default values for this actor's properties
 	ASpellManager();
 
+	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	//USpellSlots* spellSlotRef;
+	
+	//UPROPERTY(EditAnywhere, Category = Reference, meta = (AllowPrivateAccess = "true"))
+	//TSubclassOf<USpellSlots> spellSlotRef;
+
+	UPROPERTY() //The class (could also be done in a local function for a one-time go)
+	TSubclassOf<UUserWidget> spellSlotRefClass;
+	UPROPERTY() //The instance (your actual reference)
 	USpellSlots* spellSlotRef;
+
 	ASpell* GetLeftSpell();
 	ASpell* GetRightSpell();
 

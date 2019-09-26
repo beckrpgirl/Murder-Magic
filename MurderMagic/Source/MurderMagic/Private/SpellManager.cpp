@@ -7,6 +7,9 @@ ASpellManager::ASpellManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	static ConstructorHelpers::FClassFinder<UUserWidget> BlueprintClass(TEXT("WidgetBlueprint'/Game/ThirdPersonCPP/UI/UI_SpellSlots'"));
+	if (BlueprintClass.Class)
+		spellSlotRefClass = BlueprintClass.Class;
 }
 
 ASpell* ASpellManager::GetLeftSpell()
@@ -24,9 +27,24 @@ void ASpellManager::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	equippedSpellL = Cast<ASpell>(GetWorld()->SpawnActor(AMagiBolt::StaticClass()));
-	equippedSpellR = equippedSpellL;
+	// Spawning all the spells for the manager to control and put them in the slots
+	//spellSlotRef = Cast<USpellSlots>(GetWorld()->SpawnActor(USpellSlots::StaticClass()));
+	if (spellSlotRefClass)
+	{
+		spellSlotRef = CreateWidget<USpellSlots>(GetWorld()->GetFirstPlayerController(), spellSlotRefClass);
+		//spellSlotRef = CreateWidget<USpellSlots>(this, spellSlotRefClass, "PlayerSpellSlots");
+	}
+	MagiBoltSpell = Cast<ASpell>(GetWorld()->SpawnActor(AMagiBolt::StaticClass()));
+	WindSurgeSpell = Cast<ASpell>(GetWorld()->SpawnActor(AWindSurge::StaticClass()));
+	MageBlastSpell = Cast<ASpell>(GetWorld()->SpawnActor(AMageBlast::StaticClass()));
+	BurningHandsSpell = Cast<ASpell>(GetWorld()->SpawnActor(ABurningHands::StaticClass()));
+	LightningStrikesSpell = Cast<ASpell>(GetWorld()->SpawnActor(ALightningStrikes::StaticClass()));
+
+	// Setting the starting spells
+	equippedSpellL = MagiBoltSpell;
+	equippedSpellR = WindSurgeSpell;
 	hasLeftUpdated = true;
+	hasRightUpdated = true;
 }
 
 // Called every frame

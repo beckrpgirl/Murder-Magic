@@ -4,7 +4,6 @@
 #include "Runtime/UMG/Public/Components/Image.h"
 #include "MagiBolt.h"
 #include "Styling/SlateBrush.h"
-#include "GameHUD.h"
 #include "MurderMagicCharacter.h"
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
