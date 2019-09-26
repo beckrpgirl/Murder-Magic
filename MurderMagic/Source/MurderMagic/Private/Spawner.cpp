@@ -28,6 +28,7 @@ void ASpawner::BeginPlay()
 {
 	Super::BeginPlay();
 	Used = false;
+	SpawnNow = true;
 	Location = GetActorLocation();
 	Rotation = GetActorRotation();
 
@@ -45,23 +46,18 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(OtherActor);
 	if (Used == false && OtherActor == PC)
 	{
-		
 		if (PC && ToSpawn)
 		{
-			//if (GEngine)
-			//	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "PC and ToSpawn ok");
-
-			SpawnNow = true;
 			UWorld* world = GetWorld();
 			if (world)
 			{
 				FActorSpawnParameters SpawnInfo;
 				SpawnInfo.Owner = this;
-				for (float i = 1; i < 5; i++)
+				for (i = 1; i <= XNPC; i++)
 				{
-				
-					FVector Location2 = FVector(0.0f, i, 0.0f) + Location;
-					world->SpawnActor<ANPC>(ToSpawn, Location, Rotation, SpawnInfo);
+					float j = i * 10;
+					FVector Location2 = FVector(i, j, 0.0f) + Location;
+					world->SpawnActor<ANPC>(ToSpawn, Location2, Rotation, SpawnInfo);
 					//SpawnDelay();
 
 					//world->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::EndTimer, 1.f, false);
@@ -71,6 +67,7 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 					if (GEngine)
 						GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "NPC Spawned" + FString::FromInt(i));
 				}
+				SpawnNow = false;
 			}
 
 		}

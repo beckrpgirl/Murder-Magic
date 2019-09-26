@@ -37,6 +37,11 @@ public:
 	UFUNCTION()
 		virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
+	
+	UPROPERTY(EditAnywhere)
+	float XNPC = 5;
+
+	float i;
 	void SpawnDelay();
 	void EndTimer();
 

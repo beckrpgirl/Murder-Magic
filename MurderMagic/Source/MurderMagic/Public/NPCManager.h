@@ -7,8 +7,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "NPC.h"
-#include "Spawner.h"
 #include "NPCManager.generated.h"
+
+class ASpawner;
 
 UCLASS()
 class MURDERMAGIC_API ANPCManager : public AActor
@@ -34,16 +35,32 @@ public:
 	UPROPERTY(EditAnywhere, Category = Reference, meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<ANPC> BossRef;
 
+	//UPROPERTY(EditAnywhere)
+	//TSubclassOf<class ASpawner> Spawners;
+
 	UPROPERTY(EditAnywhere)
-	TSubclassOf<AAITargetPoint> spawners;
+		TSubclassOf<class ANPC> NPCType;
+
+	UPROPERTY(EditAnywhere, Category = NPCInfo)
+		TArray<ASpawner*> TotalSpawners;
+
 
 	TArray<AAITargetPoint*> spawnerArray;
 	AAITargetPoint* currentSpawner;
 
+	ASpawner* CurrentSpawner;
+
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	void SetSpawner();
 	void SetLevel(int level);
 	int *GetLevel();
+	int RanNumMaker();
+	int RNum;
+
+	int SY;
+	bool Spawnersleft;
+
 
 };

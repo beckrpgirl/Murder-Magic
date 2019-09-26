@@ -84,7 +84,8 @@ void ANPC::SpawnEXP(int SpawnAmount)
 
 void ANPC::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	APawn* Pawn = Cast<APawn>(OtherActor);
+	//APawn* Pawn = Cast<APawn>(OtherActor);
+	AMurderMagicCharacter* Pawn = Cast<AMurderMagicCharacter>(OtherActor);
 	if (Pawn)
 	{
 		ANPCAIController* AIController = Cast<ANPCAIController>(GetController());
