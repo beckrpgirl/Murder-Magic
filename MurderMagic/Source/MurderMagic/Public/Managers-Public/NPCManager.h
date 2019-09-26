@@ -37,8 +37,8 @@ public:
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class ANPC> NPCType;
 
-	UPROPERTY(EditAnywhere, Category = NPCInfo)
-		TArray<ASpawner*> TotalSpawners;
+	//UPROPERTY(EditAnywhere, Category = NPCInfo)
+	//	TArray<ASpawner*> TotalSpawners;
 
 	ASpawner* CurrentSpawner;
 	ANPC* NPC;
