@@ -5,10 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "LoadLevel.h"
-#include "MurderMagicCharacter.h"
+//#include "MurderMagicCharacter.h"
 #include "LevelManager.generated.h"
 
-
+class AMurderMagicCharacter;
 
 UCLASS()
 class MURDERMAGIC_API ALevelManager : public AActor
