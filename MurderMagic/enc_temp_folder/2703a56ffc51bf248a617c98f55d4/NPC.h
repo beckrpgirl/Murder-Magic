@@ -46,7 +46,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	float GetHealthPercent();
-	virtual bool TakeDamage(int DamageAmount);
+	bool TakeDamage(int DamageAmount);
 	void SpawnEXP(int SpawnAmount);
 
 	UFUNCTION()

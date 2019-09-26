@@ -6,8 +6,6 @@
 #include "NPC.h"
 #include "T3_Boss.generated.h"
 
-
-class ABossDoor;
 /**
  * 
  */
@@ -15,13 +13,5 @@ UCLASS()
 class MURDERMAGIC_API AT3_Boss : public ANPC
 {
 	GENERATED_BODY()
-
-
-UPROPERTY(EditAnywhere)
-ABossDoor* door;
 	
-
-public:
-	virtual bool TakeDamage(int DamageAmount) override;
-
 };
