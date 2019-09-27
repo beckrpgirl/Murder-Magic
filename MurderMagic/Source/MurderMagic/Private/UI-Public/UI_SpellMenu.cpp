@@ -4,14 +4,14 @@
 #include "UI_SpellMenu.h"
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
-#include <MurderMagic\MurderMagicCharacter.cpp>
+#include "MurderMagicCharacter.h"
 
 bool UUI_SpellMenu::Initialize()
 {
 	bool Success = Super::Initialize();
 	if (!Success) return false;
 
-	//If statements for adding in a button. 
+	/*If statements for adding in a button.*/ 
 	if (Button_Spell1Plus)
 	{
 		Button_Spell1Plus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventOnePlus);
