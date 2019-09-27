@@ -49,11 +49,6 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Trigger")
 		class UCapsuleComponent* TriggerCapsule;
 
-
-public:
-
-	AMurderMagicCharacter();
-
 	float Health;
 	float MaxHealth;
 
@@ -63,6 +58,11 @@ public:
 
 	float Experience;
 	float ExperienceToNextLevel;
+
+
+public:
+
+	AMurderMagicCharacter();
 
 	ANPC *NPC;
 
