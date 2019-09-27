@@ -3,20 +3,19 @@
 
 #include "Spell.h"
 #include "NPC.h"
+#include "MurderMagic.h"
 
 ASpell::ASpell()
 {
-	spellCD = 0;
-	sinceCast = 0;
-	range = 0;
-	baseDMG = 0;
 
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	CollisionSphere->InitSphereRadius(40.0f);
 	CollisionSphere->GetCollisionResponseToChannel(ECC_WorldStatic);
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	CollisionSphere->SetCollisionObjectType(COLLISION_SPELLS);
 	CollisionSphere->SetGenerateOverlapEvents(true);
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+	CollisionSphere->SetCollisionResponseToChannel(COLLISION_SPELLS, ECR_Ignore);
 	SetRootComponent(CollisionSphere);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
@@ -53,5 +52,6 @@ void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor
 		Enemy->TakeDamage(baseDMG);
 
 	}
+
 
 }

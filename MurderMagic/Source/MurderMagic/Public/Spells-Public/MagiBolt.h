@@ -19,8 +19,6 @@ private:
 public:
 
 	AMagiBolt();
-	AMagiBolt(ASpell* spell);
-	ASpell* windSurgeRef;
 	virtual void BeginPlay() override;
 
 };
