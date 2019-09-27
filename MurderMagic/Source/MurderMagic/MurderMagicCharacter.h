@@ -64,8 +64,6 @@ public:
 
 	AMurderMagicCharacter();
 
-	ANPC *NPC;
-
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -109,8 +107,6 @@ public:
 	FTransform PlayerTransform;
 
 	ACollectibleParent* Collectibles;
-	ACollectibleParent* TempCollectibles;
-	ATrigger* TempTrig;
 	ATrigger* Triggers;
 
 	UFUNCTION()
