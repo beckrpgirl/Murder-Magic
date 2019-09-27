@@ -49,6 +49,16 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Trigger")
 		class UCapsuleComponent* TriggerCapsule;
 
+	float Health;
+	float MaxHealth;
+
+	float Mana;
+	float MaxMana;
+	float ManaRegen;
+
+	float Experience;
+	float ExperienceToNextLevel;
+
 public:
 
 	AMurderMagicCharacter();
@@ -72,16 +82,6 @@ public:
 	virtual void BeginPlay() override;
 
 	int currentAP;
-
-	float Health;
-	float MaxHealth;
-
-	float Mana;
-	float MaxMana;
-	float ManaRegen;
-
-	float Experience;
-	float ExperienceToNextLevel;
 
 	int CurrentPlayerLevel;
 	int CurrentFloor;
