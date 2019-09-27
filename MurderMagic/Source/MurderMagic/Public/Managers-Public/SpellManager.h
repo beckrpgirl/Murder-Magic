@@ -41,11 +41,17 @@ public:
 	// Sets default values for this actor's properties
 	ASpellManager();
 
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	//USpellSlots* spellSlotRef;
-	
-	//UPROPERTY(EditAnywhere, Category = Reference, meta = (AllowPrivateAccess = "true"))
-	//TSubclassOf<USpellSlots> spellSlotRef;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASpell> MagiBoltBP;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASpell> WindSurgeBP;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASpell> MageBlastBP;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASpell> BurningHandsBP;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASpell> LightningStrikesBP;
+
 
 	UPROPERTY() //The class (could also be done in a local function for a one-time go)
 	TSubclassOf<UUserWidget> spellSlotRefClass;
@@ -63,5 +69,7 @@ public:
 
 	void CastSpellL(FVector start, float angle);
 	void CastSpellR(FVector start, float angle);
+
+	
 
 };

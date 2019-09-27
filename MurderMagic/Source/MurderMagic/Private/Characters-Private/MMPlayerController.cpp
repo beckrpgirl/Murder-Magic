@@ -14,7 +14,7 @@ AMMPlayerController::AMMPlayerController()
 
 void AMMPlayerController::BeginPlay()
 {
-	spellManager = Cast<ASpellManager>(GetWorld()->SpawnActor(ASpellManager::StaticClass()));
+	spellManager = Cast<ASpellManager>(GetWorld()->SpawnActor(spellManagerBP));
 	pawnRef = Cast<AMurderMagicCharacter>(GetPawn());
 }
 

@@ -34,6 +34,8 @@ public:
 	UFUNCTION()
 	void UpdateRightSlotImage(UTexture2D* texture);
 
+	UTexture2D* textureLS;
 	
-
+	UFUNCTION(BlueprintPure, Category = Spell)
+	FSlateBrush updateImage();
 };

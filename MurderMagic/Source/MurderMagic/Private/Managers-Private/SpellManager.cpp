@@ -28,17 +28,15 @@ void ASpellManager::BeginPlay()
 	Super::BeginPlay();
 	
 	// Spawning all the spells for the manager to control and put them in the slots
-	//spellSlotRef = Cast<USpellSlots>(GetWorld()->SpawnActor(USpellSlots::StaticClass()));
 	if (spellSlotRefClass)
 	{
 		spellSlotRef = CreateWidget<USpellSlots>(GetWorld()->GetFirstPlayerController(), spellSlotRefClass);
-		//spellSlotRef = CreateWidget<USpellSlots>(this, spellSlotRefClass, "PlayerSpellSlots");
 	}
-	MagiBoltSpell = Cast<ASpell>(GetWorld()->SpawnActor(AMagiBolt::StaticClass()));
-	WindSurgeSpell = Cast<ASpell>(GetWorld()->SpawnActor(AWindSurge::StaticClass()));
-	MageBlastSpell = Cast<ASpell>(GetWorld()->SpawnActor(AMageBlast::StaticClass()));
-	BurningHandsSpell = Cast<ASpell>(GetWorld()->SpawnActor(ABurningHands::StaticClass()));
-	LightningStrikesSpell = Cast<ASpell>(GetWorld()->SpawnActor(ALightningStrikes::StaticClass()));
+	MagiBoltSpell = Cast<ASpell>(GetWorld()->SpawnActor(MagiBoltBP));
+	WindSurgeSpell = Cast<ASpell>(GetWorld()->SpawnActor(WindSurgeBP));
+	MageBlastSpell = Cast<ASpell>(GetWorld()->SpawnActor(MageBlastBP));
+	BurningHandsSpell = Cast<ASpell>(GetWorld()->SpawnActor(BurningHandsBP));
+	LightningStrikesSpell = Cast<ASpell>(GetWorld()->SpawnActor(LightningStrikesBP));
 
 	// Setting the starting spells
 	equippedSpellL = MagiBoltSpell;
@@ -54,12 +52,12 @@ void ASpellManager::Tick(float DeltaTime)
 	if (hasLeftUpdated)
 	{
 		spellSlotRef->UpdateLeftSlotImage(equippedSpellL->SpellTexture);
-		hasLeftUpdated = false;
+		//hasLeftUpdated = false;
 	}
 	if (hasRightUpdated)
 	{
 		spellSlotRef->UpdateRightSlotImage(equippedSpellR->SpellTexture);
-		hasRightUpdated = false;
+		//hasRightUpdated = false;
 	}
 }
 
@@ -84,3 +82,4 @@ void ASpellManager::CastSpellR(FVector start, float angle)
 {
 	equippedSpellR->CastSpell(start, angle);
 }
+

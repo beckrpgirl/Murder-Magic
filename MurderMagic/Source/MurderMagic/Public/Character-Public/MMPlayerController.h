@@ -17,7 +17,7 @@ private:
 
 	GENERATED_BODY()
 
-	ASpellManager *spellManager;
+	ASpellManager* spellManager;
 
 protected:
 
@@ -32,6 +32,8 @@ public:
 
 	AMMPlayerController();
 
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<ASpellManager> spellManagerBP;
 	UFUNCTION()
 	void MoveForward(float axisValue);
 	UFUNCTION()
