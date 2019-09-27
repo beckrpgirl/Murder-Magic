@@ -171,6 +171,16 @@ float AMurderMagicCharacter::GetExperiencePercent()
 	return Experience / ExperienceToNextLevel;
 }
 
+float AMurderMagicCharacter::GetExperience()
+{
+	return Experience;
+}
+
+float AMurderMagicCharacter::GetMaxExperience()
+{
+	return ExperienceToNextLevel;
+}
+
 void AMurderMagicCharacter::PlayerLevelup()
 {
 

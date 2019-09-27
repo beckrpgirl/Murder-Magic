@@ -19,7 +19,7 @@ FString UXPBar::UpdateXP()
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 	if (MMC)
 	{
-		XProgress = FString::FromInt(MMC->Experience) + " / " + FString::FromInt(MMC->ExperienceToNextLevel);
+		XProgress = FString::FromInt(MMC->GetExperience()) + " / " + FString::FromInt(MMC->GetMaxExperience());
 
 	}
 	else if (MMC->CurrentPlayerLevel == 10) {

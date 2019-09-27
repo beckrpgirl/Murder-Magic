@@ -50,12 +50,12 @@ void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* 
 	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
 	if (GI && PC)
 	{
-		GI->PlayerXP = PC->Experience;
+		GI->PlayerXP = PC->GetExperience();
 		GI->PlayerLvl = PC->CurrentPlayerLevel;
-		GI->PlayerMaxXP = PC->ExperienceToNextLevel;
+		GI->PlayerMaxXP = PC->GetMaxExperience();
 
 		if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "Current Level " + FString::FromInt(PC->ExperienceToNextLevel));
+			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "Current Level " + FString::FromInt(PC->GetMaxExperience()));
 
 	UGameplayStatics::OpenLevel(this, NextFloorName, false);
 	}

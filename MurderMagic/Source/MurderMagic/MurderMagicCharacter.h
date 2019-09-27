@@ -99,6 +99,8 @@ public:
 	float GetManaPercent();
 	float GetHealthPercent();
 	float GetExperiencePercent();
+	float GetExperience();
+	float GetMaxExperience();
 
 	void PlayerLevelup();
 	void SetPlayerStats();
