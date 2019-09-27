@@ -28,13 +28,18 @@ void AGameHUD::BeginPlay()
 			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetMMClass);
 			hudWidget->AddToViewport();
 		}
+		if (CurrentMapName == "UEDPIE_0_WinScreen")
+		{
+			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetWSClass);
+			hudWidget->AddToViewport();
+		}
 		else
 		{
 			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetClass);
 			hudWidget->AddToViewport();
 		}
-		if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Widget has been loaded");
+		//if (GEngine)
+		//	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Widget has been loaded");
 	}
 
 }
