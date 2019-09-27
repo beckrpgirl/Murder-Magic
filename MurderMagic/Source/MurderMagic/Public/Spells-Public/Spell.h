@@ -12,6 +12,7 @@
 #include "Spell.generated.h"
 
 class ANPC;
+class AMurderMagicCharacter;
 
 /**
  * 
@@ -25,19 +26,20 @@ private:
 
 protected:
 
+	std::vector <USpellEffect *> effects;
+
+public:
+
 	float spellCD;
 	float sinceCast;
 	float range;
 	float baseDMG;
 
-	std::vector <USpellEffect *> effects;
-
-public:
-
 	ASpell();
 	ASpell *next;
 
 	ANPC* Enemy;
+	AMurderMagicCharacter* Character;
 
 	UPROPERTY(EditDefaultsOnly)
 	UTexture2D* SpellTexture;

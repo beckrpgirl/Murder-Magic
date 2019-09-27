@@ -8,20 +8,17 @@
 AMagiBolt::AMagiBolt()
 {
 
-}
-
-AMagiBolt::AMagiBolt(ASpell* spell)
-{
 	spellCD = 3;
 	range = 20;
 	baseDMG = 10;
-	windSurgeRef = spell;
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> PS(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
+
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> PS(TEXT("ParticleSystem'/Game/magiBoltEffect.magiBoltEffect'"));
 
 	PSC->SetTemplate(PS.Object);
+
 }
 
 void AMagiBolt::BeginPlay()
 {
-	next = windSurgeRef;
+	
 }

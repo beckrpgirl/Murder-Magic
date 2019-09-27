@@ -4,31 +4,28 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "UI_SpellMenu.h"
-#include "CharacterOverview.generated.h"
-
-
+#include "UI_WinWidget.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class MURDERMAGIC_API UCharacterOverview : public UUserWidget
+class MURDERMAGIC_API UUI_WinWidget : public UUserWidget
 {
 	GENERATED_BODY()
-
+	
+public:
 	virtual bool Initialize() override;
 
 	UPROPERTY(meta = (BindWidget))
-		class UButton* SpellMenu;
+		class UButton* MainMenuButton;
 
 	UPROPERTY(meta = (BindWidget))
-		class UUI_SpellMenu* UISpellMenu;
+		class UButton* PlayButton;
 
-		UFUNCTION()
-		void OnClickEvent();
+	UFUNCTION()
+		void OnClickEventPlay();
+	UFUNCTION()
+		void OnClickEventMM();
 
-		bool ClickTrue = false;
-
-	
 };

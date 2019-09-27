@@ -2,6 +2,9 @@
 
 
 #include "CharacterOverview.h"
+#include "Components/Button.h"
+#include "UserWidget.h"
+#include "Kismet/GameplayStatics.h"
 
 bool UCharacterOverview::Initialize()
 {
@@ -9,20 +12,36 @@ bool UCharacterOverview::Initialize()
 	if (!Success) return false;
 
 	//If statements for adding in a button. 
-		//if (PlayButton)
-		//{
-		//    //if (GEngine)
-		//    //    GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Found play button");
-		//    PlayButton->OnClicked.AddDynamic(this, &UPlayerWidgetOverview::OnClickEvent);
-		//}
-		//else
-		//{
-		//    //if (GEngine)
-		//    //    GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "could not find play button");
-		//}
+		if (SpellMenu)
+		{
+		   
+		    SpellMenu->OnClicked.AddDynamic(this, &UCharacterOverview::OnClickEvent);
+		}
+		else
+		{
+		    if (GEngine)
+		        GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "could not find play button");
+		}
 
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Running a widget in code");
 
 	return true;
+}
+
+void UCharacterOverview::OnClickEvent()
+{
+
+	if (ClickTrue == false)
+	{
+		UISpellMenu->SetVisibility(ESlateVisibility::Visible);
+		ClickTrue = true;
+		return;
+	}
+	else
+	{
+		UISpellMenu->SetVisibility(ESlateVisibility::Hidden);
+		ClickTrue = false;
+		return;
+	}
 }

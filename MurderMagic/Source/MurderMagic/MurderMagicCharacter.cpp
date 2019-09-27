@@ -171,6 +171,16 @@ float AMurderMagicCharacter::GetExperiencePercent()
 	return Experience / ExperienceToNextLevel;
 }
 
+float AMurderMagicCharacter::GetExperience()
+{
+	return Experience;
+}
+
+float AMurderMagicCharacter::GetMaxExperience()
+{
+	return ExperienceToNextLevel;
+}
+
 void AMurderMagicCharacter::PlayerLevelup()
 {
 
@@ -219,9 +229,9 @@ void AMurderMagicCharacter::SetPlayerStats()
 
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
-	TempCollectibles = Cast<ACollectibleParent>(OtherActor);
-	TempTrig = Cast<ATrigger>(OtherActor);
-	NPC = Cast<ANPC>(OtherActor);
+	ACollectibleParent *TempCollectibles = Cast<ACollectibleParent>(OtherActor);
+	ATrigger *TempTrig = Cast<ATrigger>(OtherActor);
+	ANPC *NPC = Cast<ANPC>(OtherActor);
 	if (TempTrig) {
 		Triggers = TempTrig;
 	}

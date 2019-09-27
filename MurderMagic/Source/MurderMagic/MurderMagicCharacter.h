@@ -49,12 +49,20 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Trigger")
 		class UCapsuleComponent* TriggerCapsule;
 
+	float Health;
+	float MaxHealth;
+
+	float Mana;
+	float MaxMana;
+	float ManaRegen;
+
+	float Experience;
+	float ExperienceToNextLevel;
+
+
 public:
 
 	AMurderMagicCharacter();
-
-
-	ANPC *NPC;
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -73,16 +81,6 @@ public:
 
 	int currentAP;
 
-	float Health;
-	float MaxHealth;
-
-	float Mana;
-	float MaxMana;
-	float ManaRegen;
-
-	float Experience;
-	float ExperienceToNextLevel;
-
 	int CurrentPlayerLevel;
 	int CurrentFloor;
 
@@ -99,6 +97,8 @@ public:
 	float GetManaPercent();
 	float GetHealthPercent();
 	float GetExperiencePercent();
+	float GetExperience();
+	float GetMaxExperience();
 
 	void PlayerLevelup();
 	void SetPlayerStats();
@@ -107,8 +107,6 @@ public:
 	FTransform PlayerTransform;
 
 	ACollectibleParent* Collectibles;
-	ACollectibleParent* TempCollectibles;
-	ATrigger* TempTrig;
 	ATrigger* Triggers;
 
 	UFUNCTION()

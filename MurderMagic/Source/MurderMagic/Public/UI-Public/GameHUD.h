@@ -21,6 +21,8 @@ public:
 	class UClass* hudWidgetClass;
 	UPROPERTY(EditDefaultsOnly)
 	class UClass* hudWidgetMMClass;
+	UPROPERTY(EditDefaultsOnly)
+	class UClass* hudWidgetWSClass;
 
 	class UUserWidget* hudWidget;
 
