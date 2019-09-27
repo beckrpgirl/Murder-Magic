@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "UI_SpellMenu.h"
 #include "CharacterOverview.generated.h"
+
+
 
 /**
  * 
@@ -15,5 +18,17 @@ class MURDERMAGIC_API UCharacterOverview : public UUserWidget
 	GENERATED_BODY()
 
 	virtual bool Initialize() override;
+
+	UPROPERTY(meta = (BindWidget))
+		class UButton* SpellMenu;
+
+	UPROPERTY(meta = (BindWidget))
+		class UUI_SpellMenu* UISpellMenu;
+
+		UFUNCTION()
+		void OnClickEvent();
+
+		bool ClickTrue = false;
+
 	
 };
