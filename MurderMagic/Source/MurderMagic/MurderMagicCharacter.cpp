@@ -13,6 +13,7 @@
 #include "MMGameInstance.h"
 #include "Trigger.h"
 #include "MMPlayerController.h"
+#include "NPC.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AMurderMagicCharacter
@@ -220,33 +221,29 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 {
 	TempCollectibles = Cast<ACollectibleParent>(OtherActor);
 	TempTrig = Cast<ATrigger>(OtherActor);
-
+	NPC = Cast<ANPC>(OtherActor);
 	if (TempTrig) {
-
 		Triggers = TempTrig;
 	}
 
 	if (TempCollectibles) {
-
 		Collectibles = TempCollectibles;
-
 	}
 
-
 	if (OtherActor && (OtherActor != this) && OtherComp) {
-		//if (GEngine) {
-
+		//if (GEngine)
 		//	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "did overlap");
-		//}
 	}
 
 	if (OtherActor == Collectibles) {
 		Collectibles->OnInteract(this);
 		PlayerLevelup();
 	}
-	if (OtherActor == CurrentLevelManager)
+
+	
+	if (NPC)
 	{
-		CheckPointRespond();
+		Health = Health - NPC->Damage;
 	}
 
 }
@@ -256,60 +253,16 @@ void AMurderMagicCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AA
 	if (OtherActor == Triggers) {
 
 		Triggers = nullptr;
-
 	}
-
 }
 
 void AMurderMagicCharacter::ObjectInteract()
 {
 
 	if (Triggers) {
-
 		Triggers->OnInteract();
 		if (GEngine) {
-
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Interacted with buttons");
 		}
-
 	}
-
-}
-
-void AMurderMagicCharacter::CheckPointRespond()
-{
-
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-
-	PlayerTransform = AMurderMagicCharacter::GetTransform();
-	GI->PlayerLocation = PlayerTransform;
-	if (GEngine) 
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "CheckPoint triggered!" + PlayerTransform.GetLocation().ToString());
-}
-
-void AMurderMagicCharacter::SpawnPoint()
-{
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	AMMPlayerController* controller = Cast<AMMPlayerController>(GetController());
-	
-	//CurrentLevelManager->GetTransform;
-	//PlayerTransform = CurrentLevelManager->GetTransform;
-
-	FVector Location = CurrentLevelManager->GetActorLocation();
-	FRotator Rotation = CurrentLevelManager->GetActorRotation();
-	FActorSpawnParameters SpawnInfo;
-	GetWorld()->SpawnActor<AMurderMagicCharacter>(Location, Rotation, SpawnInfo);
-	controller->Possess(this);
-	
-	
-}
-
-void AMurderMagicCharacter::KillPlayer()
-{
-	AMMPlayerController* controller = Cast<AMMPlayerController>(GetController());
-	//controller->UnPossess();
-	//Destroy();
-
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "Death!");
 }

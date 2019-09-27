@@ -34,26 +34,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = Reference, meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<ANPC> BossRef;
 
-	UPROPERTY(EditAnywhere)
-		TSubclassOf<class ANPC> NPCType;
-
-	//UPROPERTY(EditAnywhere, Category = NPCInfo)
-	//	TArray<ASpawner*> TotalSpawners;
-
-	ASpawner* CurrentSpawner;
 	ANPC* NPC;
-
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-	void SetSpawner();
 	void SetLevel(int level);
 	int *GetLevel();
-	int RanNumMaker();
-	int RNum;
-
-	int SY;
-	bool Spawnersleft;
 
 
 };

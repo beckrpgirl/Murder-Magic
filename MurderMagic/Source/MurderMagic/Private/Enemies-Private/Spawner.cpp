@@ -33,7 +33,7 @@ void ASpawner::BeginPlay()
 	SpawnNow = true;
 	Location = GetActorLocation();
 	Rotation = GetActorRotation();
-
+	i = 1;
 }
 
 // Called every frame
@@ -45,14 +45,15 @@ void ASpawner::Tick(float DeltaTime)
 
 void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {	
+
 	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(OtherActor);
 	if (Used == false && OtherActor == PC)
-	{
-		if (PC && ToSpawn)
+	{	
+		if (PC && ToSpawn_1 && ToSpawn_2 && ToSpawn_3)
 		{
+			
 			RandomNumber();
 			XNPC = float(RNum);
-			i = 1;
 			SpawnDelay();
 		}
 	}
@@ -64,38 +65,40 @@ void ASpawner::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 {
 
 }
-
+//Spawns random NPC with time delay
 void ASpawner::SpawnDelay()
-{
-	if (GEngine)
-	GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Orange, "NPC Spawned" + FString::FromInt(XNPC));
-	
+{	
 	if (i <= XNPC)
 	{
+		RandomNPC();
 		FActorSpawnParameters SpawnInfo;
 		SpawnInfo.Owner = this;
 		float j = i * 10;
 		FVector Location2 = FVector(i, j, 0.0f) + Location;
-		GetWorld()->SpawnActor<ANPC>(ToSpawn, Location2, Rotation, SpawnInfo);
+		if (K == 1){ GetWorld()->SpawnActor<ANPC>(ToSpawn_1, Location2, Rotation, SpawnInfo); }
+		if (K == 2) { GetWorld()->SpawnActor<ANPC>(ToSpawn_2, Location2, Rotation, SpawnInfo); }
+		if (K == 3) { GetWorld()->SpawnActor<ANPC>(ToSpawn_3, Location2, Rotation, SpawnInfo); }
 		i++;
-		GetWorld()->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::SpawnDelay, 1.f, false);
+		GetWorld()->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::SpawnDelay, TimeDelay, false);
 	}
 	else
 	{
 		SpawnNow = false;
-		//Used = true;
+		Used = true;
+		i = 1;
 	}
 }
 
-void ASpawner::EndTimer()
+void ASpawner::RandomNPC()
 {
+	K = FMath::RandRange(1, 3);
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Orange, "Timer");
 }
 
 int ASpawner::RandomNumber()
 {
-	RNum = FMath::RandRange(1, 5);
+	RNum = FMath::RandRange(Min, Max);
 	return RNum;
 }
 

@@ -5,12 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameHUD.h"
 #include "GameFramework/Character.h"
-#include "LevelManager.h"
 #include "Engine/DataTable.h"
 #include "MurderMagicCharacter.generated.h"
 
 class ACollectibleParent;
 class ATrigger;
+class ANPC;
 
 USTRUCT(Blueprintable)
 struct FDataTableStruct : public FTableRowBase
@@ -53,7 +53,8 @@ public:
 
 	AMurderMagicCharacter();
 
-	ALevelManager *CurrentLevelManager;
+
+	ANPC *NPC;
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -117,12 +118,6 @@ public:
 	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	void ObjectInteract();
-
-	void CheckPointRespond();
-	void SpawnPoint();
-
-	UFUNCTION()
-	void KillPlayer();
 
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
