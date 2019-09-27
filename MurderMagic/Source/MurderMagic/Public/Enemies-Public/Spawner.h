@@ -29,27 +29,35 @@ public:
 	UPROPERTY(VisibleDefaultsOnly)
 		UBoxComponent* CollisionBox;
 
-	UPROPERTY(EditAnywhere)
-		TSubclassOf<class ANPC> ToSpawn;
-	
-	//UPROPERTY(EditAnywhere)
-	float XNPC;
-
+	//three different classes can be set to spawn from one point.
+	UPROPERTY(EditAnywhere, Category = SpawnSettings)
+		TSubclassOf<class ANPC> ToSpawn_1;
+	UPROPERTY(EditAnywhere, Category = SpawnSettings)
+		TSubclassOf<class ANPC> ToSpawn_2;
+	UPROPERTY(EditAnywhere, Category = SpawnSettings)
+		TSubclassOf<class ANPC> ToSpawn_3;
+	//Max and Min setting for number of spawns to be produced.
+	UPROPERTY(EditAnywhere, Category = SpawnSettings)
+		int Max;
+	UPROPERTY(EditAnywhere, Category = SpawnSettings)
+		int Min;
+	//TimeDelay in spawns.
+	UPROPERTY(EditAnywhere, Category = SpawnSettings)
+		float TimeDelay;
 
 	UFUNCTION()
 		virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 	UFUNCTION()
 		virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-
-
 	float i;
+	int K;
 	void SpawnDelay();
-	void EndTimer();
+	void RandomNPC();
 
 	bool SpawnNow;
 	bool Used;
-
+	float XNPC;
 	int RandomNumber();
 	int RNum;
 

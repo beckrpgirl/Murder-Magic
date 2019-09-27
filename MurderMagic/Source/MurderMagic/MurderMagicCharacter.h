@@ -11,6 +11,7 @@
 
 class ACollectibleParent;
 class ATrigger;
+class ANPC;
 
 USTRUCT(Blueprintable)
 struct FDataTableStruct : public FTableRowBase
@@ -53,6 +54,8 @@ public:
 
 	AMurderMagicCharacter();
 
+
+	ANPC *NPC;
 	ALevelManager *CurrentLevelManager;
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
