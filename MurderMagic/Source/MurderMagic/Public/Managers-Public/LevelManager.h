@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "LoadLevel.h"
-//#include "MurderMagicCharacter.h"
+#include "MurderMagicCharacter.h"
 #include "LevelManager.generated.h"
 
 class AMurderMagicCharacter;
@@ -36,7 +36,7 @@ public:
 	ALevelManager(const FObjectInitializer& OI);
 
 	UPROPERTY(EditAnywhere, Category = LevelContents)
-		TArray<ALoadLevel*> LevelMapInformation;
+	TArray<ALoadLevel*> LevelMapInformation;
 
 	UPROPERTY(EditAnywhere)
 	FVector spawnPoint;

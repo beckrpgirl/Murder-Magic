@@ -240,10 +240,7 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 		PlayerLevelup();
 	}
 
-	if (OtherActor == CurrentLevelManager)
-	{
-		CheckPointRespond();
-	}
+	
 	if (NPC)
 	{
 		Health = Health - NPC->Damage;
@@ -268,32 +265,4 @@ void AMurderMagicCharacter::ObjectInteract()
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Interacted with buttons");
 		}
 	}
-}
-
-void AMurderMagicCharacter::CheckPointRespond()
-{
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	PlayerTransform = AMurderMagicCharacter::GetTransform();
-	GI->PlayerLocation = PlayerTransform;
-	if (GEngine) 
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "CheckPoint triggered!" + PlayerTransform.GetLocation().ToString());
-}
-
-void AMurderMagicCharacter::SpawnPoint()
-{
-	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	AMMPlayerController* controller = Cast<AMMPlayerController>(GetController());
-
-	FVector Location = CurrentLevelManager->GetActorLocation();
-	FRotator Rotation = CurrentLevelManager->GetActorRotation();
-	FActorSpawnParameters SpawnInfo;
-	GetWorld()->SpawnActor<AMurderMagicCharacter>(Location, Rotation, SpawnInfo);
-	controller->Possess(this);	
-}
-
-
-void AMurderMagicCharacter::KillPlayer()
-{
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "Death!");
 }

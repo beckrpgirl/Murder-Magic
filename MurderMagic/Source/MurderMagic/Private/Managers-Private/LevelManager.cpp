@@ -52,8 +52,7 @@ void ALevelManager::Tick(float DeltaTime)
 
 	if (player->GetHealthPercent() <= 0)
 	{
-		
-		UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetMapName()), false);
+		GetWorld()->GetFirstPlayerController()->ClientTravel(TEXT("?restart"), TRAVEL_Relative);
 	}
 
 }

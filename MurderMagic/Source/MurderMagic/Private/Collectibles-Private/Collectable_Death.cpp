@@ -12,11 +12,5 @@ ACollectable_Death::ACollectable_Death(const FObjectInitializer& OI)
 bool ACollectable_Death::OnInteract(AMurderMagicCharacter* pCharacter)
 {
 
-	if (pCharacter) {
-
-		pCharacter->KillPlayer();
-		return true;
-	}
-
 	return false;
 }
