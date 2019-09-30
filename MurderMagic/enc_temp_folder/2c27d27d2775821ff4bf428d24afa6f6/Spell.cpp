@@ -18,26 +18,17 @@ ASpell::ASpell()
 	CollisionSphere->SetCollisionResponseToChannel(COLLISION_SPELLS, ECR_Ignore);
 	SetRootComponent(CollisionSphere);
 
+	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
+	ProjectileMovementComponent->SetUpdatedComponent(CollisionSphere);
+	ProjectileMovementComponent->InitialSpeed = 3000.0f;
+	ProjectileMovementComponent->MaxSpeed = 3000.0f;
+	ProjectileMovementComponent->bRotationFollowsVelocity = true;
+	ProjectileMovementComponent->bShouldBounce = false;
+
 
 	PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleComponent"));
 	PSC->SetupAttachment(CollisionSphere);
 	PSC->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-}
-
-void ASpell::BeginPlay()
-{
-	Super::BeginPlay();
-
-	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 1, true);
-	Projectile_Handler.Invalidate();
-
-}
-
-void ASpell::ProjectileMovement()
-{
-
-
 
 }
 
@@ -47,9 +38,6 @@ void ASpell::CastSpell(FVector start, float angle)
 	destination.X = start.X + (FMath::Cos(angle) * range);
 	destination.Y = start.Y + (FMath::Sin(angle) * range);
 	destination.Z = start.Z;
-	SetActorLocation(start);
-
-	Projectile_Handler.IsValid();
 
 }
 

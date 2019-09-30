@@ -59,6 +59,7 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 	currentAP = 0;
+	ManaRegen = 3;
 
 }
 
@@ -225,7 +226,6 @@ void AMurderMagicCharacter::SetPlayerStats()
 			ExperienceToNextLevel = Row->ExperienceToNextLevel;
 
 			MaxMana = Row->MaxMana;
-			ManaRegen = 3;
 			Mana = MaxMana;
 		}
 	}
@@ -258,7 +258,14 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	
 	if (NPC)
 	{
-		Health = Health - NPC->Damage;
+		if (GetHealthPercent() <= 0.2)
+		{
+			Health -= (NPC->Damage / 1.5);
+		}
+		else
+		{
+			Health -= NPC->Damage;
+		}
 	}
 
 }

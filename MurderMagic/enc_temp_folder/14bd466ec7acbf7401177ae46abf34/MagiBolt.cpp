@@ -9,7 +9,7 @@ AMagiBolt::AMagiBolt()
 {
 
 	spellCD = 3;
-	range = 200;
+	range = 20;
 	baseDMG = 10;
 
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> PS(TEXT("ParticleSystem'/Game/magiBoltEffect.magiBoltEffect'"));

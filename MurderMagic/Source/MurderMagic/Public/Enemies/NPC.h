@@ -34,8 +34,8 @@ public:
 	float AttackSpeed;
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
 	int EXPWorth;
-
-	FVector Location;
+	UPROPERTY(EditDefaultsOnly, Category = "Enemy pickup")
+	UClass* EXPPickup;
 
 protected:
 	// Called when the game starts or when spawned
