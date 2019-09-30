@@ -253,7 +253,14 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	
 	if (NPC)
 	{
-		Health = Health - NPC->Damage;
+		if (GetHealthPercent() <= 0.2)
+		{
+			Health -= (NPC->Damage / 1.5);
+		}
+		else
+		{
+			Health -= NPC->Damage;
+		}
 	}
 
 }
