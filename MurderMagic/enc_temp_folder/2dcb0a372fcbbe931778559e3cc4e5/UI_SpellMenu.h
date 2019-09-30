@@ -18,11 +18,12 @@ public:
 	virtual bool Initialize() override;
 
 	UFUNCTION(BlueprintPure, Category = "LevelNumber")
-	FText LevelNumber();
+		FString LevelNumber();
 
+		FString CLevel;
 
 	UFUNCTION(BlueprintPure, Category = "AbilityPointNumber")
-	FString APNum();
+		FString APNum();
 
 	FString CAP;
 

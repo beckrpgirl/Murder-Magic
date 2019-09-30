@@ -77,13 +77,12 @@ bool UUI_SpellMenu::Initialize()
 
 
 
-FText UUI_SpellMenu::LevelNumber()
+FString UUI_SpellMenu::LevelNumber()
 {
-	FText CLevel;
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 	if (MMC)
 	{
-		CLevel = FText::AsNumber(MMC->CurrentPlayerLevel);
+		CLevel =  FString::FromInt(MMC->CurrentPlayerLevel);
 
 	}
 	if (GEngine)

@@ -156,11 +156,6 @@ bool AMurderMagicCharacter::AddExperience(float Points)
 	return true;
 }
 
-int AMurderMagicCharacter::GetCurrentPlayerLevel()
-{
-	return CurrentPlayerLevel;
-}
-
 float AMurderMagicCharacter::GetManaPercent()
 {
 	return Mana / MaxMana;
