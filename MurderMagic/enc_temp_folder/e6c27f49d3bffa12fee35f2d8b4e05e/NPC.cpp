@@ -71,8 +71,8 @@ void ANPC::SpawnEXP(int SpawnAmount)
 
 		for (int i = 0; i <= SpawnAmount; i++) {
 
-			Location.X += (FMath::RandRange(0, 75));
-			Location.Y += (FMath::RandRange(0, 75));
+			Location.X += (FMath::RandRange(0, 10));
+			Location.Y += (FMath::RandRange(0, 10));
 
 
 			ACollectible_EXP* XPCollectible = GetWorld()->SpawnActor<ACollectible_EXP>(EXPPickup, SpawnInfo);

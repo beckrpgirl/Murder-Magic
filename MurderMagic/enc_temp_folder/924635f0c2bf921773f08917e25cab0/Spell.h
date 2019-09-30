@@ -24,14 +24,16 @@ private:
 
 	GENERATED_BODY()
 
+protected:
+
+	std::vector <USpellEffect *> effects;
+
 public:
 
 	float spellCD;
 	float sinceCast;
 	float range;
 	float baseDMG;
-
-	FTimerHandle Projectile_Handler;
 
 	ASpell();
 	ASpell *next;
@@ -45,12 +47,11 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	USphereComponent* CollisionSphere;
 
+	UPROPERTY(VisibleAnywhere, Category = "MovementComponent")
+	UProjectileMovementComponent* ProjectileMovementComponent;
+
 	UPROPERTY(VisibleAnywhere, Category = "Spell Effect")
 	class UParticleSystemComponent* PSC;
-
-	virtual void BeginPlay() override;
-
-	void ProjectileMovement();
 
 	void CastSpell(FVector start, float angle);
 
