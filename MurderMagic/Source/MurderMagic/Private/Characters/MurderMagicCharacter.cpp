@@ -266,6 +266,7 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 		{
 			Health -= NPC->Damage;
 		}
+		NPC->Destroy();
 	}
 
 }
