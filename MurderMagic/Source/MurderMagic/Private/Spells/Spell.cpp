@@ -30,7 +30,7 @@ void ASpell::BeginPlay()
 	Super::BeginPlay();
 
 	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 1, true);
-	Projectile_Handler.Invalidate;
+	Projectile_Handler.Invalidate();
 
 }
 
@@ -48,6 +48,8 @@ void ASpell::CastSpell(FVector start, float angle)
 	destination.Y = start.Y + (FMath::Sin(angle) * range);
 	destination.Z = start.Z;
 	SetActorLocation(start);
+
+	Projectile_Handler.IsValid();
 
 }
 
