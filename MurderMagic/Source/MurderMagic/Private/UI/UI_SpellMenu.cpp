@@ -120,34 +120,42 @@ void UUI_SpellMenu::OnClickEventOneMinus()
 
 void UUI_SpellMenu::OnClickEventTwoPlus()
 {
+	APAdditionCheck();
 }
 
 void UUI_SpellMenu::OnClickEventTwoMinus()
 {
+	APRemovalCheck();
 }
 
 void UUI_SpellMenu::OnClickEventThreePlus()
 {
+	APAdditionCheck();
 }
 
 void UUI_SpellMenu::OnClickEventThreeMinus()
 {
+	APRemovalCheck();
 }
 
 void UUI_SpellMenu::OnClickEventFourPlus()
 {
+	APAdditionCheck();
 }
 
 void UUI_SpellMenu::OnClickEventFourMinus()
 {
+	APRemovalCheck();
 }
 
 void UUI_SpellMenu::OnClickEventFivePlus()
 {
+	APAdditionCheck();
 }
 
 void UUI_SpellMenu::OnClickEventFiveMinus()
 {
+	APRemovalCheck();
 }
 
 void UUI_SpellMenu::OnClickEventResumeButton()
