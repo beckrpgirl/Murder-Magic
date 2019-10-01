@@ -26,7 +26,13 @@ ASpell::ASpell()
 	PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleComponent"));
 	PSC->SetupAttachment(CollisionSphere);
 	PSC->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	isUnlocked = false;
 
+}
+
+void ASpell::UnlockSpell()
+{
+	isUnlocked = true;
 }
 
 void ASpell::BeginPlay()

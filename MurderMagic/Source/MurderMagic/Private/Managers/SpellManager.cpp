@@ -70,12 +70,20 @@ void ASpellManager::Tick(float DeltaTime)
 void ASpellManager::NextSpellL()
 {
 	equippedSpellL = equippedSpellL->next;
+	if (!equippedSpellL->isUnlocked)
+	{
+		NextSpellL();
+	}
 	hasLeftUpdated = true;
 }
 
 void ASpellManager::NextSpellR()
 {
 	equippedSpellR = equippedSpellR->next;
+	if (!equippedSpellR->isUnlocked)
+	{
+		NextSpellR();
+	}
 	hasRightUpdated = true;
 }
 
