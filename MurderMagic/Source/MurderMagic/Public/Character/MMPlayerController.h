@@ -48,6 +48,7 @@ public:
 	void LNextSpell();
 	void RNextSpell();
 
+	FVector mouseLocation, mouseDirection;
 	AMurderMagicCharacter* pawnRef;
 
 	ASpellManager* GetSpellManager();
