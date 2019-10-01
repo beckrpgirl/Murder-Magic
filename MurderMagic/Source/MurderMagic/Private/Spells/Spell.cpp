@@ -4,9 +4,12 @@
 #include "Spell.h"
 #include "NPC.h"
 #include "MurderMagic.h"
+#include "Kismet/KismetMathLibrary.h"
 
 ASpell::ASpell()
 {
+
+	PrimaryActorTick.bCanEverTick = true;
 
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 	CollisionSphere->InitSphereRadius(40.0f);
@@ -14,6 +17,7 @@ ASpell::ASpell()
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionSphere->SetCollisionObjectType(COLLISION_SPELLS);
 	CollisionSphere->SetGenerateOverlapEvents(true);
+	//CollisionSphere->SetSimulatePhysics(true);
 	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
 	CollisionSphere->SetCollisionResponseToChannel(COLLISION_SPELLS, ECR_Ignore);
 	SetRootComponent(CollisionSphere);
@@ -34,11 +38,22 @@ void ASpell::BeginPlay()
 
 }
 
+void ASpell::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+
+}
+
 void ASpell::ProjectileMovement()
 {
 
+	//CollisionSphere->SetPhysicsLinearVelocity(FVector(), true, NAME_None);
 
+	FVector fDir = GetActorForwardVector() * 100;
 
+	SetActorLocation(GetActorLocation() + fDir);
+	
 }
 
 void ASpell::CastSpell(FVector start, float angle)
@@ -48,7 +63,6 @@ void ASpell::CastSpell(FVector start, float angle)
 	destination.Y = start.Y + (FMath::Sin(angle) * range);
 	destination.Z = start.Z;
 	SetActorLocation(start);
-
 	Projectile_Handler.IsValid();
 
 }

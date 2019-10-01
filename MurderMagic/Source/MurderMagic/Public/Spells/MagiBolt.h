@@ -19,6 +19,5 @@ private:
 public:
 
 	AMagiBolt();
-	virtual void BeginPlay() override;
 
 };

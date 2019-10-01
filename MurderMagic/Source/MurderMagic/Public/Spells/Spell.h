@@ -4,9 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "SpellEffect.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
-#include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
 #include <vector>
 #include "Spell.generated.h"
@@ -49,6 +47,9 @@ public:
 	class UParticleSystemComponent* PSC;
 
 	virtual void BeginPlay() override;
+
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
 	void ProjectileMovement();
 

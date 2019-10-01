@@ -47,7 +47,7 @@ private:
 	class UCameraComponent* FollowCamera;
 
 	UPROPERTY(VisibleAnywhere, Category = "Trigger")
-		class UCapsuleComponent* TriggerCapsule;
+	class UCapsuleComponent* TriggerCapsule;
 
 	float Health;
 	float MaxHealth;

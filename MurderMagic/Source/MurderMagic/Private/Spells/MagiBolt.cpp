@@ -12,13 +12,4 @@ AMagiBolt::AMagiBolt()
 	range = 200;
 	baseDMG = 10;
 
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> PS(TEXT("ParticleSystem'/Game/magiBoltEffect.magiBoltEffect'"));
-
-	PSC->SetTemplate(PS.Object);
-
-}
-
-void AMagiBolt::BeginPlay()
-{
-	
 }
