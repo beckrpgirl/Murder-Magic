@@ -12,9 +12,7 @@ FSlateBrush USpellSlots::UpdateLeftSlotImage()
 	AMMPlayerController* pc = Cast<AMMPlayerController>(GetOwningPlayerPawn()->Controller); 
 
 	FSlateBrush SB;
-
-	if(pc && pc->GetLSTexture())
-		SB.SetResourceObject(pc->GetLSTexture());
+	SB.SetResourceObject(pc->GetLSTexture());
 
 	return SB;
 }
