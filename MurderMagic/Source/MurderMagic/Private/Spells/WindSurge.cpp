@@ -5,5 +5,5 @@
 
 AWindSurge::AWindSurge()
 {
-
+	UnlockSpell();
 }

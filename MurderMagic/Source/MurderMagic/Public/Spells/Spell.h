@@ -34,6 +34,9 @@ public:
 	ASpell();
 	ASpell *next;
 
+	bool isUnlocked;
+	void UnlockSpell();
+
 	ANPC* Enemy;
 	AMurderMagicCharacter* Character;
 
