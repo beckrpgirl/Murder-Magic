@@ -2,14 +2,4 @@
 
 
 #include "HealthBar.h"
-#include "MurderMagicCharacter.h"
 
-
-float UHealthBar::UpdateHealthPercent() 
-{
-
-	Character = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
-
-	return Character->GetHealthPercent();
-
-}

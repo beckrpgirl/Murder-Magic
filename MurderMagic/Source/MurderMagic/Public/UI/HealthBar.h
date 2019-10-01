@@ -15,13 +15,13 @@ class AMurderMagicCharacter;
 UCLASS()
 class MURDERMAGIC_API UHealthBar : public UUserWidget
 {
+private:
+
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintPure, Category = "Health")
-	float UpdateHealthPercent();
 
-	UPROPERTY(BlueprintReadWrite)
-	AMurderMagicCharacter* Character;
+	UFUNCTION(BlueprintPure, Category = "Health")
+	virtual float UpdateHealthPercent() PURE_VIRTUAL(UHealthBar::UpdateHealthPercent, return 0.0;);
 	
 };

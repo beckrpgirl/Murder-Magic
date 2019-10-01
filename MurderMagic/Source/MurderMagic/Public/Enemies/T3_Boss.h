@@ -17,11 +17,12 @@ class MURDERMAGIC_API AT3_Boss : public ANPC
 	GENERATED_BODY()
 
 
-UPROPERTY(EditAnywhere)
-ABossDoor* door;
+	UPROPERTY(EditAnywhere)
+	ABossDoor* door;
 	
 
 public:
-	virtual bool TakeDamage(int DamageAmount) override;
+
+	virtual void TakeDamage(int DamageAmount) override;
 
 };
