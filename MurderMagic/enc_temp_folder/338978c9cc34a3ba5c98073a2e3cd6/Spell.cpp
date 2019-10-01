@@ -48,6 +48,8 @@ void ASpell::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	ProjectileMovement();
+
 }
 
 void ASpell::ProjectileMovement()
@@ -55,7 +57,7 @@ void ASpell::ProjectileMovement()
 
 	//CollisionSphere->SetPhysicsLinearVelocity(FVector(), true, NAME_None);
 
-	FVector fDir = GetActorForwardVector() * 75;
+	FVector fDir = GetActorForwardVector() * 100;
 
 	SetActorLocation(GetActorLocation() + fDir);
 	
