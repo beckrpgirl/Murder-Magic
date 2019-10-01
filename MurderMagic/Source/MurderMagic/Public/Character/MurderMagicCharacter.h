@@ -110,8 +110,9 @@ public:
 	void PlayerLevelup();
 	void SetPlayerStats();
 
-	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
-	FTransform PlayerTransform;
+	void AddAP();
+	void SubtractAP();
+	int GetTotalAP();
 
 	ACollectibleParent* Collectibles;
 	ATrigger* Triggers;

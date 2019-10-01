@@ -22,9 +22,9 @@ public:
 
 
 	UFUNCTION(BlueprintPure, Category = "AbilityPointNumber")
-	FString APNum();
+	FString APNumber();
 
-	FString CAP;
+
 
 	
 
@@ -96,5 +96,10 @@ public:
 		void OnClickEventResumeButton();
 
 	bool ClickResumeTrue = false;
+
+private:
+
+	void APRemovalCheck();
+	void APAdditionCheck();
 
 };

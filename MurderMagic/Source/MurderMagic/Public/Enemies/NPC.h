@@ -12,16 +12,12 @@
 UCLASS()
 class MURDERMAGIC_API ANPC : public ACharacter
 {
-	GENERATED_BODY()
+private:
 
-public:
-	// Sets default values for this character's properties
-	ANPC(const FObjectInitializer& OI);
+	GENERATED_BODY()
 
 	UPROPERTY(VisibleDefaultsOnly)
 	USphereComponent* CollisionSphere;
-	UPROPERTY(EditDefaultsOnly, Category = "AI")
-	class UBehaviorTree* BehaviorTree;
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
 	float MovementSpeed;
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
@@ -37,19 +33,31 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy pickup")
 	UClass* EXPPickup;
 
+
+
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
+
+	// Sets default values for this character's properties
+	ANPC(const FObjectInitializer& OI);
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void SetHealth(float hp);
+
 	float GetHealthPercent();
-	virtual bool TakeDamage(int DamageAmount);
+	virtual void TakeDamage(int DamageAmount);
 	void SpawnEXP(int SpawnAmount);
 
-	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	float GetDamage();
+	int GetXPValue();
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+	class UBehaviorTree* BehaviorTree;
 
 };

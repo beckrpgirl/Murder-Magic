@@ -77,6 +77,7 @@ void AMurderMagicCharacter::BeginPlay()
 	CurrentPlayerLevel = GI->PlayerLvl;
 
 	SetPlayerStats();
+	currentAP = GI->PlayerAP;
 
 	if (PC)
 	{
@@ -198,7 +199,7 @@ void AMurderMagicCharacter::PlayerLevelup()
 
 		if (GEngine) {
 
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Health: " + FString::FromInt(Row->MaxHealth));
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "AP: " + FString::FromInt(currentAP));
 		}
 
 	}
@@ -232,6 +233,22 @@ void AMurderMagicCharacter::SetPlayerStats()
 
 }
 
+void AMurderMagicCharacter::AddAP()
+{
+	currentAP = currentAP + 1;
+}
+
+void AMurderMagicCharacter::SubtractAP()
+{
+	currentAP = currentAP - 1;
+}
+
+int AMurderMagicCharacter::GetTotalAP()
+{
+	int AP = CurrentPlayerLevel - 1;
+	return AP;
+}
+
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 	ACollectibleParent *TempCollectibles = Cast<ACollectibleParent>(OtherActor);
@@ -260,11 +277,11 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 	{
 		if (GetHealthPercent() <= 0.2)
 		{
-			Health -= (NPC->Damage / 1.5);
+			Health -= (NPC->GetDamage() / 1.5);
 		}
 		else
 		{
-			Health -= NPC->Damage;
+			Health -= NPC->GetDamage();
 		}
 		NPC->Destroy();
 	}
