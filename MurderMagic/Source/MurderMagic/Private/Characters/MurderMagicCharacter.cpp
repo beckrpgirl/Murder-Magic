@@ -77,6 +77,7 @@ void AMurderMagicCharacter::BeginPlay()
 	CurrentPlayerLevel = GI->PlayerLvl;
 
 	SetPlayerStats();
+	currentAP = GI->PlayerAP;
 
 	if (PC)
 	{
@@ -198,7 +199,7 @@ void AMurderMagicCharacter::PlayerLevelup()
 
 		if (GEngine) {
 
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Health: " + FString::FromInt(Row->MaxHealth));
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "AP: " + FString::FromInt(currentAP));
 		}
 
 	}
