@@ -40,6 +40,8 @@ public:
 	ANPC* Enemy;
 	AMurderMagicCharacter* Character;
 
+	FVector destination;
+
 	UPROPERTY(VisibleDefaultsOnly)
 	UTexture2D* SpellTexture;
 

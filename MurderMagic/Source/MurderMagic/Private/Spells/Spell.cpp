@@ -4,7 +4,10 @@
 #include "Spell.h"
 #include "NPC.h"
 #include "MurderMagic.h"
+#include "MurderMagicCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Math/Vector.h"
+#include "Kismet/GameplayStatics.h"
 
 ASpell::ASpell()
 {
@@ -39,7 +42,7 @@ void ASpell::BeginPlay()
 {
 	Super::BeginPlay();
 
-	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 1, true);
+	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 0.25, true);
 	Projectile_Handler.Invalidate();
 
 }
@@ -53,22 +56,36 @@ void ASpell::Tick(float DeltaTime)
 void ASpell::ProjectileMovement()
 {
 
-	//CollisionSphere->SetPhysicsLinearVelocity(FVector(), true, NAME_None);
 
-	FVector fDir = GetActorForwardVector() * 75;
+	FVector fDir = GetActorForwardVector() * 50;
+	FVector CurrentLocation = GetActorLocation();
 
 	SetActorLocation(GetActorLocation() + fDir);
+
+	if (destination != FVector::ZeroVector) {
+
+		if ((destination -= CurrentLocation).Size() < 50.0f) {
+			
+			if (Projectile_Handler.IsValid()) {
+
+				Projectile_Handler.Invalidate();
+
+			}
+
+		}
+
+	}
+
 	
 }
 
 void ASpell::CastSpell(FVector start, float angle)
 {
-	FVector destination;
 	destination.X = start.X + (FMath::Cos(angle) * range);
 	destination.Y = start.Y + (FMath::Sin(angle) * range);
 	destination.Z = start.Z;
 	SetActorLocation(start);
-	Projectile_Handler.IsValid();
+	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 0.25, true);
 
 }
 
