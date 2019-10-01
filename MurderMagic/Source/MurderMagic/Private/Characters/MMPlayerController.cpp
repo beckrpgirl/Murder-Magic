@@ -21,6 +21,15 @@ void AMMPlayerController::BeginPlay()
 void AMMPlayerController::PlayerTick(float deltaTime)
 {
 	Super::PlayerTick(deltaTime);
+
+
+	DeprojectMousePositionToWorld(mouseLocation, mouseDirection);
+
+	FRotator currentCharacterRotation = pawnRef->GetActorRotation();
+	FRotator targetRotation = mouseDirection.Rotation();
+
+	FRotator newRotation = FRotator(currentCharacterRotation.Pitch, targetRotation.Yaw, currentCharacterRotation.Roll);
+	pawnRef->SetActorRotation(newRotation);
 }
 
 void AMMPlayerController::SetupInputComponent()

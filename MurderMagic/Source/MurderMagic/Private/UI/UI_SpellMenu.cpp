@@ -94,12 +94,13 @@ FText UUI_SpellMenu::LevelNumber()
 	
 }
 
-FString UUI_SpellMenu::APNum()
+FString UUI_SpellMenu::APNumber()
 {
+	FString CAP = "0";
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 	if (MMC)
 	{
-		CAP = FString::FromInt(MMC->currentAP);
+		CAP = " " + FString::FromInt(MMC->currentAP);
 
 	}
 

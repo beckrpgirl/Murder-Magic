@@ -6,6 +6,7 @@
 #include "ConstructorHelpers.h"
 
 AMagiBolt::AMagiBolt()
+	: Super()
 {
 
 	spellCD = 3;

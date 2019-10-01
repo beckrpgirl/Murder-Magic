@@ -18,6 +18,8 @@ private:
 	GENERATED_BODY()
 
 	ASpellManager* spellManager;
+	FVector mouseLocation, mouseDirection;
+	AMurderMagicCharacter* pawnRef;
 
 protected:
 
@@ -48,7 +50,6 @@ public:
 	void LNextSpell();
 	void RNextSpell();
 
-	AMurderMagicCharacter* pawnRef;
 
 	ASpellManager* GetSpellManager();
 	UTexture2D* GetLSTexture();
