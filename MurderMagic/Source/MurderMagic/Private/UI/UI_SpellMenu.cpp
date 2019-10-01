@@ -4,6 +4,7 @@
 #include "UI_SpellMenu.h"
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h"
+#include "CharacterOverview.h"
 #include "MurderMagicCharacter.h"
 
 bool UUI_SpellMenu::Initialize()
@@ -53,6 +54,11 @@ bool UUI_SpellMenu::Initialize()
 		Button_Spell5Minus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventFiveMinus);
 	}
 
+	if (ResumeButton)
+	{
+		ResumeButton->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventResumeButton);
+	}
+
 
 
 
@@ -71,14 +77,17 @@ bool UUI_SpellMenu::Initialize()
 
 
 
-FString UUI_SpellMenu::LevelNumber()
+FText UUI_SpellMenu::LevelNumber()
 {
+	FText CLevel;
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 	if (MMC)
 	{
-		CLevel =  FString::FromInt(MMC->CurrentPlayerLevel);
+		CLevel = FText::AsNumber(MMC->CurrentPlayerLevel);
 
 	}
+	if (GEngine)
+		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "HELLLOOOOOO KITTEN");
 
 	return CLevel;
 
@@ -137,3 +146,22 @@ void UUI_SpellMenu::OnClickEventFivePlus()
 void UUI_SpellMenu::OnClickEventFiveMinus()
 {
 }
+
+void UUI_SpellMenu::OnClickEventResumeButton()
+{
+
+	if (ClickResumeTrue == false)
+	{
+		SetVisibility(ESlateVisibility::Hidden);
+		ClickResumeTrue = true;
+		return;
+	}
+	else
+	{
+		SetVisibility(ESlateVisibility::Visible);
+		ClickResumeTrue = false;
+		return;
+	}
+}
+
+

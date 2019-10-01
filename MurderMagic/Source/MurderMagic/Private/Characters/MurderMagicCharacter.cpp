@@ -157,6 +157,11 @@ bool AMurderMagicCharacter::AddExperience(float Points)
 	return true;
 }
 
+int AMurderMagicCharacter::GetCurrentPlayerLevel()
+{
+	return CurrentPlayerLevel;
+}
+
 float AMurderMagicCharacter::GetManaPercent()
 {
 	return Mana / MaxMana;
@@ -261,6 +266,7 @@ void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AAc
 		{
 			Health -= NPC->Damage;
 		}
+		NPC->Destroy();
 	}
 
 }

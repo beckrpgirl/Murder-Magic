@@ -64,6 +64,9 @@ public:
 
 	AMurderMagicCharacter();
 
+
+	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
+	
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -76,16 +79,16 @@ public:
 	UDataTable* DataTable;
 
 	FDataTableStruct* Row;
-
+	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
 	virtual void BeginPlay() override;
-
+	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
 	int currentAP;
 
 	int CurrentPlayerLevel;
 	int CurrentFloor;
 
 	FTimerHandle AddMana_Handler;
-
+	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
 	bool AddHealth(float Points);
 
 	void RegenMana();
@@ -93,6 +96,10 @@ public:
 	bool AddMana(float Points);
 
 	bool AddExperience(float Points);
+
+	//Steve Approved
+	UFUNCTION(BlueprintCallable, category = MMC)
+	int GetCurrentPlayerLevel();
 
 	float GetManaPercent();
 	float GetHealthPercent();
@@ -103,12 +110,12 @@ public:
 	void PlayerLevelup();
 	void SetPlayerStats();
 
-
+	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
 	FTransform PlayerTransform;
 
 	ACollectibleParent* Collectibles;
 	ATrigger* Triggers;
-
+	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 

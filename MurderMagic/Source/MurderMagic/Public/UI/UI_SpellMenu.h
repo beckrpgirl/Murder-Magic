@@ -18,14 +18,15 @@ public:
 	virtual bool Initialize() override;
 
 	UFUNCTION(BlueprintPure, Category = "LevelNumber")
-		FString LevelNumber();
+	FText LevelNumber();
 
-		FString CLevel;
 
 	UFUNCTION(BlueprintPure, Category = "AbilityPointNumber")
-		FString APNum();
+	FString APNum();
 
 	FString CAP;
+
+	
 
 	UPROPERTY(meta = (BindWidget))
 		class UButton* Button_Spell1Plus;
@@ -57,6 +58,10 @@ public:
 	UPROPERTY(meta = (BindWidget))
 		class UButton* Button_Spell5Minus;
 
+	UPROPERTY(meta = (BindWidget))
+		class UButton* ResumeButton;
+
+
 	UFUNCTION()
 		void OnClickEventOnePlus();
 
@@ -86,5 +91,10 @@ public:
 
 	UFUNCTION()
 		void OnClickEventFiveMinus();
+
+	UFUNCTION()
+		void OnClickEventResumeButton();
+
+	bool ClickResumeTrue = false;
 
 };
