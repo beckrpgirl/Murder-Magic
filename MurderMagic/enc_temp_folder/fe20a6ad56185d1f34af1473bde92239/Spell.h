@@ -40,10 +40,10 @@ public:
 	ANPC* Enemy;
 	AMurderMagicCharacter* Character;
 
-	UPROPERTY(VisibleDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly)
 	UTexture2D* SpellTexture;
 
-	UPROPERTY(VisibleDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly)
 	USphereComponent* CollisionSphere;
 
 	UPROPERTY(VisibleAnywhere, Category = "Spell Effect")

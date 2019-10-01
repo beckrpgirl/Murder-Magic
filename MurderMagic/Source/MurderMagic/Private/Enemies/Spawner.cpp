@@ -73,11 +73,11 @@ void ASpawner::SpawnDelay()
 		RandomNPC();
 		FActorSpawnParameters SpawnInfo;
 		SpawnInfo.Owner = this;
-		float j = i * 10;
-		FVector Location2 = FVector(i, j, 0.0f) + Location;
-		if (K == 1){ GetWorld()->SpawnActor<ANPC>(ToSpawn_1, Location2, Rotation, SpawnInfo); }
-		if (K == 2) { GetWorld()->SpawnActor<ANPC>(ToSpawn_2, Location2, Rotation, SpawnInfo); }
-		if (K == 3) { GetWorld()->SpawnActor<ANPC>(ToSpawn_3, Location2, Rotation, SpawnInfo); }
+		//float j = i * 10;
+		//FVector Location2 = FVector(i, j, 0.0f) + Location;
+		if (K == 1){ GetWorld()->SpawnActor<ANPC>(ToSpawn_1, Location, Rotation, SpawnInfo); }
+		if (K == 2) { GetWorld()->SpawnActor<ANPC>(ToSpawn_2, Location, Rotation, SpawnInfo); }
+		if (K == 3) { GetWorld()->SpawnActor<ANPC>(ToSpawn_3, Location, Rotation, SpawnInfo); }
 		i++;
 		GetWorld()->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::SpawnDelay, TimeDelay, false);
 	}
@@ -92,8 +92,8 @@ void ASpawner::SpawnDelay()
 void ASpawner::RandomNPC()
 {
 	K = FMath::RandRange(1, 3);
-	if (GEngine)
-		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Orange, "Timer");
+	//if (GEngine)
+	//	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Orange, "Timer");
 }
 
 int ASpawner::RandomNumber()

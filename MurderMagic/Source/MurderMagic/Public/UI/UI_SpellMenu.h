@@ -22,9 +22,9 @@ public:
 
 
 	UFUNCTION(BlueprintPure, Category = "AbilityPointNumber")
-	FString APNum();
+	FString APNumber();
 
-	FString CAP;
+
 
 	
 

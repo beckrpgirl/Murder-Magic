@@ -18,12 +18,10 @@ class MURDERMAGIC_API UMMGameInstance : public UGameInstance
 public:
 
 	//Player values
-	float PlayerHealth;
-	float PlayerMana;
 	float PlayerXP;
 	float PlayerMaxXP;
 	int PlayerLvl;
-	FTransform PlayerLocation;
+	float PlayerAP;
 
 
 
