@@ -233,6 +233,22 @@ void AMurderMagicCharacter::SetPlayerStats()
 
 }
 
+void AMurderMagicCharacter::AddAP()
+{
+	currentAP = currentAP + 1;
+}
+
+void AMurderMagicCharacter::SubtractAP()
+{
+	currentAP = currentAP - 1;
+}
+
+int AMurderMagicCharacter::GetTotalAP()
+{
+	int AP = CurrentPlayerLevel - 1;
+	return AP;
+}
+
 void AMurderMagicCharacter::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 	ACollectibleParent *TempCollectibles = Cast<ACollectibleParent>(OtherActor);

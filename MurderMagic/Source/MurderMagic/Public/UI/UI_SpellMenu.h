@@ -97,4 +97,9 @@ public:
 
 	bool ClickResumeTrue = false;
 
+private:
+
+	void APRemovalCheck();
+	void APAdditionCheck();
+
 };

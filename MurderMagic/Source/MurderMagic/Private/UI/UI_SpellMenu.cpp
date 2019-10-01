@@ -110,10 +110,12 @@ FString UUI_SpellMenu::APNumber()
 
 void UUI_SpellMenu::OnClickEventOnePlus()
 {
+	APAdditionCheck();
 }
 
 void UUI_SpellMenu::OnClickEventOneMinus()
 {
+	APRemovalCheck();
 }
 
 void UUI_SpellMenu::OnClickEventTwoPlus()
@@ -164,5 +166,39 @@ void UUI_SpellMenu::OnClickEventResumeButton()
 		return;
 	}
 }
+//Removal of AP from Spell
+void UUI_SpellMenu::APRemovalCheck()
+{
+	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
+	if (MMC) {
+		int TotalAP = MMC->GetTotalAP();
+		int CurAP = MMC->currentAP;
+		int SpellAP = TotalAP - CurAP; //something to add up all the AP spent on spells
+		int DiffAP = TotalAP - SpellAP;
 
+		if (CurAP < TotalAP)
+		{
+			MMC->AddAP();
+
+			//something to do with subtracting to spell power, using the spell type passed through as a Something
+		}
+
+	}
+
+}
+//Adding AP to Spell
+void UUI_SpellMenu::APAdditionCheck()
+{
+	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
+	if (MMC) {
+		int CurAP = MMC->currentAP;
+		if (CurAP >= 1)
+		{
+			MMC->SubtractAP();
+
+			//something to do with adding to spell power, using the spell type passed through as a Something
+		}
+
+	}
+}
 
