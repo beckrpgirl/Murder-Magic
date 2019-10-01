@@ -6,18 +6,17 @@
 
 
 
-bool AT3_Boss::TakeDamage(int DamageAmount)
+void AT3_Boss::TakeDamage(int DamageAmount)
 {
-	Health -= DamageAmount;
+	Super::TakeDamage(DamageAmount);
 
-	if (Health <= 0) {
+	if (GetHealthPercent() <= 0) 
+	{
 
-		SpawnEXP(EXPWorth);
-		Destroy();
+		SpawnEXP(GetXPValue());
 		door->Open();
+		Destroy();
 		
 
 	}
-
-	return true;
 }

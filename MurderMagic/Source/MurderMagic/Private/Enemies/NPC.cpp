@@ -18,7 +18,6 @@ ANPC::ANPC(const FObjectInitializer& OI)
 	CollisionSphere->SetCollisionResponseToAllChannels(ECR_Overlap);
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionSphere->SetGenerateOverlapEvents(true);
-	CollisionSphere->OnComponentBeginOverlap.AddDynamic(this, &ANPC::OnOverlapBegin);
 	CollisionSphere->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
@@ -40,12 +39,17 @@ void ANPC::Tick(float DeltaTime)
 
 }
 
+void ANPC::SetHealth(float hp)
+{
+	Health = hp;
+}
+
 float ANPC::GetHealthPercent()
 {
 	return Health / MaxHealth;
 }
 
-bool ANPC::TakeDamage(int DamageAmount)
+void ANPC::TakeDamage(int DamageAmount)
 {
 	Health -= DamageAmount;
 
@@ -55,8 +59,6 @@ bool ANPC::TakeDamage(int DamageAmount)
 		Destroy();
 
 	}
-
-	return true;
 }
 
 void ANPC::SpawnEXP(int SpawnAmount)
@@ -84,17 +86,12 @@ void ANPC::SpawnEXP(int SpawnAmount)
 
 }
 
-
-void ANPC::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+float ANPC::GetDamage()
 {
-	//APawn* Pawn = Cast<APawn>(OtherActor);
-	AMurderMagicCharacter* Pawn = Cast<AMurderMagicCharacter>(OtherActor);
-	if (Pawn)
-	{
-		ANPCAIController* AIController = Cast<ANPCAIController>(GetController());
-		if (AIController)
-		{
-			AIController->SetTargetEnemy(Pawn);
-		}
-	}
+	return Damage;
+}
+
+int ANPC::GetXPValue()
+{
+	return EXPWorth;
 }
