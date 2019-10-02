@@ -23,5 +23,6 @@ public:
 
 	virtual float UpdateHealthPercent() override;
 
+	UFUNCTION(BlueprintCallable)
 	void SetCharacter(ANPC *npc);
 };
