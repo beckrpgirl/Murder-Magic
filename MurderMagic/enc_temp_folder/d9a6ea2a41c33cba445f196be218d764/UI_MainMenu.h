@@ -20,13 +20,7 @@ public:
 	UPROPERTY(meta = (BindWidget))
 		class UButton* PlayButton;
 
-	UPROPERTY(meta = (BindWidget))
-		class UButton* QuitButton;
-
 	UFUNCTION()
 		void OnClickEvent();
-
-	UFUNCTION()
-		void OnClickQuitEvent();
 
 };
