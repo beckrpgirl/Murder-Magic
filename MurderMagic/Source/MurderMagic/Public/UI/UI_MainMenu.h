@@ -23,10 +23,16 @@ public:
 	UPROPERTY(meta = (BindWidget))
 		class UButton* QuitButton;
 
+	UPROPERTY(meta = (BindWidget))
+		class UButton* InstructionsButton;
+
 	UFUNCTION()
 		void OnClickEvent();
 
 	UFUNCTION()
 		void OnClickQuitEvent();
+
+	UFUNCTION()
+		void OnClickInstructionEvent();
 
 };

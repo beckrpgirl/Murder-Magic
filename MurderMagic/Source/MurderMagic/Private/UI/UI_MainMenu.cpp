@@ -31,6 +31,11 @@ bool UUI_MainMenu::Initialize()
 			QuitButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickQuitEvent);
 		}
 
+		if (InstructionsButton)
+		{
+			InstructionsButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickQuitEvent);
+		}
+
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Running a widget in code");
 
@@ -49,4 +54,8 @@ void UUI_MainMenu::OnClickQuitEvent()
 {
 	GetOwningPlayer()->ConsoleCommand("quit");
 
+}
+
+void UUI_MainMenu::OnClickInstructionEvent()
+{
 }
