@@ -56,7 +56,7 @@ public:
 
 	void ProjectileMovement();
 
-	void CastSpell(FVector start, FVector facingDirection, float angle);
+	void CastSpell(FVector start, float angle);
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);

@@ -56,7 +56,7 @@ void ASpell::Tick(float DeltaTime)
 void ASpell::ProjectileMovement()
 {
 
-	FVector fDir = (GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorForwardVector()) * 50;
+	FVector fDir = GetActorForwardVector() * 50;
 	FVector CurrentLocation = GetActorLocation();
 
 	SetActorLocation(GetActorLocation() + fDir);
@@ -78,13 +78,14 @@ void ASpell::ProjectileMovement()
 	
 }
 
-void ASpell::CastSpell(FVector start, float angle)
+void ASpell::CastSpell(FVector start, FVector facingDirection, float angle)
 {
 
 	destination.X = start.X + (FMath::Cos(angle) * range);
 	destination.Y = start.Y + (FMath::Sin(angle) * range);
 	destination.Z = start.Z;
 	SetActorLocation(start);
+	SetActorRotation(facingDirection.Rotation());
 
 	SetActorHiddenInGame(false);
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
