@@ -17,6 +17,5 @@ void AT3_Boss::TakeDamage(int DamageAmount)
 		door->Open();
 		Destroy();
 		
-
 	}
 }

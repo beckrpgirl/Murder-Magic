@@ -3,6 +3,8 @@
 
 #include "UI_MainMenu.h"
 #include "Components/Button.h"
+#include "MMPlayerController.h"
+#include "GameFramework/Controller.h"
 #include "Kismet/GameplayStatics.h"
 
 bool UUI_MainMenu::Initialize()
@@ -23,6 +25,17 @@ bool UUI_MainMenu::Initialize()
 		        GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "could not find play button");
 		}
 
+
+		if (QuitButton)
+		{
+			QuitButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickQuitEvent);
+		}
+
+		if (InstructionsButton)
+		{
+			InstructionsButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickQuitEvent);
+		}
+
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Running a widget in code");
 
@@ -35,5 +48,14 @@ void UUI_MainMenu::OnClickEvent()
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "I've Been clicked!");
 
+}
 
+void UUI_MainMenu::OnClickQuitEvent()
+{
+	GetOwningPlayer()->ConsoleCommand("quit");
+
+}
+
+void UUI_MainMenu::OnClickInstructionEvent()
+{
 }
