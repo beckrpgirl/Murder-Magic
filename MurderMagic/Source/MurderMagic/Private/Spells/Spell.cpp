@@ -63,7 +63,7 @@ void ASpell::ProjectileMovement()
 
 	if (destination != FVector::ZeroVector) {
 
-		if ((destination -= CurrentLocation).Size() < 50.0f) {
+		if ((destination - CurrentLocation).Size() < 50.0f) {
 			
 			if (Projectile_Handler.IsValid()) {
 
@@ -80,11 +80,15 @@ void ASpell::ProjectileMovement()
 
 void ASpell::CastSpell(FVector start, float angle)
 {
+
 	destination.X = start.X + (FMath::Cos(angle) * range);
 	destination.Y = start.Y + (FMath::Sin(angle) * range);
 	destination.Z = start.Z;
 	SetActorLocation(start);
-	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 0.25, true);
+
+	SetActorHiddenInGame(false);
+	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 0.35, true);
 
 }
 
@@ -103,7 +107,9 @@ void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor
 
 	if (OtherActor != Character) {
 
-		GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
+		GetWorld()->GetTimerManager().ClearTimer(Projectile_Handler);
+		SetActorHiddenInGame(true);
+		CollisionSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	}
 

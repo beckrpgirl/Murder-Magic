@@ -80,6 +80,10 @@ void ASpell::ProjectileMovement()
 
 void ASpell::CastSpell(FVector start, float angle)
 {
+
+	this->bHidden = false;
+	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+
 	destination.X = start.X + (FMath::Cos(angle) * range);
 	destination.Y = start.Y + (FMath::Sin(angle) * range);
 	destination.Z = start.Z;
@@ -92,13 +96,31 @@ void ASpell::CastSpell(FVector start, float angle)
 void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 
-	Enemy = Cast<ANPC>(OtherActor);
+	ANPC* Enemy = Cast<ANPC>(OtherActor);
+	AMurderMagicCharacter* Character = Cast<AMurderMagicCharacter>(OtherActor);
 
 	if (Enemy) {
-
-		Enemy->TakeDamage(baseDMG);
-		GetWorld()->GetTimerManager().ClearTimer(Projectile_Handler);
+		float DMG = baseDMG + APBonus;
+		Enemy->TakeDamage(DMG);
 
 	}
 
+	if (OtherActor != Character) {
+
+		GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
+		this->bHidden = true;
+		CollisionSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	}
+
+}
+
+void ASpell::AddAPBonus()
+{
+	APBonus = APBonus + 1;
+}
+
+void ASpell::SubtractAPBonus()
+{
+	APBonus = APBonus - 1;
 }
