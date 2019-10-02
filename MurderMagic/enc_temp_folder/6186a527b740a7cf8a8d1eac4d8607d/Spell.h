@@ -27,7 +27,9 @@ public:
 
 	float spellCD;
 	float sinceCast;
+	UPROPERTY(VisibleDefaultsOnly, Category = "Spell Stats")
 	float range;
+	UPROPERTY(VisibleDefaultsOnly, Category = "Enemy Stats")
 	float baseDMG;
 	float APBonus;
 

@@ -89,7 +89,7 @@ void ASpell::CastSpell(FVector start, FVector facingDirection, float angle)
 
 	SetActorHiddenInGame(false);
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 0.35, true);
+	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 0.25, true);
 
 }
 
