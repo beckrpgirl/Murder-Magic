@@ -96,10 +96,20 @@ void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor
 	Enemy = Cast<ANPC>(OtherActor);
 
 	if (Enemy) {
-
-		Enemy->TakeDamage(baseDMG);
+		float DMG = baseDMG + APBonus;
+		Enemy->TakeDamage(DMG);
 
 	}
 
 
+}
+
+void ASpell::AddAPBonus()
+{
+	APBonus = APBonus + 1;
+}
+
+void ASpell::SubtractAPBonus()
+{
+	APBonus = APBonus - 1;
 }
