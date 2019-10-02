@@ -24,9 +24,12 @@ private:
 
 public:
 
+
 	float spellCD;
 	float sinceCast;
+	UPROPERTY(VisibleDefaultsOnly, Category = "Spell Stats")
 	float range;
+	UPROPERTY(VisibleDefaultsOnly, Category = "Enemy Stats")
 	float baseDMG;
 	float APBonus;
 
@@ -56,7 +59,7 @@ public:
 
 	void ProjectileMovement();
 
-	void CastSpell(FVector start, float angle);
+	void CastSpell(FVector start, FVector facingDirection, float angle);
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);

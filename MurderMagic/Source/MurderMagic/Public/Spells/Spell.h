@@ -24,6 +24,7 @@ private:
 
 public:
 
+
 	float spellCD;
 	float sinceCast;
 	float range;
