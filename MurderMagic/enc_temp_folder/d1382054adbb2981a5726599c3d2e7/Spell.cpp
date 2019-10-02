@@ -92,18 +92,12 @@ void ASpell::CastSpell(FVector start, float angle)
 void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 
-	ANPC* Enemy = Cast<ANPC>(OtherActor);
-	AMurderMagicCharacter* Character = Cast<AMurderMagicCharacter>(OtherActor);
+	Enemy = Cast<ANPC>(OtherActor);
 
 	if (Enemy) {
 
 		Enemy->TakeDamage(baseDMG);
-
-	}
-
-	if (OtherActor != Character) {
-
-		GetWorld()->GetTimerManager().ClearAllTimersForObject(this);
+		GetWorld()->GetTimerManager().ClearTimer(Projectile_Handler);
 
 	}
 

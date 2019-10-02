@@ -37,6 +37,9 @@ public:
 	bool isUnlocked;
 	void UnlockSpell();
 
+	ANPC* Enemy;
+	AMurderMagicCharacter* Character;
+
 	FVector destination;
 
 	UPROPERTY(VisibleDefaultsOnly)
