@@ -33,7 +33,7 @@ void AGameHUD::BeginPlay()
 			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetWSClass);
 			hudWidget->AddToViewport();
 		}
-		else
+		if (CurrentMapName != "UEDPIE_0_MainMenu" && CurrentMapName != "UEDPIE_0_WinScreen")
 		{
 			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetClass);
 			hudWidget->AddToViewport();
