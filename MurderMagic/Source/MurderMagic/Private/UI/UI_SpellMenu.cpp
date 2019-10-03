@@ -208,9 +208,9 @@ void UUI_SpellMenu::APAdditionCheck()
 			if (SpellRank == 3) { MageBlastSpell->AddAPBonus(); }
 			if (SpellRank == 4) { BurningHandsSpell->AddAPBonus(); }
 			if (SpellRank == 5) { LightningStrikesSpell->AddAPBonus(); }
-			if (SpellRank == 6) { LockOne->SetVisibility(ESlateVisibility::Hidden); MageBlastSpell->isUnlocked = true; }
-			if (SpellRank == 7) { LockTwo->SetVisibility(ESlateVisibility::Hidden); BurningHandsSpell->isUnlocked = true; }
-			if (SpellRank == 8) { LockThree->SetVisibility(ESlateVisibility::Hidden); LightningStrikesSpell->isUnlocked = true; }
+			if (SpellRank == 6) { LockOne->SetVisibility(ESlateVisibility::Hidden); MageBlastSpell->UnlockSpell(); }
+			if (SpellRank == 7) { LockTwo->SetVisibility(ESlateVisibility::Hidden); BurningHandsSpell->UnlockSpell(); }
+			if (SpellRank == 8) { LockThree->SetVisibility(ESlateVisibility::Hidden); LightningStrikesSpell->UnlockSpell(); }
 		}
 
 	}

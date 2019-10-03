@@ -4,7 +4,9 @@
 #include "LightningStrikes.h"
 
 ALightningStrikes::ALightningStrikes()
+	: Super()
 {
-	UnlockSpell();
+	
+	
 }
 
