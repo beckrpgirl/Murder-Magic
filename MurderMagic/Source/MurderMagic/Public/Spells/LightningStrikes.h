@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-#include "Spell.h"
+#include "BeamSpell.h"
 #include "CoreMinimal.h"
 #include "Spell.h"
 #include "LightningStrikes.generated.h"
@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class MURDERMAGIC_API ALightningStrikes : public ASpell
+class MURDERMAGIC_API ALightningStrikes : public ABeamSpell
 {
 private:
 

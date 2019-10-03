@@ -32,8 +32,6 @@ public:
 	float APBonus;
 	FName SName;
 
-	FTimerHandle Projectile_Handler;
-
 	ASpell();
 	ASpell *next;
 
@@ -45,18 +43,10 @@ public:
 	UPROPERTY(VisibleDefaultsOnly)
 	UTexture2D* SpellTexture;
 
-	UPROPERTY(VisibleDefaultsOnly)
-	USphereComponent* CollisionSphere;
-
-	UPROPERTY(VisibleAnywhere, Category = "Spell Effect")
-	class UParticleSystemComponent* PSC;
-
 	virtual void BeginPlay() override;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	void ProjectileMovement();
 
 	void CastSpell(FVector start, FVector facingDirection, float angle);
 
