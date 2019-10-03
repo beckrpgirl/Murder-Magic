@@ -19,6 +19,8 @@ class MURDERMAGIC_API UUI_TriggerCount : public UUserWidget
 	
 	UPROPERTY(EditDefaultsOnly)
 	TArray<AActor*> TMArray;
+
+	ATriggerManager* TM;
 	
 
 	UFUNCTION(BlueprintPure, Category = "triggers")
