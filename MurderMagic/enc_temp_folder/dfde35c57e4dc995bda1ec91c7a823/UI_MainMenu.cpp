@@ -34,7 +34,7 @@ bool UUI_MainMenu::Initialize()
 
 		if (InstructionsButton)
 		{
-			InstructionsButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickInstructionEvent);
+			InstructionsButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickQuitEvent);
 		}
 
 	if (GEngine)
@@ -62,13 +62,13 @@ void UUI_MainMenu::OnClickInstructionEvent()
 
 	if (ClickTrue == false)
 	{
-		UIInstructPanel1->SetVisibility(ESlateVisibility::Visible);
+		UIInstructPanel->SetVisibility(ESlateVisibility::Visible);
 		ClickTrue = true;
 		return;
 	}
 	else
 	{
-		UIInstructPanel1->SetVisibility(ESlateVisibility::Hidden);
+		UIInstructPanel ->SetVisibility(ESlateVisibility::Hidden);
 		ClickTrue = false;
 		return;
 	}
