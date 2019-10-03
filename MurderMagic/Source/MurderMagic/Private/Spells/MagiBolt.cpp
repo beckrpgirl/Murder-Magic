@@ -10,8 +10,8 @@ AMagiBolt::AMagiBolt()
 {
 
 	spellCD = 3;
-	range = 150;
-	baseDMG = 10;
+	range = 75;
+	baseDMG = 5;
 	APBonus = 0;
 	UnlockSpell();
 }

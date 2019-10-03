@@ -7,5 +7,9 @@ AMageBlast::AMageBlast()
 	: Super()
 {
 	
+	spellCD = 3;
+	range = 60;
+	baseDMG = 10;
+	APBonus = 0;
 	
 }

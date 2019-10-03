@@ -68,7 +68,8 @@ void ASpell::ProjectileMovement()
 			if (Projectile_Handler.IsValid()) {
 
 				GetWorld()->GetTimerManager().ClearTimer(Projectile_Handler);
-	
+				SetActorHiddenInGame(true);
+				CollisionSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 			}
 
