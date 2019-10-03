@@ -13,5 +13,6 @@ AMagiBolt::AMagiBolt()
 	range = 150;
 	baseDMG = 10;
 	APBonus = 0;
+	SName = "MagiBolt";
 	UnlockSpell();
 }

@@ -6,5 +6,6 @@
 AWindSurge::AWindSurge()
 	: Super()
 {
+	SName = "WindSurge";
 	UnlockSpell();
 }

@@ -6,6 +6,6 @@
 ABurningHands::ABurningHands()
 	: Super()
 {
-	
+	SName = "BurningHands";
 	
 }

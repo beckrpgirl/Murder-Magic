@@ -69,10 +69,7 @@ void AMMPlayerController::ObjectInteract()
 
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "Interacted with button");
 		}
-
 	}
-
-
 }
 
 void AMMPlayerController::ExitGame()
@@ -109,6 +106,8 @@ void AMMPlayerController::RNextSpell()
 
 ASpellManager* AMMPlayerController::GetSpellManager()
 {
+	if (!spellManager)
+		return nullptr;
 	return spellManager;
 }
 

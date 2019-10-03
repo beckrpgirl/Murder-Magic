@@ -7,6 +7,6 @@ ALightningStrikes::ALightningStrikes()
 	: Super()
 {
 	
-	
+	SName = "LightingStrikes";
 }
 

@@ -6,6 +6,6 @@
 AMageBlast::AMageBlast()
 	: Super()
 {
-	
+	SName = "MageBlast";
 	
 }
