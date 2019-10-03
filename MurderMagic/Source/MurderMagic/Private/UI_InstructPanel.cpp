@@ -9,7 +9,7 @@ bool UUI_InstructPanel::Initialize()
 {
 	bool Success = Super::Initialize();
 	if (!Success) return false;
-1
+
 	if (InstructExitButton)
 	{
 		InstructExitButton->OnClicked.AddDynamic(this, &UUI_InstructPanel::OnClickInstructExitEvent);
