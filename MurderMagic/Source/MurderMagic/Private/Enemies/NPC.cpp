@@ -19,6 +19,8 @@ ANPC::ANPC(const FObjectInitializer& OI)
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionSphere->SetGenerateOverlapEvents(true);
 	CollisionSphere->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
+	hpBar = OI.CreateDefaultSubobject<UWidgetComponent>(this, TEXT("HP Bar"));
 }
 
 // Called when the game starts or when spawned

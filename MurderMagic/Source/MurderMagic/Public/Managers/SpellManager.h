@@ -67,8 +67,8 @@ public:
 	void NextSpellL();
 	void NextSpellR();
 
-	void CastSpellL(FVector start, float angle);
-	void CastSpellR(FVector start, float angle);
+	void CastSpellL(FVector start, FVector facingDirection, float angle);
+	void CastSpellR(FVector start, FVector facingDirection, float angle);
 
 	
 

@@ -56,7 +56,6 @@ void ASpell::Tick(float DeltaTime)
 void ASpell::ProjectileMovement()
 {
 
-
 	FVector fDir = GetActorForwardVector() * 50;
 	FVector CurrentLocation = GetActorLocation();
 
@@ -64,11 +63,11 @@ void ASpell::ProjectileMovement()
 
 	if (destination != FVector::ZeroVector) {
 
-		if ((destination -= CurrentLocation).Size() < 50.0f) {
+		if ((destination - CurrentLocation).Size() < 50.0f) {
 			
 			if (Projectile_Handler.IsValid()) {
 
-				Projectile_Handler.Invalidate();
+				GetWorldTimerManager().ClearTimer(Projectile_Handler);
 
 			}
 
@@ -79,12 +78,17 @@ void ASpell::ProjectileMovement()
 	
 }
 
-void ASpell::CastSpell(FVector start, float angle)
+void ASpell::CastSpell(FVector start, FVector facingDirection, float angle)
 {
+
 	destination.X = start.X + (FMath::Cos(angle) * range);
 	destination.Y = start.Y + (FMath::Sin(angle) * range);
 	destination.Z = start.Z;
 	SetActorLocation(start);
+	SetActorRotation(facingDirection.Rotation());
+
+	SetActorHiddenInGame(false);
+	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	GetWorld()->GetTimerManager().SetTimer(Projectile_Handler, this, &ASpell::ProjectileMovement, 0.25, true);
 
 }
@@ -93,13 +97,31 @@ void ASpell::CastSpell(FVector start, float angle)
 void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
 
-	Enemy = Cast<ANPC>(OtherActor);
+	ANPC* Enemy = Cast<ANPC>(OtherActor);
+	AMurderMagicCharacter* Character = Cast<AMurderMagicCharacter>(OtherActor);
 
 	if (Enemy) {
-
-		Enemy->TakeDamage(baseDMG);
+		float DMG = baseDMG + APBonus;
+		Enemy->TakeDamage(DMG);
 
 	}
 
+	if (OtherActor != Character) {
 
+		GetWorld()->GetTimerManager().ClearTimer(Projectile_Handler);
+		SetActorHiddenInGame(true);
+		CollisionSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	}
+
+}
+
+void ASpell::AddAPBonus()
+{
+	APBonus = APBonus + 1;
+}
+
+void ASpell::SubtractAPBonus()
+{
+	APBonus = APBonus - 1;
 }

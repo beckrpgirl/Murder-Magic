@@ -13,17 +13,20 @@ ATriggerManager::ATriggerManager()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	TrigTotal = Triggers.Num();
+
 }
 //Boolean checking if there are no active triggers then returns true
 bool ATriggerManager::CheckIsActive()
 {//Looping through triggers
-	for (int i = 0; i < Triggers.Num(); i++)
+	int i;
+	for (i = 0; i < Triggers.Num(); i++)
 	{
 		//returns false if any trigger is not active
 		if (!Triggers[i]->DidActivate)
 			return false;
 	}
-
+	TrigLeft = i;
 	return true;
 }
 

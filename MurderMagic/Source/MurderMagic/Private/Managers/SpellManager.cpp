@@ -87,13 +87,13 @@ void ASpellManager::NextSpellR()
 	hasRightUpdated = true;
 }
 
-void ASpellManager::CastSpellL(FVector start, float angle)
+void ASpellManager::CastSpellL(FVector start, FVector facingDirection, float angle)
 {
-	equippedSpellL->CastSpell(start, angle);
+	equippedSpellL->CastSpell(start, facingDirection, angle);
 }
 
-void ASpellManager::CastSpellR(FVector start, float angle)
+void ASpellManager::CastSpellR(FVector start, FVector facingDirection, float angle)
 {
-	equippedSpellR->CastSpell(start, angle);
+	equippedSpellR->CastSpell(start, facingDirection, angle);
 }
 

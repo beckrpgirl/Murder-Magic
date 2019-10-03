@@ -4,6 +4,7 @@
 #include "WindSurge.h"
 
 AWindSurge::AWindSurge()
+	: Super()
 {
 	UnlockSpell();
 }

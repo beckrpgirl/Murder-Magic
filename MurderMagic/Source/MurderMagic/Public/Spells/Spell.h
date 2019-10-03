@@ -24,10 +24,12 @@ private:
 
 public:
 
+
 	float spellCD;
 	float sinceCast;
 	float range;
 	float baseDMG;
+	float APBonus;
 
 	FTimerHandle Projectile_Handler;
 
@@ -36,9 +38,6 @@ public:
 
 	bool isUnlocked;
 	void UnlockSpell();
-
-	ANPC* Enemy;
-	AMurderMagicCharacter* Character;
 
 	FVector destination;
 
@@ -58,11 +57,14 @@ public:
 
 	void ProjectileMovement();
 
-	void CastSpell(FVector start, float angle);
+	void CastSpell(FVector start, FVector facingDirection, float angle);
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 
 	//virtual void CreateEffect() PURE_VIRTUAL(ASpell::CreateEffect);
+
+	void AddAPBonus();
+	void SubtractAPBonus();
 
 };

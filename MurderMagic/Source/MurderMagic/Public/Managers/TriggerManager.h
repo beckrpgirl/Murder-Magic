@@ -38,4 +38,7 @@ public:
 	//Not used-can be used for IsManagerActive
 	bool IsActive;
 
+	int TrigLeft;
+	int TrigTotal;
+
 };

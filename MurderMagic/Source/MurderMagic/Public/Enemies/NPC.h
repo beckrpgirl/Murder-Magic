@@ -6,6 +6,7 @@
 #include "Collectible_EXP.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Components/WidgetComponent.h"
 #include "Components/SphereComponent.h"
 #include "NPC.generated.h"
 
@@ -34,13 +35,15 @@ private:
 	UClass* EXPPickup;
 
 
-
 protected:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:	
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = "Enemy Stats")
+	UWidgetComponent *hpBar;
 
 	// Sets default values for this character's properties
 	ANPC(const FObjectInitializer& OI);
