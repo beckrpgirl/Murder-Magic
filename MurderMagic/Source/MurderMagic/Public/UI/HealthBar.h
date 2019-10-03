@@ -22,6 +22,6 @@ private:
 public:
 
 	UFUNCTION(BlueprintPure, Category = "Health")
-	virtual float UpdateHealthPercent() PURE_VIRTUAL(UHealthBar::UpdateHealthPercent, return 0.0;);
+	virtual float UpdateHealthPercent() PURE_VIRTUAL(UHealthBar::UpdateHealthPercent, return 1;);
 	
 };
