@@ -16,10 +16,9 @@ class MURDERMAGIC_API UUI_TriggerCount : public UUserWidget
 	GENERATED_BODY()
 
 		virtual bool Initialize() override;
-	ATriggerManager* TM;
 	
 	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<ATriggerManager> TMBP;
+	TArray<AActor*> TMArray;
 	
 
 	UFUNCTION(BlueprintPure, Category = "triggers")
