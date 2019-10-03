@@ -13,5 +13,17 @@ UCLASS()
 class MURDERMAGIC_API UUI_InstructPanel : public UUserWidget
 {
 	GENERATED_BODY()
+
+public:
+	virtual bool Initialize() override;
+
+	UPROPERTY(meta = (BindWidget))
+		class UButton* InstructExitButton;
+
+	UFUNCTION()
+		void OnClickInstructExitEvent();
+
+	bool ClickTrue = false;
+
 	
 };

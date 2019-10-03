@@ -96,7 +96,9 @@ public:
 private:
 
 	void APAdditionCheck(FName BName);
+	void APUnlock(FName BName);
 
 	float SPower;
+	bool Unlock;
 
 };

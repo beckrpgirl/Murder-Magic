@@ -3,6 +3,7 @@
 
 #include "UI_TriggerCount.h"
 #include "TriggerManager.h"
+#include "Kismet/GameplayStatics.h"
 
 bool UUI_TriggerCount::Initialize()
 {
@@ -16,6 +17,9 @@ bool UUI_TriggerCount::Initialize()
 
 FString UUI_TriggerCount::TriggerInfo()
 {
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATriggerManager::StaticClass(), TMArray);
+	ATriggerManager* TM = Cast<ATriggerManager>(TMArray[0]);
+
 	FString TrigMess = "Trigger x of x";
 	if (TM)
 	{
