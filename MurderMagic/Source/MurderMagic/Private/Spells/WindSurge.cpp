@@ -6,6 +6,11 @@
 AWindSurge::AWindSurge()
 	: Super()
 {
+	spellCD = 3;
+	range = 150;
+	baseDMG = 10;
+	APBonus = 0;
+
 	SName = "WindSurge";
 	UnlockSpell();
 }
