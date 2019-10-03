@@ -17,7 +17,6 @@ ANPCManager::ANPCManager()
 void ANPCManager::BeginPlay()
 {
 	Super::BeginPlay();
-	ANPC* NPC = Cast<ANPC>(this);
 	UWorld* world = GetWorld();
 }
 

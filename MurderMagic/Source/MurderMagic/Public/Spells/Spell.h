@@ -30,6 +30,7 @@ public:
 	float range;
 	float baseDMG;
 	float APBonus;
+	FName SName;
 
 	FTimerHandle Projectile_Handler;
 

@@ -108,7 +108,7 @@ bool AMurderMagicCharacter::AddHealth(float Points)
 void AMurderMagicCharacter::RegenMana()
 {
 
-	if (Mana != MaxMana) {
+	if (Mana < MaxMana) {
 
 		Mana += ManaRegen;
 

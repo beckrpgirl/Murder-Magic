@@ -9,6 +9,7 @@
 #include "LightningStrikes.h"
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "SpellManager.h"
 #include "UI_SpellMenu.generated.h"
 
 /**
@@ -21,12 +22,6 @@ class MURDERMAGIC_API UUI_SpellMenu : public UUserWidget
 {
 private:
 	GENERATED_BODY()
-
-	ASpell* MagiBoltSpell;
-	ASpell* WindSurgeSpell;
-	ASpell* MageBlastSpell;
-	ASpell* BurningHandsSpell;
-	ASpell* LightningStrikesSpell;
 
 	int SpellRank;
 
@@ -98,24 +93,9 @@ public:
 	UFUNCTION()
 		void OnClickEventlockThree();
 
-	//Spell details
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<ASpell> MagiBoltBP;
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<ASpell> WindSurgeBP;
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<ASpell> MageBlastBP;
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<ASpell> BurningHandsBP;
-	UPROPERTY(EditDefaultsOnly)
-		TSubclassOf<ASpell> LightningStrikesBP;
-
-
 private:
 
-	//void APRemovalCheck();
-	void APAdditionCheck();
-	float APPowerCount();
+	void APAdditionCheck(FName BName);
 
 	float SPower;
 

@@ -39,10 +39,10 @@ void ALevelManager::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (firstTick)
 	{
-		TArray<AMurderMagicCharacter*> player;
-		FindAllActors(GetWorld(), player);
-		player[0]->CurrentFloor = CurrentLvlMapInfo->CurrentFloorNum;
-		this->player = player[0];
+		TArray<AMurderMagicCharacter*> players;
+		FindAllActors(GetWorld(), players);
+		players[0]->CurrentFloor = CurrentLvlMapInfo->CurrentFloorNum;
+		player = players[0];
 		TArray<ANPCManager *> npcManager;
 		FindAllActors(GetWorld(), npcManager);
 		npcManager[0]->SetLevel(CurrentLvlMapInfo->CurrentFloorNum);

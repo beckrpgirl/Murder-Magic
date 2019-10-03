@@ -13,6 +13,7 @@
 #include "MageBlast.h"
 #include "BurningHands.h"
 #include "LightningStrikes.h"
+#include "MMPlayerController.h"
 
 bool UUI_SpellMenu::Initialize()
 {
@@ -57,14 +58,6 @@ bool UUI_SpellMenu::Initialize()
 		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "could not find play button");
 	}
 
-
-	MagiBoltSpell = Cast<ASpell>(GetWorld()->SpawnActor(MagiBoltBP));
-	WindSurgeSpell = Cast<ASpell>(GetWorld()->SpawnActor(WindSurgeBP));
-	MageBlastSpell = Cast<ASpell>(GetWorld()->SpawnActor(MageBlastBP));
-	BurningHandsSpell = Cast<ASpell>(GetWorld()->SpawnActor(BurningHandsBP));
-	LightningStrikesSpell = Cast<ASpell>(GetWorld()->SpawnActor(LightningStrikesBP));
-
-
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Running a widget in code");
 
@@ -96,106 +89,99 @@ FString UUI_SpellMenu::APNumber()
 FString UUI_SpellMenu::APPowerOne()
 {
 	FString SpellPower = "/";
-	if (MagiBoltSpell)
-	{
-		SpellPower = " " + FString::SanitizeFloat(MagiBoltSpell->APBonus);
-	}
+	//if (MagiBoltSpell)
+	//{
+	//	SpellPower = " " + FString::SanitizeFloat(MagiBoltSpell->APBonus);
+	//}
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerTwo()
 {
 	FString SpellPower = "/";
-	if (WindSurgeSpell)
-	{
-		SpellPower = " " + FString::SanitizeFloat(WindSurgeSpell->APBonus);
-	}
+	//if (WindSurgeSpell)
+	//{
+	//	SpellPower = " " + FString::SanitizeFloat(WindSurgeSpell->APBonus);
+	//}
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerThree()
 {
 	FString SpellPower = "/";
-	if (MageBlastSpell)
-	{
-		SpellPower = " " + FString::SanitizeFloat(MageBlastSpell->APBonus);
-	}
+	//if (MageBlastSpell)
+	//{
+	//	SpellPower = " " + FString::SanitizeFloat(MageBlastSpell->APBonus);
+	//}
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerFour()
 {
 	FString SpellPower = "/";
-	if (BurningHandsSpell)
-	{
-		SpellPower = " " + FString::SanitizeFloat(BurningHandsSpell->APBonus);
-	}
+	//if (BurningHandsSpell)
+	//{
+	//	SpellPower = " " + FString::SanitizeFloat(BurningHandsSpell->APBonus);
+	//}
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerFive()
 {
 	FString SpellPower = "/";
-	if (LightningStrikesSpell)
-	{
-		SpellPower = " " + FString::SanitizeFloat(LightningStrikesSpell->APBonus);
-	}
+	//if (LightningStrikesSpell)
+	//{
+	//	SpellPower = " " + FString::SanitizeFloat(LightningStrikesSpell->APBonus);
+	//}
 	return SpellPower;
 }
 
 //Spell Control Buttons
 void UUI_SpellMenu::OnClickEventOnePlus()
 {
-	SpellRank = 1;
-	APAdditionCheck();
+
+	APAdditionCheck("MagiBolt");
 
 }
 
 void UUI_SpellMenu::OnClickEventTwoPlus()
 {
-	SpellRank = 2;
-	APAdditionCheck();
+	APAdditionCheck("WindSurge");
 }
 
 void UUI_SpellMenu::OnClickEventThreePlus()
 {
-	SpellRank = 3;
-	APAdditionCheck();
+	APAdditionCheck("MageBlast");
 }
 
 void UUI_SpellMenu::OnClickEventFourPlus()
 {
-	SpellRank = 4;
-	APAdditionCheck();
+	APAdditionCheck("LightingStrike");
 }
 
 
 void UUI_SpellMenu::OnClickEventFivePlus()
 {
-	SpellRank = 5;
-	APAdditionCheck();
+	APAdditionCheck("BurningHands");
 }
 
 
 void UUI_SpellMenu::OnClickEventlockOne()
 {
-	SpellRank = 6;
-	APAdditionCheck();
+	APAdditionCheck("Nothing");
 }
 
 void UUI_SpellMenu::OnClickEventlockTwo()
 {
-	SpellRank = 7;
-	APAdditionCheck();
+	APAdditionCheck("Nothing");
 }
 
 void UUI_SpellMenu::OnClickEventlockThree()
 {
-	SpellRank = 8;
-	APAdditionCheck();
+	APAdditionCheck("Nothing");
 }
 
-void UUI_SpellMenu::APAdditionCheck()
+void UUI_SpellMenu::APAdditionCheck(FName BName)
 {
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 	if (MMC) {
@@ -203,49 +189,28 @@ void UUI_SpellMenu::APAdditionCheck()
 		if (CurAP >= 1)
 		{
 			MMC->SubtractAP();
-			if (SpellRank == 1) { MagiBoltSpell->AddAPBonus(); }
-			if (SpellRank == 2) { WindSurgeSpell->AddAPBonus(); }
-			if (SpellRank == 3) { MageBlastSpell->AddAPBonus(); }
-			if (SpellRank == 4) { BurningHandsSpell->AddAPBonus(); }
-			if (SpellRank == 5) { LightningStrikesSpell->AddAPBonus(); }
-			if (SpellRank == 6) { LockOne->SetVisibility(ESlateVisibility::Hidden); MageBlastSpell->UnlockSpell(); }
-			if (SpellRank == 7) { LockTwo->SetVisibility(ESlateVisibility::Hidden); BurningHandsSpell->UnlockSpell(); }
-			if (SpellRank == 8) { LockThree->SetVisibility(ESlateVisibility::Hidden); LightningStrikesSpell->UnlockSpell(); }
+			if (GetOwningPlayer())
+			{
+				AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+				ASpell* spell = PC->GetSpellManager()->GetLeftSpell();
+
+				while (spell->SName != BName)
+				{
+					spell = spell->next;
+				}
+
+				if(spell)
+					spell->AddAPBonus();
+				else
+				{
+					if (GEngine)
+						GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "No Spell Found");
+				}
+			}
 		}
 
 	}
 }
 
-//Removal of APBonus from Spell
-//void UUI_SpellMenu::APRemovalCheck()
-//{
-//
-//	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
-//	if (MMC) {
-//		int TotalAP = MMC->GetTotalAP();
-//		int CurAP = MMC->currentAP;
-//		int SpellAP = APPowerCount(); //something to add up all the AP spent on spells
-//		int DiffAP = TotalAP - SpellAP;
-//
-//		if (CurAP < TotalAP && TotalAP == (CurAP + SpellAP))
-//		{
-//			MMC->AddAP();
-//			if (SpellRank == 1) { MagiBoltSpell->SubtractAPBonus(); }
-//			if (SpellRank == 2) { WindSurgeSpell->SubtractAPBonus(); }
-//			if (SpellRank == 3) { MageBlastSpell->SubtractAPBonus(); }
-//			if (SpellRank == 4) { BurningHandsSpell->SubtractAPBonus(); }
-//			if (SpellRank == 5) { LightningStrikesSpell->SubtractAPBonus(); }
-//		}
-//
-//	}
-//
-//}
-//Adding APBonus to Spell
 
-
-float UUI_SpellMenu::APPowerCount()
-{
-	SPower = MagiBoltSpell->APBonus + WindSurgeSpell->APBonus + MageBlastSpell->APBonus + BurningHandsSpell->APBonus + LightningStrikesSpell->APBonus;
-	return SPower;
-}
 

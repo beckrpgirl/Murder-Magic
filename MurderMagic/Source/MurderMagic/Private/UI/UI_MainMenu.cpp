@@ -4,6 +4,7 @@
 #include "UI_MainMenu.h"
 #include "Components/Button.h"
 #include "MMPlayerController.h"
+#include "UI_InstructPanel.h"
 #include "GameFramework/Controller.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -33,7 +34,7 @@ bool UUI_MainMenu::Initialize()
 
 		if (InstructionsButton)
 		{
-			InstructionsButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickQuitEvent);
+			InstructionsButton->OnClicked.AddDynamic(this, &UUI_MainMenu::OnClickInstructionEvent);
 		}
 
 	if (GEngine)
@@ -58,4 +59,17 @@ void UUI_MainMenu::OnClickQuitEvent()
 
 void UUI_MainMenu::OnClickInstructionEvent()
 {
+
+	if (ClickTrue == false)
+	{
+		UIInstructPanel1->SetVisibility(ESlateVisibility::Visible);
+		ClickTrue = true;
+		return;
+	}
+	else
+	{
+		UIInstructPanel1->SetVisibility(ESlateVisibility::Hidden);
+		ClickTrue = false;
+		return;
+	}
 }

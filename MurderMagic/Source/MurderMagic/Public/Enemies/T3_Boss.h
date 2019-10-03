@@ -23,6 +23,6 @@ class MURDERMAGIC_API AT3_Boss : public ANPC
 
 public:
 
-	virtual void TakeDamage(int DamageAmount) override;
+	virtual void ReduceHealth(int DamageAmount) override;
 
 };
