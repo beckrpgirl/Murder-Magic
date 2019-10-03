@@ -5,6 +5,6 @@
 
 ALightningStrikes::ALightningStrikes()
 {
-
+	UnlockSpell();
 }
 

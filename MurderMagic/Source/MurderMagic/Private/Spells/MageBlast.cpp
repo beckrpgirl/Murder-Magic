@@ -5,5 +5,5 @@
 
 AMageBlast::AMageBlast()
 {
-
+	UnlockSpell();
 }

@@ -5,5 +5,5 @@
 
 ABurningHands::ABurningHands()
 {
-
+	UnlockSpell();
 }

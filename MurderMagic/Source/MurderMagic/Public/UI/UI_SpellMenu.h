@@ -54,61 +54,49 @@ public:
 		class UButton* Button_Spell1Plus;
 
 	UPROPERTY(meta = (BindWidget))
-		class UButton* Button_Spell1Minus;
-
-	UPROPERTY(meta = (BindWidget))
 		class UButton* Button_Spell2Plus;
-
-	UPROPERTY(meta = (BindWidget))
-		class UButton* Button_Spell2Minus;
 
 	UPROPERTY(meta = (BindWidget))
 		class UButton* Button_Spell3Plus;
 
 	UPROPERTY(meta = (BindWidget))
-		class UButton* Button_Spell3Minus;
-
-	UPROPERTY(meta = (BindWidget))
 		class UButton* Button_Spell4Plus;
-
-	UPROPERTY(meta = (BindWidget))
-		class UButton* Button_Spell4Minus;
 
 	UPROPERTY(meta = (BindWidget))
 		class UButton* Button_Spell5Plus;
 
 	UPROPERTY(meta = (BindWidget))
-		class UButton* Button_Spell5Minus;
+		class UButton* LockOne;
+
+	UPROPERTY(meta = (BindWidget))
+		class UButton* LockTwo;
+
+	UPROPERTY(meta = (BindWidget))
+		class UButton* LockThree;
 
 	UFUNCTION()
 		void OnClickEventOnePlus();
 
 	UFUNCTION()
-		void OnClickEventOneMinus();
-
-	UFUNCTION()
 		void OnClickEventTwoPlus();
-
-	UFUNCTION()
-		void OnClickEventTwoMinus();
 
 	UFUNCTION()
 		void OnClickEventThreePlus();
 
 	UFUNCTION()
-		void OnClickEventThreeMinus();
-
-	UFUNCTION()
 		void OnClickEventFourPlus();
-
-	UFUNCTION()
-		void OnClickEventFourMinus();
 
 	UFUNCTION()
 		void OnClickEventFivePlus();
 
 	UFUNCTION()
-		void OnClickEventFiveMinus();
+		void OnClickEventlockOne();
+
+	UFUNCTION()
+		void OnClickEventlockTwo();
+
+	UFUNCTION()
+		void OnClickEventlockThree();
 
 	//Spell details
 	UPROPERTY(EditDefaultsOnly)
@@ -125,7 +113,7 @@ public:
 
 private:
 
-	void APRemovalCheck();
+	//void APRemovalCheck();
 	void APAdditionCheck();
 	float APPowerCount();
 

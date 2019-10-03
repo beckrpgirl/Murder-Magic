@@ -24,43 +24,34 @@ bool UUI_SpellMenu::Initialize()
 	{
 		Button_Spell1Plus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventOnePlus);
 	}
-	if (Button_Spell1Minus)
-	{
-		Button_Spell1Minus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventOneMinus);
-	}
 	if (Button_Spell2Plus)
 	{
 		Button_Spell2Plus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventTwoPlus);
-	}
-	if (Button_Spell2Minus)
-	{
-		Button_Spell2Minus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventTwoMinus);
 	}
 	if (Button_Spell3Plus)
 	{
 		Button_Spell3Plus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventThreePlus);
 	}
-	if (Button_Spell3Minus)
-	{
-		Button_Spell3Minus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventThreeMinus);
-	}
 	if (Button_Spell4Plus)
 	{
 		Button_Spell4Plus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventFourPlus);
-	}
-	if (Button_Spell4Minus)
-	{
-		Button_Spell4Minus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventFourMinus);
 	}
 	if (Button_Spell5Plus)
 	{
 		Button_Spell5Plus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventFivePlus);
 	}
-	if (Button_Spell5Minus)
+	if (LockOne)
 	{
-		Button_Spell5Minus->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventFiveMinus);
+		LockOne->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockOne);
 	}
-
+	if (LockTwo)
+	{
+		LockTwo->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockTwo);
+	}
+	if (LockThree)
+	{
+		LockThree->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockThree);
+	}
 	else
 	{
 		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "could not find play button");
@@ -160,22 +151,10 @@ void UUI_SpellMenu::OnClickEventOnePlus()
 
 }
 
-void UUI_SpellMenu::OnClickEventOneMinus()
-{
-	SpellRank = 1;
-	APRemovalCheck();
-}
-
 void UUI_SpellMenu::OnClickEventTwoPlus()
 {
 	SpellRank = 2;
 	APAdditionCheck();
-}
-
-void UUI_SpellMenu::OnClickEventTwoMinus()
-{
-	SpellRank = 2;
-	APRemovalCheck();
 }
 
 void UUI_SpellMenu::OnClickEventThreePlus()
@@ -184,23 +163,12 @@ void UUI_SpellMenu::OnClickEventThreePlus()
 	APAdditionCheck();
 }
 
-void UUI_SpellMenu::OnClickEventThreeMinus()
-{
-	SpellRank = 3;
-	APRemovalCheck();
-}
-
 void UUI_SpellMenu::OnClickEventFourPlus()
 {
 	SpellRank = 4;
 	APAdditionCheck();
 }
 
-void UUI_SpellMenu::OnClickEventFourMinus()
-{
-	SpellRank = 4;
-	APRemovalCheck();
-}
 
 void UUI_SpellMenu::OnClickEventFivePlus()
 {
@@ -208,46 +176,31 @@ void UUI_SpellMenu::OnClickEventFivePlus()
 	APAdditionCheck();
 }
 
-void UUI_SpellMenu::OnClickEventFiveMinus()
+
+void UUI_SpellMenu::OnClickEventlockOne()
 {
-	SpellRank = 5;
-	APRemovalCheck();
+	SpellRank = 6;
+	APAdditionCheck();
 }
 
-//Removal of APBonus from Spell
-void UUI_SpellMenu::APRemovalCheck()
+void UUI_SpellMenu::OnClickEventlockTwo()
 {
-
-	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
-	if (MMC) {
-		int TotalAP = MMC->GetTotalAP();
-		int CurAP = MMC->currentAP;
-		int SpellAP = APPowerCount(); //something to add up all the AP spent on spells
-		int DiffAP = TotalAP - SpellAP;
-
-		if (CurAP < TotalAP && TotalAP == (CurAP + SpellAP))
-		{
-			MMC->AddAP();
-			if (SpellRank == 1) { MagiBoltSpell->SubtractAPBonus(); }
-			if (SpellRank == 2) { WindSurgeSpell->SubtractAPBonus(); }
-			if (SpellRank == 3) { MageBlastSpell->SubtractAPBonus(); }
-			if (SpellRank == 4) { BurningHandsSpell->SubtractAPBonus(); }
-			if (SpellRank == 5) { LightningStrikesSpell->SubtractAPBonus(); }
-		}
-
-	}
-
+	SpellRank = 7;
+	APAdditionCheck();
 }
-//Adding APBonus to Spell
+
+void UUI_SpellMenu::OnClickEventlockThree()
+{
+	SpellRank = 8;
+	APAdditionCheck();
+}
+
 void UUI_SpellMenu::APAdditionCheck()
 {
 	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 	if (MMC) {
 		int CurAP = MMC->currentAP;
-		int TotalAP = MMC->GetTotalAP();
-		int SpellAP = APPowerCount();
-
-		if (CurAP >= 1 && TotalAP == (CurAP + SpellAP))
+		if (CurAP >= 1)
 		{
 			MMC->SubtractAP();
 			if (SpellRank == 1) { MagiBoltSpell->AddAPBonus(); }
@@ -255,10 +208,40 @@ void UUI_SpellMenu::APAdditionCheck()
 			if (SpellRank == 3) { MageBlastSpell->AddAPBonus(); }
 			if (SpellRank == 4) { BurningHandsSpell->AddAPBonus(); }
 			if (SpellRank == 5) { LightningStrikesSpell->AddAPBonus(); }
+			if (SpellRank == 6) { LockOne->SetVisibility(ESlateVisibility::Hidden); MageBlastSpell->isUnlocked = true; }
+			if (SpellRank == 7) { LockTwo->SetVisibility(ESlateVisibility::Hidden); BurningHandsSpell->isUnlocked = true; }
+			if (SpellRank == 8) { LockThree->SetVisibility(ESlateVisibility::Hidden); LightningStrikesSpell->isUnlocked = true; }
 		}
 
 	}
 }
+
+//Removal of APBonus from Spell
+//void UUI_SpellMenu::APRemovalCheck()
+//{
+//
+//	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
+//	if (MMC) {
+//		int TotalAP = MMC->GetTotalAP();
+//		int CurAP = MMC->currentAP;
+//		int SpellAP = APPowerCount(); //something to add up all the AP spent on spells
+//		int DiffAP = TotalAP - SpellAP;
+//
+//		if (CurAP < TotalAP && TotalAP == (CurAP + SpellAP))
+//		{
+//			MMC->AddAP();
+//			if (SpellRank == 1) { MagiBoltSpell->SubtractAPBonus(); }
+//			if (SpellRank == 2) { WindSurgeSpell->SubtractAPBonus(); }
+//			if (SpellRank == 3) { MageBlastSpell->SubtractAPBonus(); }
+//			if (SpellRank == 4) { BurningHandsSpell->SubtractAPBonus(); }
+//			if (SpellRank == 5) { LightningStrikesSpell->SubtractAPBonus(); }
+//		}
+//
+//	}
+//
+//}
+//Adding APBonus to Spell
+
 
 float UUI_SpellMenu::APPowerCount()
 {
