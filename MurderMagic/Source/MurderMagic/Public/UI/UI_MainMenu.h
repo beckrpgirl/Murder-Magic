@@ -26,6 +26,9 @@ public:
 	UPROPERTY(meta = (BindWidget))
 		class UButton* InstructionsButton;
 
+	UPROPERTY(meta = (BindWidget))
+		class UUI_InstructPanel* UIInstructPanel;
+
 	UFUNCTION()
 		void OnClickEvent();
 
@@ -34,5 +37,7 @@ public:
 
 	UFUNCTION()
 		void OnClickInstructionEvent();
+
+	bool ClickTrue = false;
 
 };

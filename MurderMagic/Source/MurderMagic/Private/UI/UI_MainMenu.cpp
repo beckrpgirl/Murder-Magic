@@ -4,6 +4,7 @@
 #include "UI_MainMenu.h"
 #include "Components/Button.h"
 #include "MMPlayerController.h"
+#include "UI_InstructPanel.h"
 #include "GameFramework/Controller.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -58,4 +59,17 @@ void UUI_MainMenu::OnClickQuitEvent()
 
 void UUI_MainMenu::OnClickInstructionEvent()
 {
+
+	if (ClickTrue == false)
+	{
+		UIInstructPanel->SetVisibility(ESlateVisibility::Visible);
+		ClickTrue = true;
+		return;
+	}
+	else
+	{
+		UIInstructPanel ->SetVisibility(ESlateVisibility::Hidden);
+		ClickTrue = false;
+		return;
+	}
 }
