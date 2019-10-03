@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "UI_InstructPanel.h"
 #include "UI_MainMenu.generated.h"
 
 /**
@@ -28,7 +27,7 @@ public:
 		class UButton* InstructionsButton;
 
 	UPROPERTY(meta = (BindWidget))
-		class UUserWidget* UIInstructPanel1;
+		class UUI_InstructPanel* UIInstructPanel;
 
 	UFUNCTION()
 		void OnClickEvent();
