@@ -52,7 +52,7 @@ float ANPC::GetHealthPercent()
 	return Health / MaxHealth;
 }
 
-void ANPC::TakeDamage(int DamageAmount)
+void ANPC::ReduceHealth(int DamageAmount)
 {
 	Health -= DamageAmount;
 

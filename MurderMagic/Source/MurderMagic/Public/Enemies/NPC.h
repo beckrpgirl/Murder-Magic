@@ -54,7 +54,9 @@ public:
 	void SetHealth(float hp);
 
 	float GetHealthPercent();
-	virtual void TakeDamage(int DamageAmount);
+
+	UFUNCTION(BlueprintCallable)
+	virtual void ReduceHealth(int DamageAmount);
 	void SpawnEXP(int SpawnAmount);
 
 	float GetDamage();

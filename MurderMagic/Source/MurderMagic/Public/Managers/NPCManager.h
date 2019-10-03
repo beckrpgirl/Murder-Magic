@@ -34,8 +34,6 @@ public:
 	UPROPERTY(EditAnywhere, Category = Reference, meta = (AllowPrivateAccess = "true"))
 		TSubclassOf<ANPC> BossRef;
 
-	ANPC* NPC;
-
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	void SetLevel(int level);

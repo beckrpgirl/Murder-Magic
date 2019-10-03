@@ -102,7 +102,7 @@ void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor
 
 	if (Enemy) {
 		float DMG = baseDMG + APBonus;
-		Enemy->TakeDamage(DMG);
+		Enemy->ReduceHealth(DMG);
 
 	}
 

@@ -6,9 +6,9 @@
 
 
 
-void AT3_Boss::TakeDamage(int DamageAmount)
+void AT3_Boss::ReduceHealth(int DamageAmount)
 {
-	Super::TakeDamage(DamageAmount);
+	Super::ReduceHealth(DamageAmount);
 
 	if (GetHealthPercent() <= 0) 
 	{
