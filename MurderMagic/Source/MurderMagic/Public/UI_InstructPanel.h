@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-#include "UI_MainMenu.h"
 #include "UI_InstructPanel.generated.h"
 
 /**
