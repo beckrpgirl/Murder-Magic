@@ -11,5 +11,6 @@ AWindSurge::AWindSurge()
 	baseDMG = 10;
 	APBonus = 0;
 
+	SName = "WindSurge";
 	UnlockSpell();
 }
