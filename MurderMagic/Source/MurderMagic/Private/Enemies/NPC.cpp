@@ -21,6 +21,7 @@ ANPC::ANPC(const FObjectInitializer& OI)
 	CollisionSphere->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	hpBar = OI.CreateDefaultSubobject<UWidgetComponent>(this, TEXT("HP Bar"));
+	hpBar->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned
