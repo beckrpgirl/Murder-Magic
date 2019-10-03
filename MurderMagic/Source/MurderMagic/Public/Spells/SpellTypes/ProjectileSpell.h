@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Spells/Spell.h"
+#include "Spells/SpellTypes/Spell.h"
 #include "ProjectileSpell.generated.h"
 
 /**
