@@ -4,6 +4,8 @@
 #include "MageBlast.h"
 
 AMageBlast::AMageBlast()
+	: Super()
 {
-
+	
+	
 }

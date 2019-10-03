@@ -4,6 +4,8 @@
 #include "BurningHands.h"
 
 ABurningHands::ABurningHands()
+	: Super()
 {
-
+	
+	
 }
