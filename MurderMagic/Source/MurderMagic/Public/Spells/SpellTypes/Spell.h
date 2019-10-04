@@ -22,14 +22,16 @@ private:
 
 	GENERATED_BODY()
 
-public:
-
+protected:
 
 	float spellCD;
 	float sinceCast;
 	float range;
 	float baseDMG;
 	float APBonus;
+
+public:
+
 	FName SName;
 
 	ASpell();
