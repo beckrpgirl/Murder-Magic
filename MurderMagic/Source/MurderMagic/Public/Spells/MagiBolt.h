@@ -15,7 +15,9 @@ class MURDERMAGIC_API AMagiBolt : public AProjectileSpell
 private:
 
 	GENERATED_BODY()
-	
+
+	int maxPool;
+
 public:
 
 	AMagiBolt();

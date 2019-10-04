@@ -31,8 +31,6 @@ protected:
 
 public:	
 
-
-
 	// Sets default values for this component's properties
 	USpellEffect();
 
