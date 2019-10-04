@@ -3,3 +3,7 @@
 
 #include "ConeSpell.h"
 
+AConeSpell::AConeSpell()
+{
+	
+}

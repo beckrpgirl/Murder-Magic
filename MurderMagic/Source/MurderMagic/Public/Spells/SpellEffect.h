@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 #include "SpellEffect.generated.h"
 
@@ -24,6 +25,10 @@ protected:
 
 	UParticleSystemComponent *PSC;
 
+	UStaticMeshComponent *collisionShape;
+
+	bool colliding;
+
 public:	
 
 
@@ -33,6 +38,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	UParticleSystemComponent *GetPSC();
+
+	UFUNCTION(BlueprintCallable)
+	UStaticMeshComponent *GetCollisionShape();
+
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

@@ -3,3 +3,7 @@
 
 #include "BeamSpell.h"
 
+ABeamSpell::ABeamSpell()
+{
+
+}

@@ -12,6 +12,11 @@
 UCLASS()
 class MURDERMAGIC_API ABeamSpell : public ASpell
 {
+private:
+
 	GENERATED_BODY()
 	
+public:
+
+	ABeamSpell();
 };
