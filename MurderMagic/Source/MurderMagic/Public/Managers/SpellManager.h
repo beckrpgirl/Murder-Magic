@@ -70,6 +70,9 @@ public:
 	void CastSpellL(FVector start, FVector facingDirection, float angle);
 	void CastSpellR(FVector start, FVector facingDirection, float angle);
 
-	
-
+	ASpell* GetMagiBolt();
+	ASpell* GetWindSurge();
+	ASpell* GetMageBlast();
+	ASpell* GetBurningHands();
+	ASpell* GetLightningStrikes();
 };

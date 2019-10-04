@@ -17,12 +17,22 @@ class MURDERMAGIC_API UMMGameInstance : public UGameInstance
 	UMMGameInstance(const FObjectInitializer& ObjectInitializer);
 public:
 
-	//Player values
+	//Player Values
 	float PlayerXP;
 	float PlayerMaxXP;
 	int PlayerLvl;
 	float PlayerAP;
 
-
+	//Spell Values
+	bool MagiBoltUnlocked = true;
+	float MagiBoltAP;
+	bool WindSurgeUnlocked = true;
+	float WindSurgeAP;
+	bool MageBlastUnlocked;
+	float MageBlastAP;
+	bool BurningHandsUnlocked;
+	float BurningHandsAP;
+	bool LightingStrikesUnlocked;
+	float LightingStrikesAP;
 
 };
