@@ -58,13 +58,13 @@ void ASpellManager::BeginPlay()
 		MagiBoltSpell->isUnlocked = GI->MagiBoltUnlocked;
 		MagiBoltSpell->SetAPBonus(GI->MagiBoltAP);
 		WindSurgeSpell->isUnlocked = GI->WindSurgeUnlocked;
-		GI->WindSurgeAP;
+		WindSurgeSpell->SetAPBonus(GI->WindSurgeAP);
 		MageBlastSpell->isUnlocked = GI->MageBlastUnlocked;
-		GI->MageBlastAP;
+		MageBlastSpell->SetAPBonus(GI->MageBlastAP);
 		BurningHandsSpell->isUnlocked = GI->BurningHandsUnlocked;
-		GI->BurningHandsAP;
+		BurningHandsSpell->SetAPBonus(GI->BurningHandsAP);
 		LightningStrikesSpell->isUnlocked = GI->LightingStrikesUnlocked;
-		GI->LightingStrikesAP;
+		LightningStrikesSpell->SetAPBonus(GI->LightingStrikesAP);
 	}
 }
 
