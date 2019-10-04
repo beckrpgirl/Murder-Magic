@@ -77,3 +77,14 @@ void ASpell::SubtractAPBonus()
 {
 	APBonus = APBonus - 1;
 }
+
+float ASpell::GetAPBonus()
+{
+	return APBonus;
+}
+
+float ASpell::SetAPBonus(float APPass)
+{
+	APBonus = APPass;
+	return APBonus;
+}

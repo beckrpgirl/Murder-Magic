@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "SpellEffect.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
@@ -29,6 +29,8 @@ protected:
 	float range;
 	float baseDMG;
 	float APBonus;
+
+	TArray<USpellEffect> particlePool;
 
 public:
 
@@ -59,5 +61,7 @@ public:
 
 	void AddAPBonus();
 	void SubtractAPBonus();
+	float GetAPBonus();
+	float SetAPBonus(float APPass);
 
 };

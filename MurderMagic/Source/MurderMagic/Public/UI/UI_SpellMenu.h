@@ -100,5 +100,10 @@ private:
 
 	float SPower;
 	bool Unlock;
+	int SpellOne;
+	int SpellTwo;
+	int SpellThree;
+	int SpellFour;
+	int SpellFive;
 
 };
