@@ -12,6 +12,8 @@ USpellEffect::USpellEffect()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleSystem"));
+	PSC->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
+	
 	// ...
 }
 
@@ -34,3 +36,7 @@ void USpellEffect::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 	// ...
 }
 
+UParticleSystemComponent* USpellEffect::GetPSC()
+{
+	return PSC;
+}

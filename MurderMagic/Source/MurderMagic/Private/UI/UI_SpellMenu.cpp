@@ -88,51 +88,31 @@ FString UUI_SpellMenu::APNumber()
 
 FString UUI_SpellMenu::APPowerOne()
 {
-	FString SpellPower = "/";
-	//if (MagiBoltSpell)
-	//{
-	//	SpellPower = " " + FString::SanitizeFloat(MagiBoltSpell->APBonus);
-	//}
+	FString SpellPower = " " + FString::FromInt(SpellOne);
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerTwo()
 {
-	FString SpellPower = "/";
-	//if (WindSurgeSpell)
-	//{
-	//	SpellPower = " " + FString::SanitizeFloat(WindSurgeSpell->APBonus);
-	//}
+	FString SpellPower = " " + FString::FromInt(SpellTwo);
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerThree()
 {
-	FString SpellPower = "/";
-	//if (MageBlastSpell)
-	//{
-	//	SpellPower = " " + FString::SanitizeFloat(MageBlastSpell->APBonus);
-	//}
+	FString SpellPower = " " + FString::FromInt(SpellThree);
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerFour()
 {
-	FString SpellPower = "/";
-	//if (BurningHandsSpell)
-	//{
-	//	SpellPower = " " + FString::SanitizeFloat(BurningHandsSpell->APBonus);
-	//}
+	FString SpellPower = " " + FString::FromInt(SpellFour);
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerFive()
 {
-	FString SpellPower = "/";
-	//if (LightningStrikesSpell)
-	//{
-	//	SpellPower = " " + FString::SanitizeFloat(LightningStrikesSpell->APBonus);
-	//}
+	FString SpellPower = " " + FString::FromInt(SpellFive);
 	return SpellPower;
 }
 
@@ -141,28 +121,53 @@ void UUI_SpellMenu::OnClickEventOnePlus()
 {
 
 	APAdditionCheck("MagiBolt");
+	if (Unlock == true)
+	{
+		SpellOne ++;
+		Unlock = false;
+	}
 
 }
 
 void UUI_SpellMenu::OnClickEventTwoPlus()
 {
 	APAdditionCheck("WindSurge");
+	if (Unlock == true)
+	{
+		SpellTwo++;
+		Unlock = false;
+	}
 }
 
 void UUI_SpellMenu::OnClickEventThreePlus()
 {
 	APAdditionCheck("MageBlast");
+	if (Unlock == true)
+	{
+		SpellThree ++;
+		Unlock = false;
+	}
 }
 
 void UUI_SpellMenu::OnClickEventFourPlus()
 {
 	APAdditionCheck("LightingStrikes");
+	if (Unlock == true)
+	{
+		SpellFour++;
+		Unlock = false;
+	}
 }
 
 
 void UUI_SpellMenu::OnClickEventFivePlus()
 {
 	APAdditionCheck("BurningHands");
+	if (Unlock == true)
+	{
+		SpellFive++;
+		Unlock = false;
+	}
 }
 
 
@@ -219,8 +224,11 @@ void UUI_SpellMenu::APAdditionCheck(FName BName)
 						spell = nullptr;
 				}
 
-				if(spell)
+				if (spell)
+				{
 					spell->AddAPBonus();
+					Unlock = true;
+				}
 				else
 				{
 					if (GEngine)

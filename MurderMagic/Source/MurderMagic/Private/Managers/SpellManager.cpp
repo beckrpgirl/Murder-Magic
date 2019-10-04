@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "SpellManager.h"
+#include "MMGameInstance.h"
 
 // Sets default values
 ASpellManager::ASpellManager()
@@ -49,6 +50,22 @@ void ASpellManager::BeginPlay()
 	equippedSpellR = WindSurgeSpell;
 	hasLeftUpdated = true;
 	hasRightUpdated = true;
+
+	//Getting Spell Values
+	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
+	if (GI)
+	{
+		MagiBoltSpell->isUnlocked = GI->MagiBoltUnlocked;
+		MagiBoltSpell->SetAPBonus(GI->MagiBoltAP);
+		WindSurgeSpell->isUnlocked = GI->WindSurgeUnlocked;
+		WindSurgeSpell->SetAPBonus(GI->WindSurgeAP);
+		MageBlastSpell->isUnlocked = GI->MageBlastUnlocked;
+		MageBlastSpell->SetAPBonus(GI->MageBlastAP);
+		BurningHandsSpell->isUnlocked = GI->BurningHandsUnlocked;
+		BurningHandsSpell->SetAPBonus(GI->BurningHandsAP);
+		LightningStrikesSpell->isUnlocked = GI->LightingStrikesUnlocked;
+		LightningStrikesSpell->SetAPBonus(GI->LightingStrikesAP);
+	}
 }
 
 // Called every frame
@@ -96,4 +113,31 @@ void ASpellManager::CastSpellR(FVector start, FVector facingDirection, float ang
 {
 	equippedSpellR->CastSpell(start, facingDirection, angle);
 }
+
+ASpell* ASpellManager::GetMagiBolt()
+{
+	return MagiBoltSpell;
+}
+
+ASpell* ASpellManager::GetWindSurge()
+{
+	return WindSurgeSpell;
+}
+
+ASpell* ASpellManager::GetMageBlast()
+{
+	return MageBlastSpell;
+}
+
+ASpell* ASpellManager::GetBurningHands()
+{
+	return BurningHandsSpell;
+}
+
+ASpell* ASpellManager::GetLightningStrikes()
+{
+	return LightningStrikesSpell;
+}
+
+
 

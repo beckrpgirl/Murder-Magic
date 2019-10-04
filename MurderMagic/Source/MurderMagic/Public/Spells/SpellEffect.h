@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "Components/SceneComponent.h"
 #include "Runtime/Engine/Classes/Particles/ParticleSystemComponent.h"
 #include "SpellEffect.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class MURDERMAGIC_API USpellEffect : public UActorComponent
+class MURDERMAGIC_API USpellEffect : public USceneComponent
 {
 private:
 
@@ -22,16 +22,17 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
-
-	UPROPERTY(EditDefaultsOnly, Category = "Spell Effect")
 	UParticleSystemComponent *PSC;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Particles", AssetRegistrySearchable, meta = (AssetBundles = "Particles"))
-	TAssetPtr<UParticleSystem> ParticlePtr;
+public:	
+
+
 
 	// Sets default values for this component's properties
 	USpellEffect();
+
+	UFUNCTION(BlueprintCallable)
+	UParticleSystemComponent *GetPSC();
 
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;

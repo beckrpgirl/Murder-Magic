@@ -42,6 +42,23 @@ void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* Ot
 //Spawn wave, spawns the waves
 void ASpawner::SpawnWave()
 {
+	if (SpawnZones.Num() == 0) {
+
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "No Spawn points");
+		}
+		return;
+	}
+	if (UnitSpawnData.Num() == 0) {
+
+		if (GEngine) {
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "No enemies to spawn");
+		}
+		return;
+
+	}
+
+
 	FRotator Rotation = GetActorRotation();
 	//Set spawn info
 	FActorSpawnParameters SpawnInfo;
