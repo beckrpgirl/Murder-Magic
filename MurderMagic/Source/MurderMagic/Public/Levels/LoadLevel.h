@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "SpellManager.h"
 #include "LoadLevel.generated.h"
 
 UCLASS()
@@ -25,6 +26,11 @@ public:
 	UPROPERTY(EditAnywhere, Category = Level)
 		float CurrentFloorNum;
 
+	UPROPERTY(EditDefaultsOnly)
+		TArray<AActor*> SMArray;
+
+	ASpellManager* SM;
+
 
 public:	
 	// Sets default values for this actor's properties
@@ -42,5 +48,6 @@ public:
 		virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 
 	float XP;
+
 
 };

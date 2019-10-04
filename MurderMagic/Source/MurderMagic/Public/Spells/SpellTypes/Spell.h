@@ -61,5 +61,7 @@ public:
 
 	void AddAPBonus();
 	void SubtractAPBonus();
+	float GetAPBonus();
+	float SetAPBonus(float APPass);
 
 };

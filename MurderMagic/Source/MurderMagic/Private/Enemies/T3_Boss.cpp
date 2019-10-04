@@ -13,7 +13,7 @@ void AT3_Boss::ReduceHealth(int DamageAmount)
 	if (GetHealthPercent() <= 0) 
 	{
 
-		SpawnEXP(GetXPValue());
+		SpawnCollectible(GetXPValue());
 		door->Open();
 		Destroy();
 		

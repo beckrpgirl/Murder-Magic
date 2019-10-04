@@ -32,7 +32,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy Stats")
 	int EXPWorth;
 	UPROPERTY(EditDefaultsOnly, Category = "Enemy pickup")
-	UClass* EXPPickup;
+	UClass* CollectiblePickups;
 
 
 protected:
@@ -57,7 +57,7 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual void ReduceHealth(int DamageAmount);
-	void SpawnEXP(int SpawnAmount);
+	void SpawnCollectible(int SpawnAmount);
 
 	float GetDamage();
 	int GetXPValue();

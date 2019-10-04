@@ -5,6 +5,8 @@
 #include "MurderMagicCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "MMGameInstance.h"
+#include "MMPlayerController.h"
+#include "Spell.h"
 
 
 // Sets default values
@@ -32,8 +34,7 @@ ALoadLevel::ALoadLevel(const FObjectInitializer& OI)
 // Called when the game starts or when spawned
 void ALoadLevel::BeginPlay()
 {
-	Super::BeginPlay();
-	
+	Super::BeginPlay();	
 }
 
 // Called every frame
@@ -45,18 +46,40 @@ void ALoadLevel::Tick(float DeltaTime)
 
 void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {
+	//AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+	//ASpell* spell = PC->GetSpellManager()->GetLeftSpell();
 
-	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(OtherActor);
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASpellManager::StaticClass(), SMArray);
+	if (SMArray.Num() != 0) {
+
+		SM = Cast<ASpellManager>(SMArray[0]);
+
+	}
+
+	AMurderMagicCharacter* PCA = Cast<AMurderMagicCharacter>(OtherActor);
 	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
-	if (GI && PC)
+	if (GI && PCA)
 	{
-		GI->PlayerXP = PC->GetExperience();
-		GI->PlayerLvl = PC->CurrentPlayerLevel;
-		GI->PlayerMaxXP = PC->GetMaxExperience();
-		GI->PlayerAP = PC->currentAP;
+		//Player Info
+		GI->PlayerXP = PCA->GetExperience();
+		GI->PlayerLvl = PCA->CurrentPlayerLevel;
+		GI->PlayerMaxXP = PCA->GetMaxExperience();
+		GI->PlayerAP = PCA->currentAP;
+		//Spell Info
+		GI->MagiBoltUnlocked = SM->GetMagiBolt()->isUnlocked;
+		GI->MagiBoltAP = SM->GetMagiBolt()->GetAPBonus();
+		GI->WindSurgeUnlocked = SM->GetWindSurge()->isUnlocked;
+		GI->WindSurgeAP = SM->GetWindSurge()->GetAPBonus();
+		GI->MageBlastUnlocked = SM->GetMageBlast()->isUnlocked;
+		GI->MageBlastAP = SM->GetMageBlast()->GetAPBonus();
+		GI->BurningHandsUnlocked = SM->GetBurningHands()->isUnlocked;
+		GI->BurningHandsAP = SM->GetBurningHands()->GetAPBonus();
+		GI->LightingStrikesUnlocked = SM->GetLightningStrikes() ->isUnlocked;
+		GI->LightingStrikesAP = SM->GetLightningStrikes()->GetAPBonus();
+
 
 		if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "Current Level " + FString::FromInt(PC->GetMaxExperience()));
+			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "Current Level " + FString::FromInt(PCA->GetMaxExperience()));
 
 	UGameplayStatics::OpenLevel(this, NextFloorName, false);
 	}
