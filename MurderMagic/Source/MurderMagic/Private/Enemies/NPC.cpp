@@ -2,7 +2,7 @@
 
 
 #include "NPC.h"
-#include "Collectible_EXP.h"
+#include "CollectibleParent.h"
 #include "Math/Vector.h"
 #include "Components/PrimitiveComponent.h"
 
@@ -58,13 +58,13 @@ void ANPC::ReduceHealth(int DamageAmount)
 
 	if (Health <= 0) {
 
-		SpawnEXP(EXPWorth);
+		SpawnCollectible(EXPWorth);
 		Destroy();
 
 	}
 }
 
-void ANPC::SpawnEXP(int SpawnAmount)
+void ANPC::SpawnCollectible(int SpawnAmount)
 {
 	FVector Location;
 	Location = GetActorLocation();
@@ -72,16 +72,16 @@ void ANPC::SpawnEXP(int SpawnAmount)
 	FActorSpawnParameters SpawnInfo;
 	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-	if (EXPPickup) {
+	if (CollectiblePickups) {
 
 		for (int i = 0; i <= SpawnAmount; i++) {
 
-			Location.X += (FMath::RandRange(0, 75));
-			Location.Y += (FMath::RandRange(0, 75));
+			Location.X += (FMath::RandRange(-100, 100));
+			Location.Y += (FMath::RandRange(-100, 100));
 
 
-			ACollectible_EXP* XPCollectible = GetWorld()->SpawnActor<ACollectible_EXP>(EXPPickup, SpawnInfo);
-			XPCollectible->SetActorLocation(Location);
+			ACollectibleParent* Collectibles = GetWorld()->SpawnActor<ACollectibleParent>(CollectiblePickups, SpawnInfo);
+			Collectibles->SetActorLocation(Location);
 
 		}
 
