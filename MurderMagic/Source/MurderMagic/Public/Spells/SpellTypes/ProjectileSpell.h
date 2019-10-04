@@ -12,6 +12,10 @@
 UCLASS()
 class MURDERMAGIC_API AProjectileSpell : public ASpell
 {
+private:
+
 	GENERATED_BODY()
 	
+public:
+
 };

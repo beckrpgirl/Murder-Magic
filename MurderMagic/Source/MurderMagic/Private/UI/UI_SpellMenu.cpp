@@ -44,19 +44,41 @@ bool UUI_SpellMenu::Initialize()
 	if (LockOne)
 	{
 		LockOne->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockOne);
+		
+		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+		ASpell* spell = PC->GetSpellManager()->GetMageBlast();
+		if (spell->isUnlocked == true)
+		{
+			LockOne->SetVisibility(ESlateVisibility::Hidden);
+		}
 	}
 	if (LockTwo)
 	{
 		LockTwo->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockTwo);
+
+		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+		ASpell* spell = PC->GetSpellManager()->GetLightningStrikes();
+		if (spell->isUnlocked == true)
+		{
+			LockTwo->SetVisibility(ESlateVisibility::Hidden);
+		}
 	}
 	if (LockThree)
 	{
 		LockThree->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockThree);
+
+		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+		ASpell* spell = PC->GetSpellManager()->GetBurningHands();
+		if (spell->isUnlocked == true)
+		{
+			LockThree->SetVisibility(ESlateVisibility::Hidden);
+		}
 	}
 	else
 	{
 		if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "could not find play button");
 	}
+
 
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Running a widget in code");
@@ -88,86 +110,94 @@ FString UUI_SpellMenu::APNumber()
 
 FString UUI_SpellMenu::APPowerOne()
 {
-	FString SpellPower = " " + FString::FromInt(SpellOne);
+	FString SpellPower = " ";
+	AMMPlayerController * PC = Cast<AMMPlayerController>(GetOwningPlayer());
+	ASpell* spell = PC->GetSpellManager()->GetMagiBolt();
+	if (spell)
+	{
+		SpellPower = " " + FString::FromInt(spell->GetAPBonus());
+	}
+
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerTwo()
 {
-	FString SpellPower = " " + FString::FromInt(SpellTwo);
+	FString SpellPower = " ";
+	AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+	ASpell* spell = PC->GetSpellManager()->GetWindSurge();
+	if (spell)
+	{
+		SpellPower = " " + FString::FromInt(spell->GetAPBonus());
+	}
+
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerThree()
 {
-	FString SpellPower = " " + FString::FromInt(SpellThree);
+	FString SpellPower = " ";
+	AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+	ASpell* spell = PC->GetSpellManager()->GetMageBlast();
+	if (spell)
+	{
+		SpellPower = " " + FString::FromInt(spell->GetAPBonus());
+	}
+
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerFour()
 {
-	FString SpellPower = " " + FString::FromInt(SpellFour);
+	FString SpellPower = " ";
+	AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+	ASpell* spell = PC->GetSpellManager()->GetLightningStrikes();
+	if (spell)
+	{
+		SpellPower = " " + FString::FromInt(spell->GetAPBonus());
+	}
+
 	return SpellPower;
 }
 
 FString UUI_SpellMenu::APPowerFive()
 {
-	FString SpellPower = " " + FString::FromInt(SpellFive);
+	FString SpellPower = " ";
+	AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+	ASpell* spell = PC->GetSpellManager()->GetBurningHands();
+	if (spell)
+	{
+		SpellPower = " " + FString::FromInt(spell->GetAPBonus());
+	}
+
 	return SpellPower;
 }
 
 //Spell Control Buttons
 void UUI_SpellMenu::OnClickEventOnePlus()
 {
-
 	APAdditionCheck("MagiBolt");
-	if (Unlock == true)
-	{
-		SpellOne ++;
-		Unlock = false;
-	}
-
 }
 
 void UUI_SpellMenu::OnClickEventTwoPlus()
 {
 	APAdditionCheck("WindSurge");
-	if (Unlock == true)
-	{
-		SpellTwo++;
-		Unlock = false;
-	}
 }
 
 void UUI_SpellMenu::OnClickEventThreePlus()
 {
 	APAdditionCheck("MageBlast");
-	if (Unlock == true)
-	{
-		SpellThree ++;
-		Unlock = false;
-	}
 }
 
 void UUI_SpellMenu::OnClickEventFourPlus()
 {
 	APAdditionCheck("LightingStrikes");
-	if (Unlock == true)
-	{
-		SpellFour++;
-		Unlock = false;
-	}
 }
 
 
 void UUI_SpellMenu::OnClickEventFivePlus()
 {
 	APAdditionCheck("BurningHands");
-	if (Unlock == true)
-	{
-		SpellFive++;
-		Unlock = false;
-	}
 }
 
 
@@ -227,7 +257,6 @@ void UUI_SpellMenu::APAdditionCheck(FName BName)
 				if (spell)
 				{
 					spell->AddAPBonus();
-					Unlock = true;
 				}
 				else
 				{
