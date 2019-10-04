@@ -18,7 +18,12 @@ bool UUI_TriggerCount::Initialize()
 FString UUI_TriggerCount::TriggerInfo()
 {
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATriggerManager::StaticClass(), TMArray);
-	ATriggerManager* TM = Cast<ATriggerManager>(TMArray[0]);
+
+	if (TMArray.Num() != 0) {
+
+		TM = Cast<ATriggerManager>(TMArray[0]);
+
+	}
 
 	FString TrigMess = "Trigger x of x";
 	if (TM)

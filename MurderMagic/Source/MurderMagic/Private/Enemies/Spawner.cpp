@@ -20,85 +20,51 @@ ASpawner::ASpawner(const FObjectInitializer& OI)
 	CollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionBox->SetGenerateOverlapEvents(true);
 	CollisionBox->OnComponentBeginOverlap.AddDynamic(this, &ASpawner::OnOverlapBegin);
-	//CollisionBox->OnComponentEndOverlap.AddDynamic(this, &ASpawner::OnOverlapEnd);
 	SetRootComponent(CollisionBox);
-
-}
-
-// Called when the game starts or when spawned
-void ASpawner::BeginPlay()
-{
-	Super::BeginPlay();
-	Used = false;
-	SpawnNow = true;
-	Location = GetActorLocation();
-	Rotation = GetActorRotation();
-	i = 1;
-}
-
-// Called every frame
-void ASpawner::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 
 }
 
 void ASpawner::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit)
 {	
-
+	//Check to see if were colliding with MurderMagicCharacter
 	AMurderMagicCharacter* PC = Cast<AMurderMagicCharacter>(OtherActor);
-	if (Used == false && OtherActor == PC)
-	{	
-		if (PC && ToSpawn_1 && ToSpawn_2 && ToSpawn_3)
+	if (PC)
+	{
+		//Spawn the waves
+		SpawnWave();
+		//remove the generate overlaps event.
+		CollisionBox->SetGenerateOverlapEvents(false);
+		//Remove the bind from memory(could also destroy objects)
+		CollisionBox->OnComponentBeginOverlap.RemoveDynamic(this, &ASpawner::OnOverlapBegin);
+	}
+}
+
+//Spawn wave, spawns the waves
+void ASpawner::SpawnWave()
+{
+	FRotator Rotation = GetActorRotation();
+	//Set spawn info
+	FActorSpawnParameters SpawnInfo;
+	SpawnInfo.Owner = this;
+
+	//Loop through the different SpawnData, Struct - Unit, Count.
+	for (auto data : UnitSpawnData)
+	{
+		//Pick a random target point per wave
+		FVector pos = SpawnZones[FMath::RandRange(0, SpawnZones.Num() - 1)]->GetActorLocation();
+
+		//Pick a random number between the waves min and max counts.
+		int count = FMath::RandRange(data.MinCount, data.MaxCount);
+		//Loop through the random count spawning each unit x times.
+		for (int i = 0; i < count; i++)
 		{
-			
-			RandomNumber();
-			XNPC = float(RNum);
-			SpawnDelay();
+			//pick a random location around the selected target point.
+			pos.X = FMath::RandRange(pos.X - SpawnMaxDistance, pos.X + SpawnMaxDistance);
+			pos.Y = FMath::RandRange(pos.Y - SpawnMaxDistance, pos.Y + SpawnMaxDistance);
+
+			//Spawn unit.
+			GetWorld()->SpawnActor<ANPC>(data.unit, pos, Rotation, SpawnInfo);
 		}
 	}
-
-
-}
-
-void ASpawner::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-
-}
-//Spawns random NPC with time delay
-void ASpawner::SpawnDelay()
-{	
-	if (i <= XNPC)
-	{
-		RandomNPC();
-		FActorSpawnParameters SpawnInfo;
-		SpawnInfo.Owner = this;
-		//float j = i * 10;
-		//FVector Location2 = FVector(i, j, 0.0f) + Location;
-		if (K == 1){ GetWorld()->SpawnActor<ANPC>(ToSpawn_1, Location, Rotation, SpawnInfo); }
-		if (K == 2) { GetWorld()->SpawnActor<ANPC>(ToSpawn_2, Location, Rotation, SpawnInfo); }
-		if (K == 3) { GetWorld()->SpawnActor<ANPC>(ToSpawn_3, Location, Rotation, SpawnInfo); }
-		i++;
-		GetWorld()->GetTimerManager().SetTimer(_TimerHandle, this, &ASpawner::SpawnDelay, TimeDelay, false);
-	}
-	else
-	{
-		SpawnNow = false;
-		Used = true;
-		i = 1;
-	}
-}
-
-void ASpawner::RandomNPC()
-{
-	K = FMath::RandRange(1, 3);
-	//if (GEngine)
-	//	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Orange, "Timer");
-}
-
-int ASpawner::RandomNumber()
-{
-	RNum = FMath::RandRange(Min, Max);
-	return RNum;
 }
 

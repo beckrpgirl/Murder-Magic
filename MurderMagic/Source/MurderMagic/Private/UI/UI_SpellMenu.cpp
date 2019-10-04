@@ -156,7 +156,7 @@ void UUI_SpellMenu::OnClickEventThreePlus()
 
 void UUI_SpellMenu::OnClickEventFourPlus()
 {
-	APAdditionCheck("LightingStrike");
+	APAdditionCheck("LightingStrikes");
 }
 
 
@@ -168,17 +168,32 @@ void UUI_SpellMenu::OnClickEventFivePlus()
 
 void UUI_SpellMenu::OnClickEventlockOne()
 {
-	APAdditionCheck("Nothing");
+	APUnlock("MageBlast");
+	if (Unlock == true)
+	{
+		LockOne->SetVisibility(ESlateVisibility::Hidden);
+		Unlock = false;
+	}
 }
 
 void UUI_SpellMenu::OnClickEventlockTwo()
 {
-	APAdditionCheck("Nothing");
+	APUnlock("LightingStrikes");
+	if (Unlock == true)
+	{
+		LockTwo->SetVisibility(ESlateVisibility::Hidden);
+		Unlock = false;
+	}
 }
 
 void UUI_SpellMenu::OnClickEventlockThree()
 {
-	APAdditionCheck("Nothing");
+	APUnlock("BurningHands");
+	if (Unlock == true)
+	{
+		LockThree->SetVisibility(ESlateVisibility::Hidden);
+		Unlock = false;
+	}
 }
 
 void UUI_SpellMenu::APAdditionCheck(FName BName)
@@ -194,9 +209,14 @@ void UUI_SpellMenu::APAdditionCheck(FName BName)
 				AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
 				ASpell* spell = PC->GetSpellManager()->GetLeftSpell();
 
-				while (spell->SName != BName)
+				int i = 0;
+				while (spell && spell->SName != BName)
 				{
 					spell = spell->next;
+
+					i++;
+					if (i >= 10)
+						spell = nullptr;
 				}
 
 				if(spell)
@@ -212,5 +232,43 @@ void UUI_SpellMenu::APAdditionCheck(FName BName)
 	}
 }
 
+void UUI_SpellMenu::APUnlock(FName BName)
+{
+	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
+	if (MMC) {
+		int CurAP = MMC->currentAP;
+		if (CurAP >= 1)
+		{
+			MMC->SubtractAP();
+			if (GetOwningPlayer())
+			{
+				AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+				ASpell* spell = PC->GetSpellManager()->GetLeftSpell();
+				int i = 0;
+				while (spell && spell->SName != BName)
+				{
+					spell = spell->next;
+
+					i++;
+					if (i >= 10)
+						spell = nullptr;
+				}
+
+				if (spell) 
+				{
+					spell->UnlockSpell();
+					Unlock = true;
+				}
+					
+				else
+				{
+					if (GEngine)
+						GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "No Spell Found");
+				}
+			}
+		}
+
+	}
+}
 
 
