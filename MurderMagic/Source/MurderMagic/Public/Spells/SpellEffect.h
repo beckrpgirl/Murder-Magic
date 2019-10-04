@@ -24,8 +24,8 @@ protected:
 
 public:	
 
-	UPROPERTY(EditDefaultsOnly, Category = "Spell Effect")
-	UParticleSystemComponent *PSC;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Spell Effect")
+	TAssetPtr<UParticleSystemComponent> PSC;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Particles", AssetRegistrySearchable, meta = (AssetBundles = "Particles"))
 	TAssetPtr<UParticleSystem> ParticlePtr;
