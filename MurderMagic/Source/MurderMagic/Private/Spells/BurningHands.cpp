@@ -9,7 +9,6 @@ ABurningHands::ABurningHands()
 	spellCD = 3;
 	range = 0;
 	baseDMG = 2;
-	APBonus = 0;
 	SName = "BurningHands";
 	
 }

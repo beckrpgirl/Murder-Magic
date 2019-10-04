@@ -10,7 +10,6 @@ AMagiBolt::AMagiBolt()
 	spellCD = 3;
 	range = 75;
 	baseDMG = 5;
-	//APBonus = 0;
 	SName = "MagiBolt";
 	UnlockSpell();
 	maxPool = 5;
