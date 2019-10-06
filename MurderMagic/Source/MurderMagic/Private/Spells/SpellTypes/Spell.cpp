@@ -76,6 +76,11 @@ void ASpell::PopulatePool(const FObjectInitializer& OI)
 	}
 }
 
+TArray<USpellEffect *> ASpell::GetPool()
+{
+	return particlePool;
+}
+
 void ASpell::AddAPBonus()
 {
 	APBonus = APBonus + 1;

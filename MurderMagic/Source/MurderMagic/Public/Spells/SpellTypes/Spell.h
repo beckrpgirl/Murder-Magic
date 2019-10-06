@@ -62,6 +62,8 @@ public:
 	//virtual void CreateEffect() PURE_VIRTUAL(ASpell::CreateEffect);
 
 	void PopulatePool(const FObjectInitializer& OI);
+	UFUNCTION(BlueprintCallable)
+	TArray<USpellEffect *> GetPool();
 
 	void AddAPBonus();
 	void SubtractAPBonus();
