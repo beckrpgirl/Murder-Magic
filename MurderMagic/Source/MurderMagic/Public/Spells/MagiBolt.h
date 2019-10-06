@@ -16,10 +16,8 @@ private:
 
 	GENERATED_BODY()
 
-	int maxPool;
-
 public:
 
-	AMagiBolt();
+	AMagiBolt(const FObjectInitializer& ObjectInitializer);
 
 };

@@ -68,6 +68,14 @@ void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor
 
 }
 
+void ASpell::PopulatePool(const FObjectInitializer& OI)
+{
+	for (int i = 0; i < maxPool; i++)
+	{
+		particlePool.Add(OI.CreateDefaultSubobject<USpellEffect>(this, TEXT("PoolObject" + i)));
+	}
+}
+
 void ASpell::AddAPBonus()
 {
 	APBonus = APBonus + 1;

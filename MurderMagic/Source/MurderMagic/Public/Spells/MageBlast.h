@@ -18,6 +18,6 @@ private:
 
 public:
 
-	AMageBlast();
+	AMageBlast(const FObjectInitializer& ObjectInitializer);
 
 };

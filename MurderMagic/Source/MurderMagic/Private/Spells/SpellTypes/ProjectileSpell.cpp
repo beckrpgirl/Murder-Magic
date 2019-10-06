@@ -2,3 +2,8 @@
 
 
 #include "ProjectileSpell.h"
+
+AProjectileSpell::AProjectileSpell()
+{
+
+}

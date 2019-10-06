@@ -5,5 +5,5 @@
 
 AConeSpell::AConeSpell()
 {
-	
+	maxPool = 1;
 }

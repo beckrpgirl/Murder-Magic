@@ -3,12 +3,12 @@
 
 #include "LightningStrikes.h"
 
-ALightningStrikes::ALightningStrikes()
-	: Super()
+ALightningStrikes::ALightningStrikes(const FObjectInitializer& OI)
 {
 	spellCD = 3;
 	range = 150;
 	baseDMG = 15;
 	SName = "LightingStrikes";
+	PopulatePool(OI);
 }
 

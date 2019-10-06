@@ -27,8 +27,6 @@ protected:
 
 	UStaticMeshComponent *collisionShape;
 
-	bool colliding;
-
 public:	
 
 	// Sets default values for this component's properties

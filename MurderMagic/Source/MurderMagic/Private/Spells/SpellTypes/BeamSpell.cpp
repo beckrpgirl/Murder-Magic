@@ -5,5 +5,5 @@
 
 ABeamSpell::ABeamSpell()
 {
-
+	maxPool = 1;
 }

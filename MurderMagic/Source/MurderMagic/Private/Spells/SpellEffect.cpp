@@ -11,8 +11,6 @@ USpellEffect::USpellEffect()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	colliding = false;
-
 	PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleSystem"));
 	PSC->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
 	collisionShape = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Collision"));

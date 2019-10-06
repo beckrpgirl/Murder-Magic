@@ -3,12 +3,12 @@
 
 #include "WindSurge.h"
 
-AWindSurge::AWindSurge()
-	: Super()
+AWindSurge::AWindSurge(const FObjectInitializer& OI)
 {
 	spellCD = 3;
 	range = 150;
 	baseDMG = 10;
 	SName = "WindSurge";
 	UnlockSpell();
+	PopulatePool(OI);
 }

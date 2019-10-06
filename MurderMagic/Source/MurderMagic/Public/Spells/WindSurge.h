@@ -18,6 +18,6 @@ private:
 
 public:
 
-	AWindSurge();
+	AWindSurge(const FObjectInitializer& ObjectInitializer);
 	
 };

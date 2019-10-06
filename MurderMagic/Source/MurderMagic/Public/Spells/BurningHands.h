@@ -18,6 +18,6 @@ private:
 
 public:
 
-	ABurningHands();
+	ABurningHands(const FObjectInitializer& ObjectInitializer);
 
 };

@@ -3,12 +3,12 @@
 
 #include "MageBlast.h"
 
-AMageBlast::AMageBlast()
-	: Super()
+AMageBlast::AMageBlast(const FObjectInitializer& OI)
 {
 	spellCD = 3;
 	range = 60;
 	baseDMG = 10;
 	SName = "MageBlast";
+	PopulatePool(OI);
 	
 }

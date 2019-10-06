@@ -18,6 +18,6 @@ private:
 
 public:
 
-	ALightningStrikes();
+	ALightningStrikes(const FObjectInitializer& ObjectInitializer);
 
 };

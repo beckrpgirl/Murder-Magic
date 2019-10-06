@@ -3,12 +3,12 @@
 
 #include "BurningHands.h"
 
-ABurningHands::ABurningHands()
-	: Super()
+ABurningHands::ABurningHands(const FObjectInitializer& OI)
 {
 	spellCD = 3;
 	range = 0;
 	baseDMG = 2;
 	SName = "BurningHands";
+	PopulatePool(OI);
 	
 }

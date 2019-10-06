@@ -30,7 +30,9 @@ protected:
 	float baseDMG;
 	float APBonus;
 
-	TArray<USpellEffect> particlePool;
+	int maxPool;
+
+	TArray<USpellEffect *> particlePool;
 
 public:
 
@@ -58,6 +60,8 @@ public:
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 
 	//virtual void CreateEffect() PURE_VIRTUAL(ASpell::CreateEffect);
+
+	void PopulatePool(const FObjectInitializer& OI);
 
 	void AddAPBonus();
 	void SubtractAPBonus();

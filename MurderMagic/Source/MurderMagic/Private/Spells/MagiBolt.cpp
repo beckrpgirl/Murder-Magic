@@ -5,7 +5,7 @@
 #include "Runtime/Engine/Classes/Engine/objectLibrary.h"
 #include "ConstructorHelpers.h"
 
-AMagiBolt::AMagiBolt()
+AMagiBolt::AMagiBolt(const FObjectInitializer& OI)
 {
 	spellCD = 3;
 	range = 75;
@@ -13,8 +13,5 @@ AMagiBolt::AMagiBolt()
 	SName = "MagiBolt";
 	UnlockSpell();
 	maxPool = 5;
-	for (int i = 0; i < maxPool; i++)
-	{
-		//particlePool.Add(*CreateDefaultSubobject<USpellEffect>(TEXT("PoolObject" + i)));
-	}
+	PopulatePool(OI);
 }
