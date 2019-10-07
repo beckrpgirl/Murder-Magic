@@ -12,6 +12,7 @@ ATriggerManager::ATriggerManager()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	TrigLeft = 0;
 
 }
 //Boolean checking if there are no active triggers then returns true
@@ -23,11 +24,24 @@ bool ATriggerManager::CheckIsActive()
 		//returns false if any trigger is not active
 		if (!Triggers[i]->DidActivate)
 			return false;
-
-		TrigLeft = i;
+		
 	}
 	return true;
 }
+
+//bool ATriggerManager::UpdateTrigsLeft()
+//{
+//
+//	for (int i = 0; i < Triggers.Num(); i++) {
+//
+//		if (Triggers[i]->OnInteract()) {
+//
+//			TrigLeft += 1;
+//
+//		}
+//
+//	}
+//}
 
 
 // Called when the game starts or when spawned

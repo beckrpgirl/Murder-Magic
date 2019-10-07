@@ -28,6 +28,8 @@ public:
 	//Boolean to check if all triggers are active
 	bool CheckIsActive();
 
+	bool UpdateTrigsLeft();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

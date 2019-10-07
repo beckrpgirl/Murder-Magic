@@ -4,6 +4,7 @@
 #include "UI_TriggerCount.h"
 #include "TriggerManager.h"
 #include "Kismet/GameplayStatics.h"
+#include "MurderMagicCharacter.h"
 
 bool UUI_TriggerCount::Initialize()
 {
@@ -18,6 +19,7 @@ bool UUI_TriggerCount::Initialize()
 FString UUI_TriggerCount::TriggerInfo()
 {
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATriggerManager::StaticClass(), TMArray);
+	AMurderMagicCharacter* MMC = Cast<AMurderMagicCharacter>(GetOwningPlayerPawn());
 
 	if (TMArray.Num() != 0) {
 
@@ -28,7 +30,7 @@ FString UUI_TriggerCount::TriggerInfo()
 	FString TrigMess = "Trigger x of x";
 	if (TM)
 	{
-		TrigMess = "Triggers " + FString::FromInt(TM->TrigLeft) + " of " + FString::FromInt(TM->TrigTotal);
+		TrigMess = "Triggers " + FString::FromInt(MMC->GetTriggersCollected()) + " of " + FString::FromInt(TM->TrigTotal);
 	}
 	return TrigMess;
 }

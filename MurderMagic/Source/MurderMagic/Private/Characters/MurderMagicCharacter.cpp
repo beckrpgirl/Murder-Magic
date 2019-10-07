@@ -59,6 +59,7 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 	ManaRegen = 3;
+	TriggersCollected = 0;
 
 }
 
@@ -187,6 +188,16 @@ float AMurderMagicCharacter::GetMaxExperience()
 	return ExperienceToNextLevel;
 }
 
+int AMurderMagicCharacter::GetTriggersCollected()
+{
+	return TriggersCollected;
+}
+
+void AMurderMagicCharacter::AddTriggersCollected()
+{
+	TriggersCollected += 1;
+}
+
 void AMurderMagicCharacter::PlayerLevelup()
 {
 
@@ -287,16 +298,5 @@ void AMurderMagicCharacter::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AA
 	if (OtherActor == Triggers) {
 
 		Triggers = nullptr;
-	}
-}
-
-void AMurderMagicCharacter::ObjectInteract()
-{
-
-	if (Triggers) {
-		Triggers->OnInteract();
-		if (GEngine) {
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red, "Interacted with buttons");
-		}
 	}
 }

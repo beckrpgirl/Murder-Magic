@@ -59,6 +59,8 @@ private:
 	float Experience;
 	float ExperienceToNextLevel;
 
+	int TriggersCollected;
+
 
 public:
 
@@ -103,6 +105,8 @@ public:
 	float GetExperiencePercent();
 	float GetExperience();
 	float GetMaxExperience();
+	int GetTriggersCollected();
+	void AddTriggersCollected();
 
 	void PlayerLevelup();
 	void SetPlayerStats();
