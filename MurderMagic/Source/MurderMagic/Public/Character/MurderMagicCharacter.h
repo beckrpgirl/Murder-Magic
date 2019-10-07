@@ -64,9 +64,6 @@ public:
 
 	AMurderMagicCharacter();
 
-
-	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
-	
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseTurnRate;
@@ -110,7 +107,6 @@ public:
 	void PlayerLevelup();
 	void SetPlayerStats();
 
-	void AddAP();
 	void SubtractAP();
 	int GetTotalAP();
 

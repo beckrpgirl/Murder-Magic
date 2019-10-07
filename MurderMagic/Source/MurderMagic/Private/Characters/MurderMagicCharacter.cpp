@@ -58,7 +58,6 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	currentAP = 0;
 	ManaRegen = 3;
 
 }
@@ -231,11 +230,6 @@ void AMurderMagicCharacter::SetPlayerStats()
 		}
 	}
 
-}
-
-void AMurderMagicCharacter::AddAP()
-{
-	currentAP = currentAP + 1;
 }
 
 void AMurderMagicCharacter::SubtractAP()
