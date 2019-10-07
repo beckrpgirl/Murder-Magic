@@ -46,10 +46,13 @@ bool UUI_SpellMenu::Initialize()
 		LockOne->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockOne);
 		
 		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
-		ASpell* spell = PC->GetSpellManager()->GetMageBlast();
-		if (spell->isUnlocked == true)
+		if (PC)
 		{
-			LockOne->SetVisibility(ESlateVisibility::Hidden);
+			ASpell* spell = PC->GetSpellManager()->GetMageBlast();
+			if (spell->isUnlocked == true)
+			{
+				LockOne->SetVisibility(ESlateVisibility::Hidden);
+			}
 		}
 	}
 	if (LockTwo)
@@ -57,10 +60,13 @@ bool UUI_SpellMenu::Initialize()
 		LockTwo->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockTwo);
 
 		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
-		ASpell* spell = PC->GetSpellManager()->GetLightningStrikes();
-		if (spell->isUnlocked == true)
+		if (PC)
 		{
-			LockTwo->SetVisibility(ESlateVisibility::Hidden);
+			ASpell* spell = PC->GetSpellManager()->GetLightningStrikes();
+			if (spell->isUnlocked == true)
+			{
+				LockTwo->SetVisibility(ESlateVisibility::Hidden);
+			}
 		}
 	}
 	if (LockThree)
@@ -68,10 +74,13 @@ bool UUI_SpellMenu::Initialize()
 		LockThree->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockThree);
 
 		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
-		ASpell* spell = PC->GetSpellManager()->GetBurningHands();
-		if (spell->isUnlocked == true)
+		if (PC)
 		{
-			LockThree->SetVisibility(ESlateVisibility::Hidden);
+			ASpell* spell = PC->GetSpellManager()->GetBurningHands();
+			if (spell->isUnlocked == true)
+			{
+				LockThree->SetVisibility(ESlateVisibility::Hidden);
+			}
 		}
 	}
 	else
