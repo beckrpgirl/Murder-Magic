@@ -16,6 +16,38 @@ USpellEffect::USpellEffect()
 	collisionShape = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Collision"));
 	collisionShape->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
 	// ...
+
+	active = false;
+}
+
+void USpellEffect::Init(FTransform Start, FTransform End, float maxTime)
+{
+	SetWorldTransform(Start);
+	startPoint = Start;
+	endPoint = End;
+	maxLife = maxTime;
+	lifeTime = 0;
+	active = true;
+}
+
+void USpellEffect::Update(float deltaSeconds)
+{
+	lifeTime += deltaSeconds;
+	FTransform newTrans;
+	newTrans.SetLocation(CalcNewVector(startPoint.GetLocation(), endPoint.GetLocation(), lifeTime / maxLife));
+	newTrans.SetRotation(CalcNewVector(startPoint.GetRotation().Vector(), endPoint.GetRotation().Vector(), lifeTime / maxLife).ToOrientationQuat());
+	newTrans.SetScale3D(CalcNewVector(startPoint.GetScale3D(), endPoint.GetScale3D(), lifeTime / maxLife));
+
+	SetWorldTransform(newTrans);
+}
+
+FVector USpellEffect::CalcNewVector(FVector start, FVector end, float progress)
+{
+	FVector result;
+	result.X = start.X + ((end.X - start.X) * progress);
+	result.Y = start.Y + ((end.Y - start.Y) * progress);
+	result.Z = start.Z + ((end.Z - start.Z) * progress);
+	return result;
 }
 
 

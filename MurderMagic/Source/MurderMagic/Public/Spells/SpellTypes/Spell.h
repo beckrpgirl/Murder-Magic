@@ -54,7 +54,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void CastSpell(FVector start, FVector facingDirection, float angle);
+	virtual void CastSpell(FTransform start) PURE_VIRTUAL(ASpell::CastSpell, );
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);

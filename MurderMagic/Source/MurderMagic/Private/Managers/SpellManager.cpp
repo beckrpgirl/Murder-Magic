@@ -104,14 +104,14 @@ void ASpellManager::NextSpellR()
 	hasRightUpdated = true;
 }
 
-void ASpellManager::CastSpellL(FVector start, FVector facingDirection, float angle)
+void ASpellManager::CastSpellL(FTransform start, float angle)
 {
-	equippedSpellL->CastSpell(start, facingDirection, angle);
+	equippedSpellL->CastSpell(start);
 }
 
-void ASpellManager::CastSpellR(FVector start, FVector facingDirection, float angle)
+void ASpellManager::CastSpellR(FTransform start, float angle)
 {
-	equippedSpellR->CastSpell(start, facingDirection, angle);
+	equippedSpellR->CastSpell(start);
 }
 
 ASpell* ASpellManager::GetMagiBolt()
