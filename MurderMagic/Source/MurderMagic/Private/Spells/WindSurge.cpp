@@ -10,6 +10,10 @@ AWindSurge::AWindSurge(const FObjectInitializer& OI)
 	baseDMG = 10;
 	SName = "WindSurge";
 	UnlockSpell();
+
+	myRoot = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("myRoot"));
+	RootComponent = myRoot;
+
 	PopulatePool(OI);
 
 	for (int i = 0; i < particlePool.Num(); ++i)

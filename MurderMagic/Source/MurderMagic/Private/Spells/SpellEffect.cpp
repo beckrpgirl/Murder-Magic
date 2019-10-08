@@ -3,6 +3,7 @@
 
 #include "SpellEffect.h"
 #include "ConstructorHelpers.h"
+#include "Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h"
 
 // Sets default values for this component's properties
 USpellEffect::USpellEffect()
@@ -13,8 +14,10 @@ USpellEffect::USpellEffect()
 
 	PSC = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("ParticleSystem"));
 	PSC->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
+	PSC->SetVisibility(true);
 	collisionShape = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Collision"));
 	collisionShape->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
+	
 	// ...
 
 	active = false;
@@ -22,7 +25,6 @@ USpellEffect::USpellEffect()
 
 void USpellEffect::Init(FTransform Start, FTransform End, float maxTime)
 {
-	basePoint = GetComponentTransform();
 	SetWorldTransform(Start);
 	startPoint = Start;
 	endPoint = End;
@@ -40,22 +42,21 @@ void USpellEffect::Update(float deltaSeconds)
 		newTrans.SetLocation(CalcNewVector(startPoint.GetLocation(), endPoint.GetLocation(), lifeTime / maxLife));
 		newTrans.SetRotation(CalcNewVector(startPoint.GetRotation().Vector(), endPoint.GetRotation().Vector(), lifeTime / maxLife).ToOrientationQuat());
 		newTrans.SetScale3D(CalcNewVector(startPoint.GetScale3D(), endPoint.GetScale3D(), lifeTime / maxLife));
-
-		SetWorldTransform(newTrans);
+		SetRelativeTransform(newTrans);
 	}
 	else
 	{
 		active = false;
-		SetWorldTransform(basePoint);
+		SetRelativeTransform(basePoint);
 	}
 }
 
 FVector USpellEffect::CalcNewVector(FVector start, FVector end, float progress)
 {
 	FVector result;
-	result.X = start.X + ((end.X - start.X) * progress);
-	result.Y = start.Y + ((end.Y - start.Y) * progress);
-	result.Z = start.Z + ((end.Z - start.Z) * progress);
+	result.X = ((end.X - start.X) * progress);
+	result.Y = ((end.Y - start.Y) * progress);
+	result.Z = ((end.Z - start.Z) * progress);
 	return result;
 }
 
@@ -65,6 +66,7 @@ void USpellEffect::BeginPlay()
 {
 	Super::BeginPlay();
 
+	basePoint = GetComponentTransform();
 	// ...
 	
 }

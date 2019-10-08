@@ -8,17 +8,22 @@
 AMagiBolt::AMagiBolt(const FObjectInitializer& OI)
 {
 	spellCD = 3;
-	range = 500;
+	range = 1500;
 	baseDMG = 5;
 	SName = "MagiBolt";
 	UnlockSpell();
 	maxPool = 5;
-	lifeTime = 4;
+	lifeTime = 2.5;
+
+	myRoot = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("myRoot"));
+	RootComponent = myRoot;
+
 	PopulatePool(OI);
 
 	for (int i = 0; i < particlePool.Num(); ++i)
 	{
 		particlePool[i]->GetCollisionShape()->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+		particlePool[i]->AttachToComponent(myRoot, FAttachmentTransformRules::KeepWorldTransform);
 	}
 }
 

@@ -9,6 +9,10 @@ ABurningHands::ABurningHands(const FObjectInitializer& OI)
 	range = 0;
 	baseDMG = 2;
 	SName = "BurningHands";
+
+	myRoot = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("myRoot"));
+	RootComponent = myRoot;
+
 	PopulatePool(OI);
 
 	for (int i = 0; i < particlePool.Num(); ++i)

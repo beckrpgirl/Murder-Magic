@@ -33,7 +33,10 @@ protected:
 
 	int maxPool;
 
+	UPROPERTY(VisibleAnywhere)
 	TArray<USpellEffect *> particlePool;
+
+	USphereComponent *myRoot;
 
 public:
 
