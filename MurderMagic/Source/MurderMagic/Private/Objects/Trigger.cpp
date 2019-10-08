@@ -29,6 +29,7 @@ ATrigger::ATrigger(const FObjectInitializer& OI)
 	Particle->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	DidActivate = false;
+	CanActivate = true;
 
 }
 
@@ -66,10 +67,11 @@ void ATrigger::Tick(float DeltaTime)
 
 bool ATrigger::OnInteract()
 {
-
-	ToggleInteracted();
-	
-
+	if (CanActivate == true)
+	{
+		ToggleInteracted();
+		CanActivate = false;
+	}
 	return false;
 }
 

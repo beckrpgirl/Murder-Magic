@@ -62,10 +62,11 @@ void AMMPlayerController::ObjectInteract()
 
 	//allows interraction with the triggers
 	if (pawnRef && pawnRef->Triggers) {
-
-		pawnRef->AddTriggersCollected();
-		pawnRef->Triggers->OnInteract();
-
+		if (pawnRef->Triggers->CanActivate == true)
+		{
+			pawnRef->AddTriggersCollected();
+			pawnRef->Triggers->OnInteract();
+		}
 		if (GEngine) {
 
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "Interacted with button");

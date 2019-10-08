@@ -34,6 +34,7 @@ public:
 	UParticleSystemComponent* Particle;
 
 	bool DidActivate;
+	bool CanActivate;
 
 	bool ToggleInteracted();
 
