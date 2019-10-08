@@ -62,9 +62,11 @@ void AMMPlayerController::ObjectInteract()
 
 	//allows interraction with the triggers
 	if (pawnRef && pawnRef->Triggers) {
-
-		pawnRef->Triggers->OnInteract();
-
+		if (pawnRef->Triggers->CanActivate == true)
+		{
+			pawnRef->AddTriggersCollected();
+			pawnRef->Triggers->OnInteract();
+		}
 		if (GEngine) {
 
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Orange, "Interacted with button");
@@ -80,18 +82,16 @@ void AMMPlayerController::ExitGame()
 void AMMPlayerController::FireLSpell()
 {
 	FRotator direction = GetPawn()->GetActorRotation();
-	FVector forwardVector = GetPawn()->GetActorForwardVector();
 	float rAngle = direction.Yaw;
-	spellManager->CastSpellL((GetPawn()->GetActorLocation()), forwardVector, rAngle);
+	spellManager->CastSpellL(GetPawn()->GetActorTransform(), rAngle);
 
 }
 
 void AMMPlayerController::FireRSpell()
 {
 	FRotator direction = GetPawn()->GetActorRotation();
-	FVector forwardVector = GetPawn()->GetActorForwardVector();
 	float rAngle = direction.Yaw;
-	spellManager->CastSpellR(GetPawn()->GetActorLocation(), forwardVector, rAngle);
+	spellManager->CastSpellR(GetPawn()->GetActorTransform(), rAngle);
 }
 
 void AMMPlayerController::LNextSpell()

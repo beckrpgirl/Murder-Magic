@@ -10,5 +10,15 @@ ABurningHands::ABurningHands(const FObjectInitializer& OI)
 	baseDMG = 2;
 	SName = "BurningHands";
 	PopulatePool(OI);
+
+	for (int i = 0; i < particlePool.Num(); ++i)
+	{
+		particlePool[i]->GetCollisionShape()->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+	}
 	
+}
+
+void ABurningHands::CastSpell(FTransform start)
+{
+
 }

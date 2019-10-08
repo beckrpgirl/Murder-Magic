@@ -10,5 +10,15 @@ AMageBlast::AMageBlast(const FObjectInitializer& OI)
 	baseDMG = 10;
 	SName = "MageBlast";
 	PopulatePool(OI);
+
+	for (int i = 0; i < particlePool.Num(); ++i)
+	{
+		particlePool[i]->GetCollisionShape()->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+	}
 	
+}
+
+void AMageBlast::CastSpell(FTransform start)
+{
+
 }

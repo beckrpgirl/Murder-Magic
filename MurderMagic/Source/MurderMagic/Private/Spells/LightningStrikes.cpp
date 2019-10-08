@@ -10,5 +10,14 @@ ALightningStrikes::ALightningStrikes(const FObjectInitializer& OI)
 	baseDMG = 15;
 	SName = "LightingStrikes";
 	PopulatePool(OI);
+
+	for (int i = 0; i < particlePool.Num(); ++i)
+	{
+		particlePool[i]->GetCollisionShape()->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+	}
 }
 
+void ALightningStrikes::CastSpell(FTransform start)
+{
+
+}

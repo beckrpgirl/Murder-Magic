@@ -32,6 +32,8 @@ protected:
 
 	int maxPool;
 
+	FVector destination;
+
 	TArray<USpellEffect *> particlePool;
 
 public:
@@ -44,8 +46,6 @@ public:
 	bool isUnlocked;
 	void UnlockSpell();
 
-	FVector destination;
-
 	UPROPERTY(VisibleDefaultsOnly)
 	UTexture2D* SpellTexture;
 
@@ -54,12 +54,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void CastSpell(FVector start, FVector facingDirection, float angle);
+	virtual void CastSpell(FTransform start) PURE_VIRTUAL(ASpell::CastSpell, );
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
-
-	//virtual void CreateEffect() PURE_VIRTUAL(ASpell::CreateEffect);
 
 	void PopulatePool(const FObjectInitializer& OI);
 	UFUNCTION(BlueprintCallable)

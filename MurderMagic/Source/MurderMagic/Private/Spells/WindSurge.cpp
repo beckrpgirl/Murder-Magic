@@ -11,4 +11,14 @@ AWindSurge::AWindSurge(const FObjectInitializer& OI)
 	SName = "WindSurge";
 	UnlockSpell();
 	PopulatePool(OI);
+
+	for (int i = 0; i < particlePool.Num(); ++i)
+	{
+		particlePool[i]->GetCollisionShape()->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
+	}
+}
+
+void AWindSurge::CastSpell(FTransform start)
+{
+
 }

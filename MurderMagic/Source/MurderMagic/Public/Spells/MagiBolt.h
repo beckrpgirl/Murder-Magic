@@ -20,4 +20,6 @@ public:
 
 	AMagiBolt(const FObjectInitializer& ObjectInitializer);
 
+	virtual void CastSpell(FTransform start) override;
+
 };
