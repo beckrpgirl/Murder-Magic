@@ -69,6 +69,18 @@ TArray<USpellEffect *> ASpell::GetPool()
 	return particlePool;
 }
 
+USpellEffect* ASpell::GetInactiveEffect()
+{
+	for (int i = 0; i < particlePool.Num(); ++i)
+	{
+		if (!particlePool[i]->Activated())
+		{
+			return particlePool[i];
+		}
+	}
+	return NULL;
+}
+
 void ASpell::AddAPBonus()
 {
 	APBonus = APBonus + 1;
