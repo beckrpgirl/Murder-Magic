@@ -22,6 +22,7 @@ USpellEffect::USpellEffect()
 
 void USpellEffect::Init(FTransform Start, FTransform End, float maxTime)
 {
+	basePoint = GetComponentTransform();
 	SetWorldTransform(Start);
 	startPoint = Start;
 	endPoint = End;
@@ -33,12 +34,20 @@ void USpellEffect::Init(FTransform Start, FTransform End, float maxTime)
 void USpellEffect::Update(float deltaSeconds)
 {
 	lifeTime += deltaSeconds;
-	FTransform newTrans;
-	newTrans.SetLocation(CalcNewVector(startPoint.GetLocation(), endPoint.GetLocation(), lifeTime / maxLife));
-	newTrans.SetRotation(CalcNewVector(startPoint.GetRotation().Vector(), endPoint.GetRotation().Vector(), lifeTime / maxLife).ToOrientationQuat());
-	newTrans.SetScale3D(CalcNewVector(startPoint.GetScale3D(), endPoint.GetScale3D(), lifeTime / maxLife));
+	if (lifeTime < maxLife)
+	{ 
+		FTransform newTrans;
+		newTrans.SetLocation(CalcNewVector(startPoint.GetLocation(), endPoint.GetLocation(), lifeTime / maxLife));
+		newTrans.SetRotation(CalcNewVector(startPoint.GetRotation().Vector(), endPoint.GetRotation().Vector(), lifeTime / maxLife).ToOrientationQuat());
+		newTrans.SetScale3D(CalcNewVector(startPoint.GetScale3D(), endPoint.GetScale3D(), lifeTime / maxLife));
 
-	SetWorldTransform(newTrans);
+		SetWorldTransform(newTrans);
+	}
+	else
+	{
+		active = false;
+		SetWorldTransform(basePoint);
+	}
 }
 
 FVector USpellEffect::CalcNewVector(FVector start, FVector end, float progress)
@@ -66,7 +75,10 @@ void USpellEffect::TickComponent(float DeltaTime, ELevelTick TickType, FActorCom
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	if (active)
+	{
+		Update(DeltaTime);
+	}
 }
 
 UParticleSystemComponent* USpellEffect::GetPSC()
@@ -77,4 +89,9 @@ UParticleSystemComponent* USpellEffect::GetPSC()
 UStaticMeshComponent* USpellEffect::GetCollisionShape()
 {
 	return collisionShape;
+}
+
+bool USpellEffect::Activated()
+{
+	return active;
 }

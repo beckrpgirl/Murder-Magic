@@ -27,12 +27,11 @@ protected:
 	float spellCD;
 	float sinceCast;
 	float range;
+	float lifeTime;
 	float baseDMG;
 	float APBonus;
 
 	int maxPool;
-
-	FVector destination;
 
 	TArray<USpellEffect *> particlePool;
 
@@ -62,6 +61,8 @@ public:
 	void PopulatePool(const FObjectInitializer& OI);
 	UFUNCTION(BlueprintCallable)
 	TArray<USpellEffect *> GetPool();
+
+	USpellEffect *GetInactiveEffect();
 
 	void AddAPBonus();
 	void SubtractAPBonus();
