@@ -60,7 +60,12 @@ private:
 	float ExperienceToNextLevel;
 
 	int TriggersCollected;
+	virtual void BeginPlay() override;
+	UFUNCTION()
+	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 
+	UFUNCTION()
+	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 public:
 
@@ -78,11 +83,8 @@ public:
 	UDataTable* DataTable;
 
 	FDataTableStruct* Row;
-	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
-	virtual void BeginPlay() override;
-	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
+	
 	int currentAP;
-
 	int CurrentPlayerLevel;
 	int CurrentFloor;
 
@@ -116,20 +118,12 @@ public:
 
 	ACollectibleParent* Collectibles;
 	ATrigger* Triggers;
-	/*NO PUBLIC VARIABLES PLEASE!!!! STEVEN C*/
-	UFUNCTION()
-	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);
 
-	UFUNCTION()
-	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
-	void ObjectInteract();
 
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-	
 };
 
