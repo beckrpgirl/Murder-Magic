@@ -18,22 +18,22 @@ void AGameHUD::BeginPlay()
 	Super::BeginPlay();
 	MyWorld = GetWorld();
 	CurrentMapName = MyWorld->GetMapName();
-
+	CurrentMapName.RemoveFromStart(GetWorld()->StreamingLevelsPrefix);
 
 
 	if (hudWidgetClass)
 	{
-		if (CurrentMapName == "UEDPIE_0_MainMenu")
+		if (CurrentMapName == "MainMenu")
 		{
 			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetMMClass);
 			hudWidget->AddToViewport();
 		}
-		if (CurrentMapName == "UEDPIE_0_WinScreen")
+		if (CurrentMapName == "WinScreen")
 		{
 			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetWSClass);
 			hudWidget->AddToViewport();
 		}
-		if (CurrentMapName != "UEDPIE_0_MainMenu" && CurrentMapName != "UEDPIE_0_WinScreen")
+		if (CurrentMapName != "MainMenu" && CurrentMapName != "WinScreen")
 		{
 			hudWidget = CreateWidget<UUserWidget>(GetOwningPlayerController(), hudWidgetClass);
 			hudWidget->AddToViewport();
