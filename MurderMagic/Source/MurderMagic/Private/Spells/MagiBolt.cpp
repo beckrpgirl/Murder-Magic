@@ -23,7 +23,6 @@ AMagiBolt::AMagiBolt(const FObjectInitializer& OI)
 	for (int i = 0; i < particlePool.Num(); ++i)
 	{
 		particlePool[i]->GetCollisionShape()->OnComponentBeginOverlap.AddDynamic(this, &ASpell::OnOverlapBegin);
-		particlePool[i]->AttachToComponent(myRoot, FAttachmentTransformRules::KeepWorldTransform);
 	}
 }
 
