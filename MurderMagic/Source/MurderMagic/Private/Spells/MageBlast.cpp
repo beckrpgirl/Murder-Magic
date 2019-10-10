@@ -22,7 +22,7 @@ AMageBlast::AMageBlast(const FObjectInitializer& OI)
 	
 }
 
-void AMageBlast::CastSpell(FTransform start)
+float AMageBlast::CastSpell(FTransform start)
 {
-
+	return 0.0;
 }

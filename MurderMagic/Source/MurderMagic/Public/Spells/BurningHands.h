@@ -20,5 +20,5 @@ public:
 
 	ABurningHands(const FObjectInitializer& ObjectInitializer);
 
-	virtual void CastSpell(FTransform start) override;
+	virtual float CastSpell(FTransform start) override;
 };

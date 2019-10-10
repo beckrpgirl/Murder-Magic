@@ -28,6 +28,7 @@ protected:
 	float sinceCast;
 	float range;
 	float lifeTime;
+	float mCost;
 	float baseDMG;
 	float APBonus;
 
@@ -56,7 +57,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	virtual void CastSpell(FTransform start) PURE_VIRTUAL(ASpell::CastSpell, );
+	virtual float CastSpell(FTransform start) PURE_VIRTUAL(ASpell::CastSpell, return 0.0;);
 
 	UFUNCTION()
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& Hit);

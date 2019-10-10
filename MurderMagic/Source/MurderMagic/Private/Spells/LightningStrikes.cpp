@@ -21,7 +21,7 @@ ALightningStrikes::ALightningStrikes(const FObjectInitializer& OI)
 	}
 }
 
-void ALightningStrikes::CastSpell(FTransform start)
+float ALightningStrikes::CastSpell(FTransform start)
 {
-
+	return 0.0;
 }

@@ -8,12 +8,13 @@
 AMagiBolt::AMagiBolt(const FObjectInitializer& OI)
 {
 	spellCD = 3;
-	range = 500;
+	range = 1000;
 	baseDMG = 5;
 	SName = "MagiBolt";
 	UnlockSpell();
 	maxPool = 5;
-	lifeTime = 2.5;
+	lifeTime = 0.5;
+	mCost = 20;
 
 	myRoot = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("myRoot"));
 	RootComponent = myRoot;
@@ -26,17 +27,27 @@ AMagiBolt::AMagiBolt(const FObjectInitializer& OI)
 	}
 }
 
-void AMagiBolt::CastSpell(FTransform start)
+float AMagiBolt::CastSpell(FTransform start)
 {
 	SetActorTransform(start);
 	FVector destination;
 	destination.X = start.GetLocation().X + (GetActorForwardVector().X * range);
 	destination.Y = start.GetLocation().Y + (GetActorForwardVector().Y * range);
-	FTransform endTF = start;
-	endTF.SetLocation(destination);
+	FVector startPoint = start.GetLocation();
+	startPoint.X += GetActorForwardVector().X * 15;
+	startPoint.Y += GetActorForwardVector().Y * 15;
+	start.SetLocation(startPoint);
 	USpellEffect *effect = GetInactiveEffect();
 	if (effect != NULL)
 	{
+		FTransform endTF = start;
+		endTF.SetLocation(destination);
 		effect->Init(start, endTF, lifeTime);
+
+		return mCost;
+	}
+	else
+	{
+		return 0.0;
 	}
 }

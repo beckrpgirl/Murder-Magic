@@ -81,17 +81,12 @@ void AMMPlayerController::ExitGame()
 
 void AMMPlayerController::FireLSpell()
 {
-	FRotator direction = GetPawn()->GetActorRotation();
-	float rAngle = direction.Yaw;
-	spellManager->CastSpellL(GetPawn()->GetActorTransform(), rAngle);
-
+	pawnRef->UseMana(spellManager->CastSpellL(GetPawn()->GetActorTransform()));
 }
 
 void AMMPlayerController::FireRSpell()
 {
-	FRotator direction = GetPawn()->GetActorRotation();
-	float rAngle = direction.Yaw;
-	spellManager->CastSpellR(GetPawn()->GetActorTransform(), rAngle);
+	pawnRef->UseMana(spellManager->CastSpellR(GetPawn()->GetActorTransform()));
 }
 
 void AMMPlayerController::LNextSpell()

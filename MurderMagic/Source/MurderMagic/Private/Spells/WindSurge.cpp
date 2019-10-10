@@ -22,7 +22,7 @@ AWindSurge::AWindSurge(const FObjectInitializer& OI)
 	}
 }
 
-void AWindSurge::CastSpell(FTransform start)
+float AWindSurge::CastSpell(FTransform start)
 {
-
+	return 0.0;
 }

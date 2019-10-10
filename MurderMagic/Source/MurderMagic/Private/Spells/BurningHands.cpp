@@ -22,7 +22,7 @@ ABurningHands::ABurningHands(const FObjectInitializer& OI)
 	
 }
 
-void ABurningHands::CastSpell(FTransform start)
+float ABurningHands::CastSpell(FTransform start)
 {
-
+	return 0.0;
 }

@@ -104,14 +104,14 @@ void ASpellManager::NextSpellR()
 	hasRightUpdated = true;
 }
 
-void ASpellManager::CastSpellL(FTransform start, float angle)
+float ASpellManager::CastSpellL(FTransform start)
 {
-	equippedSpellL->CastSpell(start);
+	return equippedSpellL->CastSpell(start);
 }
 
-void ASpellManager::CastSpellR(FTransform start, float angle)
+float ASpellManager::CastSpellR(FTransform start)
 {
-	equippedSpellR->CastSpell(start);
+	return equippedSpellR->CastSpell(start);
 }
 
 ASpell* ASpellManager::GetMagiBolt()

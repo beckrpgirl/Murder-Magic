@@ -19,19 +19,22 @@ USpellEffect::USpellEffect()
 	collisionShape->AttachToComponent(this, FAttachmentTransformRules::KeepRelativeTransform);
 	
 	// ...
-
+	FTransform base;
+	base.SetLocation(FVector(0, 0, -500));
+	basePoint = base;
 	active = false;
+
 }
 
 void USpellEffect::Init(FTransform Start, FTransform End, float maxTime)
 {
-	basePoint = Start;
 	SetWorldTransform(Start, false, &result, ETeleportType::TeleportPhysics);
 	startPoint = Start;
 	endPoint = End;
 	maxLife = maxTime;
 	lifeTime = 0;
 	active = true;
+	collisionShape->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
 void USpellEffect::Update(float deltaSeconds)
@@ -46,7 +49,7 @@ void USpellEffect::Update(float deltaSeconds)
 		newTrans.SetLocation(locationVector);
 		newTrans.SetRotation(CalcNewVector(startPoint.GetRotation().Vector(), endPoint.GetRotation().Vector(), progress).ToOrientationQuat());
 		newTrans.SetScale3D(CalcNewVector(startPoint.GetScale3D(), endPoint.GetScale3D(), progress));
-		SetWorldTransform(newTrans, true, &result, ETeleportType::None);
+		SetWorldTransform(newTrans, false, &result, ETeleportType::None);
 	}
 	else
 	{

@@ -67,8 +67,8 @@ public:
 	void NextSpellL();
 	void NextSpellR();
 
-	void CastSpellL(FTransform start, float angle);
-	void CastSpellR(FTransform start, float angle);
+	float CastSpellL(FTransform start);
+	float CastSpellR(FTransform start);
 
 	ASpell* GetMagiBolt();
 	ASpell* GetWindSurge();

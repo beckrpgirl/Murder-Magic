@@ -33,6 +33,7 @@ protected:
 
 	UParticleSystemComponent *PSC;
 
+	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent *collisionShape;
 
 public:	
