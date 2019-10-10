@@ -67,27 +67,25 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 void AMurderMagicCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
+	//timer for Mana
 	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::RegenMana, 1, true);
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
 	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());
 
+	//setting player info according to what's stored on the Game Instance
 	Experience = GI->PlayerXP;
 	CurrentPlayerLevel = GI->PlayerLvl;
-
 	SetPlayerStats();
 	currentAP = GI->PlayerAP;
 
+	//mouse showing
 	if (PC)
 	{
 		PC->bShowMouseCursor = true;
 		PC->bEnableClickEvents = true;
 		PC->bEnableMouseOverEvents = true;
 	}
-
-
-
 }
 
 bool AMurderMagicCharacter::AddHealth(float Points)
