@@ -25,7 +25,8 @@ USpellEffect::USpellEffect()
 
 void USpellEffect::Init(FTransform Start, FTransform End, float maxTime)
 {
-	SetWorldTransform(Start);
+	basePoint = Start;
+	SetWorldTransform(Start, false, &result, ETeleportType::TeleportPhysics);
 	startPoint = Start;
 	endPoint = End;
 	maxLife = maxTime;
@@ -39,24 +40,27 @@ void USpellEffect::Update(float deltaSeconds)
 	if (lifeTime < maxLife)
 	{ 
 		FTransform newTrans;
-		newTrans.SetLocation(CalcNewVector(startPoint.GetLocation(), endPoint.GetLocation(), lifeTime / maxLife));
-		newTrans.SetRotation(CalcNewVector(startPoint.GetRotation().Vector(), endPoint.GetRotation().Vector(), lifeTime / maxLife).ToOrientationQuat());
-		newTrans.SetScale3D(CalcNewVector(startPoint.GetScale3D(), endPoint.GetScale3D(), lifeTime / maxLife));
-		SetRelativeTransform(newTrans);
+		float progress = lifeTime / maxLife;
+		FVector locationVector = CalcNewVector(startPoint.GetLocation(), endPoint.GetLocation(), progress);
+		locationVector.Z = startPoint.GetLocation().Z;
+		newTrans.SetLocation(locationVector);
+		newTrans.SetRotation(CalcNewVector(startPoint.GetRotation().Vector(), endPoint.GetRotation().Vector(), progress).ToOrientationQuat());
+		newTrans.SetScale3D(CalcNewVector(startPoint.GetScale3D(), endPoint.GetScale3D(), progress));
+		SetWorldTransform(newTrans, true, &result, ETeleportType::None);
 	}
 	else
 	{
 		active = false;
-		SetRelativeTransform(basePoint);
+		SetWorldTransform(basePoint, false, &result, ETeleportType::ResetPhysics);
 	}
 }
 
 FVector USpellEffect::CalcNewVector(FVector start, FVector end, float progress)
 {
 	FVector result;
-	result.X = ((end.X - start.X) * progress);
-	result.Y = ((end.Y - start.Y) * progress);
-	result.Z = ((end.Z - start.Z) * progress);
+	result.X = start.X + ((end.X - start.X) * progress);
+	result.Y = start.Y + ((end.Y - start.Y) * progress);
+	result.Z = start.Z + ((end.Z - start.Z) * progress);
 	return result;
 }
 
@@ -65,8 +69,6 @@ FVector USpellEffect::CalcNewVector(FVector start, FVector end, float progress)
 void USpellEffect::BeginPlay()
 {
 	Super::BeginPlay();
-
-	basePoint = GetComponentTransform();
 	// ...
 	
 }

@@ -8,7 +8,7 @@
 AMagiBolt::AMagiBolt(const FObjectInitializer& OI)
 {
 	spellCD = 3;
-	range = 1500;
+	range = 500;
 	baseDMG = 5;
 	SName = "MagiBolt";
 	UnlockSpell();
@@ -30,9 +30,8 @@ void AMagiBolt::CastSpell(FTransform start)
 {
 	SetActorTransform(start);
 	FVector destination;
-	destination.X = GetActorForwardVector().X * range;
-	destination.Y = GetActorForwardVector().Y * range;
-	destination += start.GetLocation();
+	destination.X = start.GetLocation().X + (GetActorForwardVector().X * range);
+	destination.Y = start.GetLocation().Y + (GetActorForwardVector().Y * range);
 	FTransform endTF = start;
 	endTF.SetLocation(destination);
 	USpellEffect *effect = GetInactiveEffect();

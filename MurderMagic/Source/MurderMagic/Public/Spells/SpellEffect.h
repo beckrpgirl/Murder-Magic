@@ -29,6 +29,7 @@ protected:
 	float lifeTime;
 	float maxLife;
 	bool active;
+	FHitResult result;
 
 	UParticleSystemComponent *PSC;
 
