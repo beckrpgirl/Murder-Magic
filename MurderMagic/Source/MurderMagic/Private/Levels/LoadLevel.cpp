@@ -81,7 +81,7 @@ void ALoadLevel::OnOverlapBegin(UPrimitiveComponent* OverlapComp, class AActor* 
 		if (GEngine)
 			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Orange, "Current Level " + FString::FromInt(PCA->GetMaxExperience()));
 
-		//UGameplayStatics::OpenLevel(this, NextFloorName, false);
+		UGameplayStatics::OpenLevel(this, NextFloorName, false);
 	}
 }
 

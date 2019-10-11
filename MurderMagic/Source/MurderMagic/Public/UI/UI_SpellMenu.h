@@ -97,6 +97,8 @@ private:
 
 	void APAdditionCheck(FName BName);
 	void APUnlock(FName BName);
+	void CheckVisability();
+
 
 	float SPower;
 	bool Unlock;

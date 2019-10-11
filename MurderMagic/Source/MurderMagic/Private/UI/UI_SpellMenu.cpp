@@ -45,15 +45,17 @@ bool UUI_SpellMenu::Initialize()
 	{
 		LockOne->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockOne);
 		
-		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
-		if (PC && PC->GetSpellManager())
-		{
-			ASpell* spell = PC->GetSpellManager()->GetMageBlast();
-			if (spell && spell->isUnlocked == true)
-			{
-				LockOne->SetVisibility(ESlateVisibility::Hidden);
-			}
-		}
+		CheckVisability();
+
+		//AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+		//if (PC && PC->GetSpellManager())
+		//{
+		//	ASpell* spell = PC->GetSpellManager()->GetMageBlast();
+		//	if (spell && spell->isUnlocked == true)
+		//	{
+		//		LockOne->SetVisibility(ESlateVisibility::Hidden);
+		//	}
+		//}
 	}
 	if (LockTwo)
 	{
@@ -317,4 +319,22 @@ void UUI_SpellMenu::APUnlock(FName BName)
 	}
 }
 
+void UUI_SpellMenu::CheckVisability()
+{
+
+	AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+	if (PC && PC->GetSpellManager())
+	{
+		ASpell* spell = PC->GetSpellManager()->GetMageBlast();
+		if (spell && spell->isUnlocked == true)
+		{
+			LockOne->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
+
+
+
+
+
+}
 
