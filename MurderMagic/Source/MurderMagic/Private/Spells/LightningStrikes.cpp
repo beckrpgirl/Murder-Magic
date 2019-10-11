@@ -6,12 +6,16 @@
 ALightningStrikes::ALightningStrikes(const FObjectInitializer& OI)
 {
 	spellCD = 3;
-	range = 150;
-	baseDMG = 15;
+	range = 1;
+	baseDMG = 50;
 	SName = "LightingStrikes";
+	UnlockSpell();
+	baseDMG = 10;
+	lifeTime = 1;
+	SetManaCost(50);
 
-	myRoot = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("myRoot"));
-	RootComponent = myRoot;
+	//myRoot = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("myRoot"));
+	//RootComponent = myRoot;
 
 	PopulatePool(OI);
 
@@ -23,5 +27,25 @@ ALightningStrikes::ALightningStrikes(const FObjectInitializer& OI)
 
 float ALightningStrikes::CastSpell(FTransform start)
 {
-	return 0.0;
+	SetActorTransform(start);
+	FVector destination;
+	destination.X = start.GetLocation().X + (GetActorForwardVector().X * range);
+	destination.Y = start.GetLocation().Y + (GetActorForwardVector().Y * range);
+	FVector startPoint = start.GetLocation();
+	startPoint.X += GetActorForwardVector().X * 1;
+	startPoint.Y += GetActorForwardVector().Y * 1;
+	start.SetLocation(startPoint);
+	USpellEffect* effect = GetInactiveEffect();
+	if (effect != NULL)
+	{
+		FTransform endTF = start;
+		endTF.SetLocation(destination);
+		effect->Init(start, endTF, lifeTime);
+
+		return mCost;
+	}
+	else
+	{
+		return 0.0;
+	}
 }

@@ -14,7 +14,7 @@ ASpell::ASpell()
 
 	PrimaryActorTick.bCanEverTick = true;
 
-	isUnlocked = false;
+	isUnlocked = true;
 
 }
 
@@ -43,15 +43,33 @@ void ASpell::OnOverlapBegin(UPrimitiveComponent* OverlapComp, AActor* OtherActor
 	ANPC* Enemy = Cast<ANPC>(OtherActor);
 	AMurderMagicCharacter* Character = Cast<AMurderMagicCharacter>(OtherActor);
 
-	if (Enemy) {
+	if (Enemy) 
+	{
 		float DMG = baseDMG + APBonus;
 		Enemy->ReduceHealth(DMG);
+		if (SName == "MagiBolt")
+		{
+			FVector destination;
+			destination.X = 0;
+			destination.Y = 0;
+			destination.Z = -200;
+			SetActorLocation(destination);
+		}
+	}
+
+	if (OtherActor != Character) 
+	{
+
 
 	}
 
-	if (OtherActor != Character) {
-
-
+	else
+	{
+		FVector destination;
+		destination.X = 0;
+		destination.Y = 0;
+		destination.Z = -200;
+		SetActorLocation(destination);
 	}
 
 }
@@ -100,4 +118,14 @@ float ASpell::SetAPBonus(float APPass)
 {
 	APBonus = APPass;
 	return APBonus;
+}
+
+float ASpell::GetManaCost()
+{
+	return mCost;
+}
+
+void ASpell::SetManaCost(float cost)
+{
+	mCost = cost;
 }

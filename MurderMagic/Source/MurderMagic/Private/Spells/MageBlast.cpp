@@ -5,10 +5,16 @@
 
 AMageBlast::AMageBlast(const FObjectInitializer& OI)
 {
-	spellCD = 3;
-	range = 60;
 	baseDMG = 10;
+	lifeTime = 1;
+	SetManaCost(40);
+	range = 0;
 	SName = "MageBlast";
+	UnlockSpell();
+
+	//myRoot = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("myRoot"));
+	//RootComponent = myRoot;
+
 
 	myRoot = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("myRoot"));
 	RootComponent = myRoot;
@@ -24,5 +30,25 @@ AMageBlast::AMageBlast(const FObjectInitializer& OI)
 
 float AMageBlast::CastSpell(FTransform start)
 {
-	return 0.0;
+	SetActorTransform(start);
+	FVector destination;
+	destination.X = start.GetLocation().X + (GetActorForwardVector().X * range);
+	destination.Y = start.GetLocation().Y + (GetActorForwardVector().Y * range);
+	FVector startPoint = start.GetLocation();
+	startPoint.X += GetActorForwardVector().X * 1;
+	startPoint.Y += GetActorForwardVector().Y * 1;
+	start.SetLocation(startPoint);
+	USpellEffect* effect = GetInactiveEffect();
+	if (effect != NULL)
+	{
+		FTransform endTF = start;
+		endTF.SetLocation(destination);
+		effect->Init(start, endTF, lifeTime);
+
+		return mCost;
+	}
+	else
+	{
+		return 0.0;
+	}
 }

@@ -12,7 +12,7 @@ ACollectibleParent::ACollectibleParent(const FObjectInitializer& OI)
 	PrimaryActorTick.bCanEverTick = true;
 
 	CollisionSphere = OI.CreateDefaultSubobject<USphereComponent>(this, TEXT("SphereComponent"));
-	CollisionSphere->InitSphereRadius(40.0f);
+	CollisionSphere->InitSphereRadius(80.0f);
 	CollisionSphere->GetCollisionResponseToChannel(ECC_WorldStatic);
 	CollisionSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionSphere->SetGenerateOverlapEvents(true);

@@ -58,7 +58,7 @@ AMurderMagicCharacter::AMurderMagicCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
-	ManaRegen = 3;
+	ManaRegen = 2;
 	TriggersCollected = 0;
 
 }
@@ -68,7 +68,7 @@ void AMurderMagicCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	//timer for Mana
-	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::RegenMana, 1, true);
+	GetWorld()->GetTimerManager().SetTimer(AddMana_Handler, this, &AMurderMagicCharacter::RegenMana, .2, true);
 
 	APlayerController* PC = Cast<APlayerController>(GetController());
 	UMMGameInstance* GI = Cast<UMMGameInstance>(GetGameInstance());

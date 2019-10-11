@@ -22,15 +22,16 @@ private:
 
 	GENERATED_BODY()
 
+
 protected:
 
 	float spellCD;
 	float sinceCast;
 	float range;
 	float lifeTime;
-	float mCost;
 	float baseDMG;
 	float APBonus;
+	float mCost;
 
 	int maxPool;
 
@@ -73,4 +74,6 @@ public:
 	float GetAPBonus();
 	float SetAPBonus(float APPass);
 
+	float GetManaCost();
+	void SetManaCost(float cost);
 };
