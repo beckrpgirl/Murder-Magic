@@ -8,7 +8,7 @@ AMageBlast::AMageBlast(const FObjectInitializer& OI)
 	baseDMG = 10;
 	lifeTime = 1;
 	SetManaCost(40);
-	range = 0;
+	range = 500;
 	SName = "MageBlast";
 	UnlockSpell();
 
@@ -35,8 +35,8 @@ float AMageBlast::CastSpell(FTransform start)
 	destination.X = start.GetLocation().X + (GetActorForwardVector().X * range);
 	destination.Y = start.GetLocation().Y + (GetActorForwardVector().Y * range);
 	FVector startPoint = start.GetLocation();
-	startPoint.X += GetActorForwardVector().X * 1;
-	startPoint.Y += GetActorForwardVector().Y * 1;
+	startPoint.X += GetActorForwardVector().X * range;
+	startPoint.Y += GetActorForwardVector().Y * range;
 	start.SetLocation(startPoint);
 	USpellEffect* effect = GetInactiveEffect();
 	if (effect != NULL)

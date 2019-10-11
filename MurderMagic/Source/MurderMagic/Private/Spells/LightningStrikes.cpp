@@ -6,7 +6,7 @@
 ALightningStrikes::ALightningStrikes(const FObjectInitializer& OI)
 {
 	spellCD = 3;
-	range = 1;
+	range = 600;
 	baseDMG = 50;
 	SName = "LightingStrikes";
 	UnlockSpell();
@@ -32,8 +32,8 @@ float ALightningStrikes::CastSpell(FTransform start)
 	destination.X = start.GetLocation().X + (GetActorForwardVector().X * range);
 	destination.Y = start.GetLocation().Y + (GetActorForwardVector().Y * range);
 	FVector startPoint = start.GetLocation();
-	startPoint.X += GetActorForwardVector().X * 1;
-	startPoint.Y += GetActorForwardVector().Y * 1;
+	startPoint.X += GetActorForwardVector().X * range;
+	startPoint.Y += GetActorForwardVector().Y * range;
 	start.SetLocation(startPoint);
 	USpellEffect* effect = GetInactiveEffect();
 	if (effect != NULL)
