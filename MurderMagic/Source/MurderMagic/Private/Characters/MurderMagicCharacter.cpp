@@ -186,6 +186,11 @@ float AMurderMagicCharacter::GetMaxExperience()
 	return ExperienceToNextLevel;
 }
 
+float AMurderMagicCharacter::GetCurrentMana()
+{
+	return Mana;
+}
+
 int AMurderMagicCharacter::GetTriggersCollected()
 {
 	return TriggersCollected;

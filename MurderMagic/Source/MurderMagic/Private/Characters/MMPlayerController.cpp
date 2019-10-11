@@ -81,12 +81,25 @@ void AMMPlayerController::ExitGame()
 
 void AMMPlayerController::FireLSpell()
 {
-	pawnRef->UseMana(spellManager->CastSpellL(GetPawn()->GetActorTransform()));
+	if ((pawnRef->GetCurrentMana()) >= (spellManager->CastSpellL(GetPawn()->GetActorTransform()))) {
+
+		pawnRef->UseMana(spellManager->CastSpellL(GetPawn()->GetActorTransform()));
+
+	}
+	else if((pawnRef->GetCurrentMana()) < (spellManager->CastSpellL(GetPawn()->GetActorTransform()))) {
+
+		return;
+
+	}
 }
 
 void AMMPlayerController::FireRSpell()
 {
-	pawnRef->UseMana(spellManager->CastSpellR(GetPawn()->GetActorTransform()));
+	if ((pawnRef->GetCurrentMana()) >= (spellManager->CastSpellR(GetPawn()->GetActorTransform()))) {
+
+		pawnRef->UseMana(spellManager->CastSpellR(GetPawn()->GetActorTransform()));
+
+	}
 }
 
 void AMMPlayerController::LNextSpell()

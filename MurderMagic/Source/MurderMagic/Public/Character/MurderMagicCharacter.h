@@ -107,6 +107,7 @@ public:
 	float GetExperiencePercent();
 	float GetExperience();
 	float GetMaxExperience();
+	float GetCurrentMana();
 	int GetTriggersCollected();
 	void AddTriggersCollected();
 
