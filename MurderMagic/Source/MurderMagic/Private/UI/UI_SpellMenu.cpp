@@ -45,7 +45,7 @@ bool UUI_SpellMenu::Initialize()
 	{
 		LockOne->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockOne);
 		
-		CheckVisability();
+		/*CheckVisability();*/
 
 		//AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
 		//if (PC && PC->GetSpellManager())
@@ -61,29 +61,29 @@ bool UUI_SpellMenu::Initialize()
 	{
 		LockTwo->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockTwo);
 
-		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
-		if (PC && PC->GetSpellManager())
-		{
-			ASpell* spell = PC->GetSpellManager()->GetLightningStrikes();
-			if (spell && spell->isUnlocked == true)
-			{
-				LockTwo->SetVisibility(ESlateVisibility::Hidden);
-			}
-		}
+		//AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+		//if (PC && PC->GetSpellManager())
+		//{
+		//	ASpell* spell = PC->GetSpellManager()->GetLightningStrikes();
+		//	if (spell && spell->isUnlocked == true)
+		//	{
+		//		LockTwo->SetVisibility(ESlateVisibility::Hidden);
+		//	}
+		//}
 	}
 	if (LockThree)
 	{
 		LockThree->OnClicked.AddDynamic(this, &UUI_SpellMenu::OnClickEventlockThree);
 
-		AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
-		if (PC && PC->GetSpellManager())
-		{
-			ASpell* spell = PC->GetSpellManager()->GetBurningHands();
-			if (spell && spell->isUnlocked == true)
-			{
-				LockThree->SetVisibility(ESlateVisibility::Hidden);
-			}
-		}
+		//AMMPlayerController* PC = Cast<AMMPlayerController>(GetOwningPlayer());
+		//if (PC && PC->GetSpellManager())
+		//{
+		//	ASpell* spell = PC->GetSpellManager()->GetBurningHands();
+		//	if (spell && spell->isUnlocked == true)
+		//	{
+		//		LockThree->SetVisibility(ESlateVisibility::Hidden);
+		//	}
+		//}
 	}
 	else
 	{
@@ -93,6 +93,8 @@ bool UUI_SpellMenu::Initialize()
 
 	if (GEngine)
 		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Purple, "Running a widget in code");
+
+	GetWorld()->GetTimerManager().SetTimer(MenuCheck, this, &UUI_SpellMenu::CheckVisability, 1.0, false);
 
 	return true;
 }
@@ -330,9 +332,19 @@ void UUI_SpellMenu::CheckVisability()
 		{
 			LockOne->SetVisibility(ESlateVisibility::Hidden);
 		}
+
+		ASpell* Lspell = PC->GetSpellManager()->GetLightningStrikes();
+		if (Lspell && Lspell->isUnlocked == true)
+		{
+			LockTwo->SetVisibility(ESlateVisibility::Hidden);
+		}
+
+		ASpell* Bspell = PC->GetSpellManager()->GetBurningHands();
+		if (Bspell && Bspell->isUnlocked == true)
+		{
+			LockThree->SetVisibility(ESlateVisibility::Hidden);
+		}
 	}
-
-
 
 
 

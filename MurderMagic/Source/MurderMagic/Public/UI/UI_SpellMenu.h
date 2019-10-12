@@ -108,4 +108,6 @@ private:
 	int SpellFour;
 	int SpellFive;
 
+	FTimerHandle MenuCheck;
+
 };
